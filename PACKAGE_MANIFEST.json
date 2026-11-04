@@ -1,9 +1,33 @@
 {
   "scope": "Deliverable source/data/resources; generated results and target directories excluded",
   "files": {
+    ".gitattributes": {
+      "bytes": 74,
+      "sha256": "6ed17a9885cb13414c4661c3401cc18d6f2a1fd4fe3fd0e555ef5e044064288b"
+    },
     ".gitignore": {
       "bytes": 86,
       "sha256": "7e052990cf826726294139b5999890dcd1c118278c43eab48fa25d54a64344ff"
+    },
+    "EXCLUDED_MATERIALS.csv": {
+      "bytes": 2990,
+      "sha256": "ecddaca3abf11a12efd50702af5f778ba1d90e6c6b8523ea5a9f8a93b39dfb2a"
+    },
+    "README.md": {
+      "bytes": 4223,
+      "sha256": "93e5c91ccfbb873beca04c264936cb612062f634f7bdd6dfe89f78c513c68892"
+    },
+    "REPOSITORY_AVAILABILITY.csv": {
+      "bytes": 8290606,
+      "sha256": "9c11afea53f595baee70545cd5b497d8c0622491157d663d12bd1df4292482cf"
+    },
+    "TABLE_REPRODUCTION_REPORT.md": {
+      "bytes": 951,
+      "sha256": "e90ff3eafae260c39f0cba7b43ddbc9f86ff4e9498a0ec818512b70f567502b6"
+    },
+    "THIRD_PARTY_NOTICES.md": {
+      "bytes": 2356,
+      "sha256": "5c314e77eb593ca7ac0363438bfd0a4f887ee2003feffb0dbee9166823ceacec"
     },
     "config/model.example.yaml": {
       "bytes": 740,
@@ -121,10 +145,6 @@
       "bytes": 178,
       "sha256": "5318998af3591f72e0e3e80667d32ba334c080399011a767f93e611d907036ca"
     },
-    "docs/licenses/detector/LICENSE": {
-      "bytes": 35815,
-      "sha256": "53927bd0b739d38c87a0a82236fd9b070c2dfff11c0c119be50372005d5047ad"
-    },
     "docs/licenses/detector-embedded/META-INF/LICENSE.txt": {
       "bytes": 11358,
       "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
@@ -132,6 +152,10 @@
     "docs/licenses/detector-embedded/META-INF/NOTICE.txt": {
       "bytes": 301,
       "sha256": "082d9df90850fbbfad9a9a8850f96fcb1657e1f069758cf37b27e82e45b25331"
+    },
+    "docs/licenses/detector/LICENSE": {
+      "bytes": 35815,
+      "sha256": "53927bd0b739d38c87a0a82236fd9b070c2dfff11c0c119be50372005d5047ad"
     },
     "docs/licenses/jfreechart/licence-LGPL.txt": {
       "bytes": 26934,
@@ -161,9 +185,9 @@
       "bytes": 2333,
       "sha256": "35ab431f2c6d2e445571704b6bc31a753645404f0464748faaf43af0f9f0ad94"
     },
-    "EXCLUDED_MATERIALS.csv": {
-      "bytes": 2990,
-      "sha256": "ecddaca3abf11a12efd50702af5f778ba1d90e6c6b8523ea5a9f8a93b39dfb2a"
+    "experiments/rq1/README.md": {
+      "bytes": 1674,
+      "sha256": "5ede82f14dbaff74a3398bd9a893f9921c345e461725778f07d682ba9ba639e6"
     },
     "experiments/rq1/accepted_evidence_index.csv": {
       "bytes": 990554,
@@ -173,13 +197,13 @@
       "bytes": 144,
       "sha256": "6b823cadba0a39d7bb0fa71962d287a9037d89e2a292a206c4ee74b6f7922eda"
     },
-    "experiments/rq1/README.md": {
-      "bytes": 1674,
-      "sha256": "5ede82f14dbaff74a3398bd9a893f9921c345e461725778f07d682ba9ba639e6"
-    },
     "experiments/rq1/source_index.json": {
       "bytes": 2655,
       "sha256": "084da1d09832afab39f2a40321489bb4f9bdc7670ac426bc07ddf5316d3c510e"
+    },
+    "experiments/rq2/README.md": {
+      "bytes": 1700,
+      "sha256": "8c0563e400a19e017187194c5420b0cf682576540660045b4444b7a50d762d42"
     },
     "experiments/rq2/acceptance_six_differences.json": {
       "bytes": 25347,
@@ -189,13 +213,13 @@
       "bytes": 165,
       "sha256": "dc49f349cd62f73bcb5293e550fee06af50ed6a91daa69abdfd681f6f00d747a"
     },
-    "experiments/rq2/README.md": {
-      "bytes": 1700,
-      "sha256": "8c0563e400a19e017187194c5420b0cf682576540660045b4444b7a50d762d42"
-    },
     "experiments/rq2/source_index.json": {
       "bytes": 2615,
       "sha256": "066f8fa5deae3860c415e2b615d3aa7b7ceb7c71d421409170406acc4b988ae5"
+    },
+    "experiments/rq3/README.md": {
+      "bytes": 1536,
+      "sha256": "dafdcd0b8d88f7e0b877cf1dc3a8fc697e0c17ef48028d1c5bc6d4742792af5e"
     },
     "experiments/rq3/auxiliary_evidence_index.json": {
       "bytes": 3976,
@@ -205,10 +229,6 @@
       "bytes": 78,
       "sha256": "1f752445c93aa587675f77bcc1e8962e9bbeca2e58fdf37a0a9e1d9e543156f2"
     },
-    "experiments/rq3/README.md": {
-      "bytes": 1536,
-      "sha256": "dafdcd0b8d88f7e0b877cf1dc3a8fc697e0c17ef48028d1c5bc6d4742792af5e"
-    },
     "experiments/rq3/source_index.json": {
       "bytes": 2640,
       "sha256": "cad855bba411166fb1a6e5493487bf51257c704a6e78563c0a6dcfb66591714a"
@@ -216,6 +236,10 @@
     "framework/CODE_VERSION_MAP.csv": {
       "bytes": 69797,
       "sha256": "eecfd7995e43ef6f37261d839888557c94fb0f5f5da65c592aa3805829f5d63a"
+    },
+    "framework/FILE_AVAILABILITY.csv": {
+      "bytes": 50877,
+      "sha256": "3385f60099cc646487a5dad82e49191c815b93350d3415d00c0318ab2969bec8"
     },
     "framework/config/ablation_profiles.yaml": {
       "bytes": 448,
@@ -236,6 +260,14 @@
     "framework/config/ablation_variants/A3.json": {
       "bytes": 2158,
       "sha256": "031d20318e6bebca82b11440c45a1bd5b0da9003dc0a45fdc5e64aa19119bf8e"
+    },
+    "framework/config/ablation_variants/FULL_CONTROL.json": {
+      "bytes": 2170,
+      "sha256": "280f210acdacccf89d5b840455c860427f7b2914d2e793797d4ba7c75b03fdc6"
+    },
+    "framework/config/ablation_variants/FULL_ECT_CONTROL.json": {
+      "bytes": 2172,
+      "sha256": "2e2c50266971536ae3e9016ef7e4cd43a78f2669b0424348d7920fa24bfedbb5"
     },
     "framework/config/ablation_variants/ar_rq2/A1.json": {
       "bytes": 1767,
@@ -261,14 +293,6 @@
       "bytes": 1948,
       "sha256": "83c68985c65f53dc6021d79b41f346085adeafbaa848b4b8789811afd8e26ee5"
     },
-    "framework/config/ablation_variants/FULL_CONTROL.json": {
-      "bytes": 2170,
-      "sha256": "280f210acdacccf89d5b840455c860427f7b2914d2e793797d4ba7c75b03fdc6"
-    },
-    "framework/config/ablation_variants/FULL_ECT_CONTROL.json": {
-      "bytes": 2172,
-      "sha256": "2e2c50266971536ae3e9016ef7e4cd43a78f2669b0424348d7920fa24bfedbb5"
-    },
     "framework/config/agent_config.yaml": {
       "bytes": 1551,
       "sha256": "db77d7661b5c6fcaaeaee948dad4822602a060be66bd8d136a628285a39f4bc7"
@@ -284,10 +308,6 @@
     "framework/config/refactoring_scope.yaml": {
       "bytes": 1282,
       "sha256": "8437ceabb29f36495aa7e7df070986e3cd5bd6a237a88a4cd5160023381ff0e9"
-    },
-    "framework/FILE_AVAILABILITY.csv": {
-      "bytes": 50877,
-      "sha256": "3385f60099cc646487a5dad82e49191c815b93350d3415d00c0318ab2969bec8"
     },
     "framework/pipeline/__init__.py": {
       "bytes": 97,
@@ -649,6 +669,10 @@
       "bytes": 5032,
       "sha256": "45b5047e8f64164f4cf1d0c7f2c5482f22a21d908e5ff93c96e4f6f4a69c5b8e"
     },
+    "framework/pipeline/instances/templates/README.md": {
+      "bytes": 987,
+      "sha256": "b76a2a5d266fead499c24f5c97190ef084a19b4f32d90793b86e2d184dd677be"
+    },
     "framework/pipeline/instances/templates/examples/pipeline-instance.AR.example.json": {
       "bytes": 1886,
       "sha256": "064905d1b05cd073f711ecfa748bb4af2b435bcd8295090c43791f0acc174119"
@@ -664,10 +688,6 @@
     "framework/pipeline/instances/templates/pipeline-instance.template.json": {
       "bytes": 1571,
       "sha256": "c8466c691eb5e78ac2a1f37f887547ed9e8bfff427b19bac6f8e484edd1f1a3f"
-    },
-    "framework/pipeline/instances/templates/README.md": {
-      "bytes": 987,
-      "sha256": "b76a2a5d266fead499c24f5c97190ef084a19b4f32d90793b86e2d184dd677be"
     },
     "framework/pipeline/llm_transport.py": {
       "bytes": 2254,
@@ -704,6 +724,10 @@
     "framework/pipeline/validation_evidence.py": {
       "bytes": 332,
       "sha256": "a335004bdc822176374b93132fbf1d8264e4c334b7d9cd2a9aa68c85110bee3f"
+    },
+    "framework/pipeline/verification/README.md": {
+      "bytes": 1089,
+      "sha256": "57567cfefdfeb691883459bcc886b8084bd64a6f41b0aacc45a9f385b65cfa1c"
     },
     "framework/pipeline/verification/__init__.py": {
       "bytes": 203,
@@ -845,10 +869,6 @@
       "bytes": 945,
       "sha256": "6b4cc290d7e7800c7f728584b6396ffd11191e89e321409e1a4a29cec017faf4"
     },
-    "framework/pipeline/verification/README.md": {
-      "bytes": 1089,
-      "sha256": "57567cfefdfeb691883459bcc886b8084bd64a6f41b0aacc45a9f385b65cfa1c"
-    },
     "framework/pipeline/verification/reintegration/__init__.py": {
       "bytes": 70,
       "sha256": "1598794e6bafcaa73f436755535029e1b461e3de58b7520b33105c40eb37b91e"
@@ -909,6 +929,14 @@
       "bytes": 20432,
       "sha256": "b6de579482f0a6689dce165b7169a039769f0c5a3100c09ae0c425ecdc81d657"
     },
+    "framework/refactoring/contracts/README.md": {
+      "bytes": 3636,
+      "sha256": "ed490efc60518e5bb715851e59937816a68c4ffe546c4eed929d13717a9ed16d"
+    },
+    "framework/refactoring/contracts/assertion_roulette/README.md": {
+      "bytes": 1059,
+      "sha256": "407b91f59c4130f326f7ed5c3e5d13809e4f068f99ae3e346daa5557c0e4eb17"
+    },
     "framework/refactoring/contracts/assertion_roulette/contract.yaml": {
       "bytes": 5650,
       "sha256": "42de2d807fe18ba797810588f6951b95b54951f24143bc33a375cbb0f559aba6"
@@ -921,9 +949,17 @@
       "bytes": 5344,
       "sha256": "6aec8102544a6d9852119fe8aa411d579475e87ce09009115cb9a3c52150504e"
     },
-    "framework/refactoring/contracts/assertion_roulette/README.md": {
-      "bytes": 1059,
-      "sha256": "407b91f59c4130f326f7ed5c3e5d13809e4f068f99ae3e346daa5557c0e4eb17"
+    "framework/refactoring/contracts/exception_catching_throwing/README.md": {
+      "bytes": 453,
+      "sha256": "c69718986f92c8c0a616b4f9d283c44e34c5bf54b83640cc07e4952427a62312"
+    },
+    "framework/refactoring/contracts/exception_catching_throwing/must_throw/README.md": {
+      "bytes": 1246,
+      "sha256": "a72dfa4fd3563e271ae7d3622df7b0615eb89795a1286273c76d1857b984667f"
+    },
+    "framework/refactoring/contracts/exception_catching_throwing/must_throw/fail.manifest.yaml": {
+      "bytes": 764,
+      "sha256": "2bd9952950c2559a0224b3d8c73077703d65422db89791a5c96f844991e47892"
     },
     "framework/refactoring/contracts/exception_catching_throwing/must_throw/fail/contract.yaml": {
       "bytes": 7320,
@@ -933,9 +969,9 @@
       "bytes": 6063,
       "sha256": "08ef0fa0ddc297728bb85c69d1084da5d85fba72dd41e19c0387d0a3a6faa5de"
     },
-    "framework/refactoring/contracts/exception_catching_throwing/must_throw/fail.manifest.yaml": {
-      "bytes": 764,
-      "sha256": "2bd9952950c2559a0224b3d8c73077703d65422db89791a5c96f844991e47892"
+    "framework/refactoring/contracts/exception_catching_throwing/must_throw/flag.manifest.yaml": {
+      "bytes": 824,
+      "sha256": "e0a384dda59f7a478f5365d9c97ed826d6e162ca077ff60c327f37d8cb35d389"
     },
     "framework/refactoring/contracts/exception_catching_throwing/must_throw/flag/contract.yaml": {
       "bytes": 7365,
@@ -945,13 +981,9 @@
       "bytes": 6339,
       "sha256": "0198d12c65ff5bb5ccf066cc198f4ef17af663d8aa24a207713c4e834a914da6"
     },
-    "framework/refactoring/contracts/exception_catching_throwing/must_throw/flag.manifest.yaml": {
-      "bytes": 824,
-      "sha256": "e0a384dda59f7a478f5365d9c97ed826d6e162ca077ff60c327f37d8cb35d389"
-    },
-    "framework/refactoring/contracts/exception_catching_throwing/must_throw/README.md": {
-      "bytes": 1246,
-      "sha256": "a72dfa4fd3563e271ae7d3622df7b0615eb89795a1286273c76d1857b984667f"
+    "framework/refactoring/contracts/exception_catching_throwing/no_throw/README.md": {
+      "bytes": 940,
+      "sha256": "07d80e4c1a92db6020ee2b77e2163a2e89132ff035a7677b6b3e67fcb7e985ea"
     },
     "framework/refactoring/contracts/exception_catching_throwing/no_throw/contract.yaml": {
       "bytes": 7482,
@@ -965,17 +997,13 @@
       "bytes": 5917,
       "sha256": "2babbe70311e2c1c82e35db89655f813c421c05f625bef647b73e6d9965a7c8b"
     },
-    "framework/refactoring/contracts/exception_catching_throwing/no_throw/README.md": {
-      "bytes": 940,
-      "sha256": "07d80e4c1a92db6020ee2b77e2163a2e89132ff035a7677b6b3e67fcb7e985ea"
+    "framework/refactoring/contracts/redundant_assertion/README.md": {
+      "bytes": 1610,
+      "sha256": "c8fc7bbf53451c1823adb3102780ca7e6f6480f2a5d42efb262bb9abe7ffc06c"
     },
-    "framework/refactoring/contracts/exception_catching_throwing/README.md": {
-      "bytes": 453,
-      "sha256": "c69718986f92c8c0a616b4f9d283c44e34c5bf54b83640cc07e4952427a62312"
-    },
-    "framework/refactoring/contracts/README.md": {
-      "bytes": 3636,
-      "sha256": "ed490efc60518e5bb715851e59937816a68c4ffe546c4eed929d13717a9ed16d"
+    "framework/refactoring/contracts/redundant_assertion/jfreechart.manifest.yaml": {
+      "bytes": 812,
+      "sha256": "d0212060edd98a073c997c17ecb157bc204265abd70f04be4c60ded6c18febb7"
     },
     "framework/refactoring/contracts/redundant_assertion/jfreechart/contract.yaml": {
       "bytes": 5629,
@@ -985,9 +1013,9 @@
       "bytes": 4222,
       "sha256": "5bf3b0d660c3b892551d7cb0eab54ee1c1c8a42b53493c863e2f45c89e25836c"
     },
-    "framework/refactoring/contracts/redundant_assertion/jfreechart.manifest.yaml": {
-      "bytes": 812,
-      "sha256": "d0212060edd98a073c997c17ecb157bc204265abd70f04be4c60ded6c18febb7"
+    "framework/refactoring/contracts/redundant_assertion/ordinary.manifest.yaml": {
+      "bytes": 735,
+      "sha256": "b1215066506e34e3e34d60d2e696236235f0d097cffdd43eb5e8a86b9b19a74a"
     },
     "framework/refactoring/contracts/redundant_assertion/ordinary/contract.yaml": {
       "bytes": 5622,
@@ -996,14 +1024,6 @@
     "framework/refactoring/contracts/redundant_assertion/ordinary/prompt.md": {
       "bytes": 5356,
       "sha256": "62697a792f90bdd9f5037ade5c9d2cbc0bd4e78cfd92c92bf485f5ca69bac3e8"
-    },
-    "framework/refactoring/contracts/redundant_assertion/ordinary.manifest.yaml": {
-      "bytes": 735,
-      "sha256": "b1215066506e34e3e34d60d2e696236235f0d097cffdd43eb5e8a86b9b19a74a"
-    },
-    "framework/refactoring/contracts/redundant_assertion/README.md": {
-      "bytes": 1610,
-      "sha256": "c8fc7bbf53451c1823adb3102780ca7e6f6480f2a5d42efb262bb9abe7ffc06c"
     },
     "framework/refactoring/contracts/registry.yaml": {
       "bytes": 5224,
@@ -1020,6 +1040,10 @@
     "framework/refactoring/smell_name_normalization.py": {
       "bytes": 2926,
       "sha256": "23b370b351a2105fcfa7393bd75e126afdb8eda62ac1d4943866181236223f4c"
+    },
+    "framework/src/main/java/Main.java": {
+      "bytes": 3860,
+      "sha256": "b74da66e67d555d74e61e1a5965a7efa56c3a42a87087167ecd7e676d48d4358"
     },
     "framework/src/main/java/antlr/Java8.g4": {
       "bytes": 31605,
@@ -1117,9 +1141,13 @@
       "bytes": 1034,
       "sha256": "d2a527554be45ef5403b52b8afc0f3c98e8ff8ac48524d52391088057da78add"
     },
-    "framework/src/main/java/Main.java": {
-      "bytes": 3860,
-      "sha256": "b74da66e67d555d74e61e1a5965a7efa56c3a42a87087167ecd7e676d48d4358"
+    "framework/src/main/java/service/TaskParamReader.java": {
+      "bytes": 1980,
+      "sha256": "2c74537fc9068058466f2316c286b6c632c87e0e645bc213a26c3fa1e23cbded"
+    },
+    "framework/src/main/java/service/TestContextCollection.java": {
+      "bytes": 16011,
+      "sha256": "f31909471ffe5d9884a9989435256712f9addadbda6094291ae6be45451f32d5"
     },
     "framework/src/main/java/service/detection/TestSmellDetection.java": {
       "bytes": 8709,
@@ -1177,14 +1205,6 @@
       "bytes": 4788,
       "sha256": "fdc13ff84b615514b2b13c0d44a781a5be5b9ec2e6c31f32fa508b04b90bec59"
     },
-    "framework/src/main/java/service/TaskParamReader.java": {
-      "bytes": 1980,
-      "sha256": "2c74537fc9068058466f2316c286b6c632c87e0e645bc213a26c3fa1e23cbded"
-    },
-    "framework/src/main/java/service/TestContextCollection.java": {
-      "bytes": 16011,
-      "sha256": "f31909471ffe5d9884a9989435256712f9addadbda6094291ae6be45451f32d5"
-    },
     "framework/src/main/java/util/ExecuteJar.java": {
       "bytes": 2043,
       "sha256": "77164b9985ed5384bdaa7338b4e841c48ea4b79b0335b883c7c3c1607cfd483e"
@@ -1200,14 +1220,6 @@
     "framework/src/main/java/util/JsonUtil.java": {
       "bytes": 1120,
       "sha256": "5a9629ca1c51af264fd555418ea6422cedc62b9fa92db4c432a9b281fc0494ae"
-    },
-    "README.md": {
-      "bytes": 4223,
-      "sha256": "93e5c91ccfbb873beca04c264936cb612062f634f7bdd6dfe89f78c513c68892"
-    },
-    "REPOSITORY_AVAILABILITY.csv": {
-      "bytes": 8290606,
-      "sha256": "9c11afea53f595baee70545cd5b497d8c0622491157d663d12bd1df4292482cf"
     },
     "requirements.txt": {
       "bytes": 103,
@@ -1249,10 +1261,6 @@
       "bytes": 9305,
       "sha256": "23bbbb9766bc434fb811ca17af499a4a30bd565af744896a0809bcc5d43c232e"
     },
-    "TABLE_REPRODUCTION_REPORT.md": {
-      "bytes": 951,
-      "sha256": "e90ff3eafae260c39f0cba7b43ddbc9f86ff4e9498a0ec818512b70f567502b6"
-    },
     "tests/check_engineering.py": {
       "bytes": 4226,
       "sha256": "6cbe75c0165eafd0cea6240e17c0ffcbfa3f344e261060e138ac28aee79e2404"
@@ -1261,9 +1269,9 @@
       "bytes": 8289,
       "sha256": "71cc760ef623088eb209158ef4774f7b1015c84a57efc99c82f1dbb1d43c0d80"
     },
-    "THIRD_PARTY_NOTICES.md": {
-      "bytes": 2356,
-      "sha256": "5c314e77eb593ca7ac0363438bfd0a4f887ee2003feffb0dbee9166823ceacec"
+    "tools/detector/TestSmellDetector.jar": {
+      "bytes": 4770873,
+      "sha256": "7d89be5e7aab461723bd4b7057a9daf0e3e0595862cf684ca667b8f451b0f3df"
     },
     "tools/detector/provenance.json": {
       "bytes": 5823,
@@ -1273,13 +1281,13 @@
       "bytes": 35815,
       "sha256": "53927bd0b739d38c87a0a82236fd9b070c2dfff11c0c119be50372005d5047ad"
     },
-    "tools/detector/source/pom.xml": {
-      "bytes": 6711,
-      "sha256": "c4703330c1842cc21a515f5efd6d1d871f4df1f035e70ab2b8d693b14f2eafbc"
-    },
     "tools/detector/source/README.md": {
       "bytes": 2201,
       "sha256": "d08fb550001e29d8244be859107fab1d3cbf66e3402522b68b9b0a7f6da75926"
+    },
+    "tools/detector/source/pom.xml": {
+      "bytes": 6711,
+      "sha256": "c4703330c1842cc21a515f5efd6d1d871f4df1f035e70ab2b8d693b14f2eafbc"
     },
     "tools/detector/source/src/main/java/Main.java": {
       "bytes": 7786,
@@ -1312,6 +1320,34 @@
     "tools/detector/source/src/main/java/testsmell/RunStatistics.java": {
       "bytes": 2257,
       "sha256": "d42aa6193f10e638f1864176ecf56905f7fef544e264977fc8e651e0fc9a92fa"
+    },
+    "tools/detector/source/src/main/java/testsmell/SmellyElement.java": {
+      "bytes": 232,
+      "sha256": "e58958a095dc2c45aeb6f84288142542ff93f7565feed39e262e49ae9428c575"
+    },
+    "tools/detector/source/src/main/java/testsmell/TestClass.java": {
+      "bytes": 803,
+      "sha256": "5bf0edb4ade4bb6db7a78917fb45c2e3f8009f0b2e96e0eced59558fe56e0530"
+    },
+    "tools/detector/source/src/main/java/testsmell/TestFile.java": {
+      "bytes": 4209,
+      "sha256": "f1a20c45919adeb202fc903916be9e3bbfec2334b8c3c670f6db576c203f5c6a"
+    },
+    "tools/detector/source/src/main/java/testsmell/TestFrameworkDetector.java": {
+      "bytes": 9053,
+      "sha256": "2ce592292bf912da332ea9cc3df223d948e8b750a22fe91a6b8c16934c467da0"
+    },
+    "tools/detector/source/src/main/java/testsmell/TestMethod.java": {
+      "bytes": 807,
+      "sha256": "337420ee25b675505219632402781c71b1d633209eb33a533015ed5707f03b60"
+    },
+    "tools/detector/source/src/main/java/testsmell/TestSmellDetector.java": {
+      "bytes": 7652,
+      "sha256": "d441f8914666c6822d75e6ae6e9121338e01c892c7c0ef6f30d4b3e2af58f804"
+    },
+    "tools/detector/source/src/main/java/testsmell/Util.java": {
+      "bytes": 943,
+      "sha256": "56452a840efbbba066562e476e425580ab3127a066aad00d4017b458caa59ac2"
     },
     "tools/detector/source/src/main/java/testsmell/smell/AssertionRoulette.java": {
       "bytes": 4875,
@@ -1397,34 +1433,6 @@
       "bytes": 2798,
       "sha256": "e19d49a4d14e73b8adfb30d8a52f9c5f19f32002f74c0d38eb1b0afe7a4af42c"
     },
-    "tools/detector/source/src/main/java/testsmell/SmellyElement.java": {
-      "bytes": 232,
-      "sha256": "e58958a095dc2c45aeb6f84288142542ff93f7565feed39e262e49ae9428c575"
-    },
-    "tools/detector/source/src/main/java/testsmell/TestClass.java": {
-      "bytes": 803,
-      "sha256": "5bf0edb4ade4bb6db7a78917fb45c2e3f8009f0b2e96e0eced59558fe56e0530"
-    },
-    "tools/detector/source/src/main/java/testsmell/TestFile.java": {
-      "bytes": 4209,
-      "sha256": "f1a20c45919adeb202fc903916be9e3bbfec2334b8c3c670f6db576c203f5c6a"
-    },
-    "tools/detector/source/src/main/java/testsmell/TestFrameworkDetector.java": {
-      "bytes": 9053,
-      "sha256": "2ce592292bf912da332ea9cc3df223d948e8b750a22fe91a6b8c16934c467da0"
-    },
-    "tools/detector/source/src/main/java/testsmell/TestMethod.java": {
-      "bytes": 807,
-      "sha256": "337420ee25b675505219632402781c71b1d633209eb33a533015ed5707f03b60"
-    },
-    "tools/detector/source/src/main/java/testsmell/TestSmellDetector.java": {
-      "bytes": 7652,
-      "sha256": "d441f8914666c6822d75e6ae6e9121338e01c892c7c0ef6f30d4b3e2af58f804"
-    },
-    "tools/detector/source/src/main/java/testsmell/Util.java": {
-      "bytes": 943,
-      "sha256": "56452a840efbbba066562e476e425580ab3127a066aad00d4017b458caa59ac2"
-    },
     "tools/detector/source/src/main/kotlin/detection/Detection.kt": {
       "bytes": 1535,
       "sha256": "6e394081104c2d971659304ee4bc96d4ada8fd7e10f93a2a7fed6cbe95c23430"
@@ -1452,10 +1460,6 @@
     "tools/detector/source/src/main/kotlin/thresholds/Thresholds.kt": {
       "bytes": 1917,
       "sha256": "9fb4afd4f6965f8bbb7948b66c2de32dcd937fcbc59cb52c16869ecc43aac246"
-    },
-    "tools/detector/TestSmellDetector.jar": {
-      "bytes": 4770873,
-      "sha256": "7d89be5e7aab461723bd4b7057a9daf0e3e0595862cf684ca667b8f451b0f3df"
     }
   }
 }
