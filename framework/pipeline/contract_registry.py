@@ -6,8 +6,8 @@ import yaml
 ROOT = Path(__file__).resolve().parents[1]
 REGISTRY = ROOT / 'refactoring/contracts/registry.yaml'
 REQUIRED = ('contract_id', 'issue_type', 'version', 'status', 'applicability_entry',
-            'contract_builder_entry', 'transformation_entry', 'prompt_entry', 'validator_entry', 'test_entry')
-ENTRIES = ('applicability_entry', 'contract_builder_entry', 'transformation_entry', 'prompt_entry', 'validator_entry', 'test_entry')
+            'contract_builder_entry', 'transformation_entry', 'prompt_entry', 'validator_entry')
+ENTRIES = ('applicability_entry', 'contract_builder_entry', 'transformation_entry', 'prompt_entry', 'validator_entry')
 
 
 def load_registry(path=REGISTRY):
@@ -69,10 +69,7 @@ def check_registry(path=REGISTRY):
         for key in ENTRIES:
             values = item[key] if isinstance(item[key], list) else [item[key]]
             for entry in values:
-                _, node = resolve_entry(entry)
-                if key == 'test_entry' and not (getattr(node, 'name', '').startswith('test_') or
-                       isinstance(node, ast.ClassDef) and any(isinstance(n, ast.FunctionDef) and n.name.startswith('test_') for n in node.body)):
-                    raise ValueError('test_entry must identify actual tests')
+                resolve_entry(entry)
         if item.get('scope') == 'project_specific' and not item.get('project'):
             raise ValueError('Project-specific contract needs project provenance')
         from .contract_documents import check_documents

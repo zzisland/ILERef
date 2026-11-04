@@ -1,10 +1,12 @@
-# 正式重构契约目录
+# 重构契约
 
-`registry.yaml` 将 contract_id/version 映射到 contract_file、prompt_file、Python implementation、validator 与 tests。每条 `contract.yaml` 保存 Stage 3 确认的规范及来源绑定；同目录 `prompt.md` 保存当前实际 Prompt 基础模板、表达式槽位和可选后缀。
+`registry.yaml` 登记六条契约的身份、版本及 Python 入口。每条契约包含：
 
-**Python 是唯一执行逻辑。** runtime 不读取 contract.yaml / prompt.md 执行准入、变换、生成或验证。`contract_for()` 仍只返回原有 contract_id/version；文档完整性检查仅由显式检查命令/测试调用，不加到 Full 运行路径。
+- `manifest.yaml` 或 `*.manifest.yaml`：注册信息。
+- `contract.yaml`：适用条件、允许修改、保护范围和候选检查规则。
+- `prompt.md`：提示词模板、输入槽位和输出要求。
 
-## 六条正式契约
+准入、提示词构建和验证由登记的 Python 入口执行；YAML 和 Markdown 用于阅读与检查。
 
 | contract_id / version | contract.yaml | prompt.md | scope |
 |---|---|---|---|
@@ -15,21 +17,14 @@
 | ect.must_throw.flag / 2.0 | [exception_catching_throwing/must_throw/flag/contract.yaml](exception_catching_throwing/must_throw/flag/contract.yaml) | [exception_catching_throwing/must_throw/flag/prompt.md](exception_catching_throwing/must_throw/flag/prompt.md) | general |
 | ect.no_throw / 1.0 | [exception_catching_throwing/no_throw/contract.yaml](exception_catching_throwing/no_throw/contract.yaml) | [exception_catching_throwing/no_throw/prompt.md](exception_catching_throwing/no_throw/prompt.md) | general |
 
-JFreeChart catch 继续为 project_specific，仅对应当前 audited setter(null)/Marker event-oracle 结构。标签没有新增 project-name gate，也没有推广 catch 删除规则。
-
-## 维护与检查
+在项目根目录执行：
 
 ```powershell
-.venv/Scripts/python.exe -m pipeline.contract_registry
-.venv/Scripts/python.exe -m unittest pipeline.tests.test_contract_documents
+python -B scripts/check_package.py
+python -B tests/test_contract_resources.py
+python -B tests/test_instance_pipeline.py
 ```
 
-保留 manifest 作为已有 registry 元数据镜像；规则正文只在各 contract.yaml，Prompt 快照只在对应 prompt.md。registry/manifest 均登记这两条路径，避免旧工具引用失效。
+包检查核对注册信息、实现入口、规则字段和提示词资源；资源回归检查验证缺失或错配时会失败。单实例回归覆盖 AR 的源码绑定、候选约束和失败处理，不代表其他契约已完成端到端验证。
 
-规则版本可跨不同 ID 重复；要求 contract_id 唯一、version 非空，因此 (contract_id, version) 也唯一。不得误把所有 1.0 版本视为冲突。
-
-contract.yaml 中 forbidden_edits / protected_elements / required_preservation 通过 source_field 指向同文件 edit_and_preservation_constraints，allowed_edits 指向 transformation_target；保留 Stage 3 联合审计原文，不擅自拆出新的规则语义。
-
-文档、Prompt、Stage 3 报告或相关实现发生变化时检查会失败，需明确复审并同步来源绑定；不得靠重新生成来掩盖业务变更。检查依赖保留的 analysis/framework_refactor_stage3_20260920 审计材料；缺失时失败。检查不是安全证明或权限边界。
-
-已知 ECT fail 的 flag 提示段、Markdown 清理、布局/注释验证边界均原样保留，详见 Stage 3 alignment 报告。将来修正这些差异属于独立业务变更。
+规则与提示词修改后应同步对应 Python 实现和验证。检查资源一致性不代替编译、目标测试、重检测及最终接受判断。

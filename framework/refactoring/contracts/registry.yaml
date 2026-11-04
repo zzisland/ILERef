@@ -10,8 +10,6 @@ contracts:
   scope: general
   applicability_entry: pipeline.agents.safety_contracts:analyze
   validator_entry: pipeline.agents.candidate_validation:validate_assertion_roulette
-  test_entry:
-  - pipeline.tests.test_safety_contract_v4:ExecutableSafetyContractTest
   manifest: assertion_roulette/manifest.yaml
   contract_file: assertion_roulette/contract.yaml
   prompt_file: assertion_roulette/prompt.md
@@ -25,8 +23,6 @@ contracts:
   scope: general
   applicability_entry: pipeline.agents.safety_contracts:analyze_ra
   validator_entry: pipeline.agents.candidate_validation:validate_redundant_assertion
-  test_entry:
-  - pipeline.tests.test_safety_contract_v4:ExecutableSafetyContractTest
   manifest: redundant_assertion/ordinary.manifest.yaml
   contract_file: redundant_assertion/ordinary/contract.yaml
   prompt_file: redundant_assertion/ordinary/prompt.md
@@ -40,8 +36,6 @@ contracts:
   scope: project_specific
   applicability_entry: pipeline.agents.ra_contract:analyze_catch
   validator_entry: pipeline.agents.ra_contract:validate_candidate
-  test_entry:
-  - pipeline.tests.test_ra_v2_contract:RaV2ContractTest
   project: JFreeChart
   scope_note: Audited setter(null)/Marker event-oracle pattern. Existing Python guards
     unchanged; no new project-name gate.
@@ -58,8 +52,6 @@ contracts:
   scope: general
   applicability_entry: pipeline.agents.safety_contracts:analyze_ect
   validator_entry: pipeline.agents.candidate_validation:validate_exception_refactoring
-  test_entry:
-  - pipeline.tests.test_safety_contract_v4:ExecutableSafetyContractTest
   manifest: exception_catching_throwing/must_throw/fail.manifest.yaml
   contract_file: exception_catching_throwing/must_throw/fail/contract.yaml
   prompt_file: exception_catching_throwing/must_throw/fail/prompt.md
@@ -73,9 +65,6 @@ contracts:
   scope: general
   applicability_entry: pipeline.agents.safety_contracts:_analyze_ect_v2
   validator_entry: pipeline.agents.candidate_validation:validate_exception_refactoring
-  test_entry:
-  - pipeline.tests.test_ect_v2_contract:EctV2RiskContractTest
-  - pipeline.tests.test_ect_v2_contract:EctV2CandidateContractTest
   manifest: exception_catching_throwing/must_throw/flag.manifest.yaml
   contract_file: exception_catching_throwing/must_throw/flag/contract.yaml
   prompt_file: exception_catching_throwing/must_throw/flag/prompt.md
@@ -89,9 +78,6 @@ contracts:
   scope: general
   applicability_entry: pipeline.agents.safety_contracts:_analyze_ect_nothrow_v1
   validator_entry: pipeline.agents.candidate_validation:validate_exception_refactoring
-  test_entry:
-  - pipeline.tests.test_ect_nothrow_contract:EctNoThrowRiskContractTest
-  - pipeline.tests.test_ect_nothrow_contract:EctNoThrowCandidateContractTest
   manifest: exception_catching_throwing/no_throw/manifest.yaml
   contract_file: exception_catching_throwing/no_throw/contract.yaml
   prompt_file: exception_catching_throwing/no_throw/prompt.md

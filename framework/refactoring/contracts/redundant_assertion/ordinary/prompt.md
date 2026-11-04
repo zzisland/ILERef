@@ -35,7 +35,7 @@ Relevant production context summary:
 | len(assertion_targets) / json.dumps(assertion_targets, ensure_ascii=False) | conclusion=MISSING_MESSAGE 的 evidence 投影：evidence_id、assertion_identity、api、ast_path、parent_assertion_id、nesting_depth、matched_code |
 | json.dumps(imports, ensure_ascii=False) | context.test_class_source 的 import 正则提取，保留现行顺序 |
 | json.dumps(ect_contract, ensure_ascii=False) | proof.targets[0] 的路径字段投影；不存在的键为 null |
-| json.dumps(case_refs, ensure_ascii=False) | 入参 cases 的 case_id/summary；本次 []，无检索调用 |
+| json.dumps(case_refs, ensure_ascii=False) | 入参 cases 的 case_id/summary；未启用 RAG 时为空数组 |
 | instance['test_code'] | normalized 执行视图的方法源码，不从 provenance 随意拼接 |
 | json.dumps(production_summary, ensure_ascii=False) | production_context 的 available、productionClassName、focalMethodSignatures/Summaries、dependencyMethodSignatures/Summaries、astMethodCalls、astControlFlow；省略 None/[]/空串 |
 | json.dumps(proof, ensure_ascii=False) | RA catch 专用全部 proof |
@@ -46,7 +46,7 @@ must_throw 的 ect_contract 投影：target_id、exception_type、catch_variable
 
 ## 可选后缀
 
-Full 策略组合与 risk assessment mode 是不同维度。若 risk.assessment_mode == rule_llm 且 admission_guidance 非空，build 在 validate_advice/check_evidence 通过后追加以下内容并重算 hash；本次 rule_only fixtures 未触发，也没有执行模型。
+Full 策略组合与 risk assessment mode 是不同维度。若 risk.assessment_mode == rule_llm 且 admission_guidance 非空，build 在 validate_advice/check_evidence 通过后追加以下内容并重算 hash；rule_only 模式不追加该后缀。
 
 ```text
 
@@ -56,6 +56,6 @@ Verified admission advice (guidance, NOT a safety proof). The source-bound candi
 
 RA catch 的 early return 发生在 _build；仍可经过外层 build 的 guidance 后缀。它不包含通用模板的 case references/imports/production summary。
 
-## 已知对齐差异
+## 验证边界
 
-沿用 Stage 3 prompt_validator_alignment.md，未修正语义：单 Java fence 可清理；RA catch 允许布局差异；普通 RA/ECT fail 的 AST 检查忽略注释；ECT fail 的 flag 提示段错配已由 ect-fail-prompt-fix-1 修复，其他行为不变。具体适用范围以对应 Python validator 为准。
+提示词约束由对应 Python validator 检查。单个 Java Markdown 代码块可被清理；RA catch 允许布局差异，普通 RA 和 ECT fail 的 AST 比较忽略注释。静态检查通过后仍需编译、目标测试和重检测。

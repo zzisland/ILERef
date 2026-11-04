@@ -570,12 +570,12 @@
       "sha256": "294b8766c92786b3b1d230b8672a50ec8f55c66326495fe1eb127464eb536998"
     },
     "framework/pipeline/contract_documents.py": {
-      "bytes": 7530,
-      "sha256": "a6c4385a6036fb6f25ce39e93936dd04ffbed31d71cd248c7246dbd9b4e78c71"
+      "bytes": 2150,
+      "sha256": "9c531531ea8780dac33deafe1b38282cd4a3311b9fe2dc01bb78779431e8c5a6"
     },
     "framework/pipeline/contract_registry.py": {
-      "bytes": 6209,
-      "sha256": "6140ab7dc13d20ff53619ba62e86963636b9e5208603683dfe95bdc6bcbedc8f"
+      "bytes": 5850,
+      "sha256": "1d1c299020f3f8d48263af9ca7fbedb9e1ac37620c3a135c43400eb7429ffca4"
     },
     "framework/pipeline/contracts/__init__.py": {
       "bytes": 580,
@@ -670,8 +670,8 @@
       "sha256": "45b5047e8f64164f4cf1d0c7f2c5482f22a21d908e5ff93c96e4f6f4a69c5b8e"
     },
     "framework/pipeline/instances/templates/README.md": {
-      "bytes": 987,
-      "sha256": "b76a2a5d266fead499c24f5c97190ef084a19b4f32d90793b86e2d184dd677be"
+      "bytes": 847,
+      "sha256": "abefb3b737ba15880fe8ae421cb27bbe5761698356fc310684f1b59340a486b4"
     },
     "framework/pipeline/instances/templates/examples/pipeline-instance.AR.example.json": {
       "bytes": 1886,
@@ -930,24 +930,24 @@
       "sha256": "b6de579482f0a6689dce165b7169a039769f0c5a3100c09ae0c425ecdc81d657"
     },
     "framework/refactoring/contracts/README.md": {
-      "bytes": 3636,
-      "sha256": "ed490efc60518e5bb715851e59937816a68c4ffe546c4eed929d13717a9ed16d"
+      "bytes": 2530,
+      "sha256": "8a1399552c91c4b7f20926b49cfa88020a1d699d6594ed63b3362414b027b0c9"
     },
     "framework/refactoring/contracts/assertion_roulette/README.md": {
       "bytes": 1059,
       "sha256": "407b91f59c4130f326f7ed5c3e5d13809e4f068f99ae3e346daa5557c0e4eb17"
     },
     "framework/refactoring/contracts/assertion_roulette/contract.yaml": {
-      "bytes": 5650,
-      "sha256": "42de2d807fe18ba797810588f6951b95b54951f24143bc33a375cbb0f559aba6"
+      "bytes": 3935,
+      "sha256": "c90ab433ab146275febfd926a6a12c7693409a652ca6b2c8658d719f192fb2c2"
     },
     "framework/refactoring/contracts/assertion_roulette/manifest.yaml": {
-      "bytes": 698,
-      "sha256": "1156a6eafeac7f1be14eca162978554686b9f2120d17a7521a0c5078fd2cc16b"
+      "bytes": 614,
+      "sha256": "5ec3c57126540ee7213f6609dc58051917f3ac6fb216ddb9ebd7b3f70653f83e"
     },
     "framework/refactoring/contracts/assertion_roulette/prompt.md": {
-      "bytes": 5344,
-      "sha256": "6aec8102544a6d9852119fe8aa411d579475e87ce09009115cb9a3c52150504e"
+      "bytes": 5240,
+      "sha256": "d2c1d76db36fa69e521863bc8cc8f69f3c0fc716a5e9c0c36640baf64898cee8"
     },
     "framework/refactoring/contracts/exception_catching_throwing/README.md": {
       "bytes": 453,
@@ -958,76 +958,76 @@
       "sha256": "a72dfa4fd3563e271ae7d3622df7b0615eb89795a1286273c76d1857b984667f"
     },
     "framework/refactoring/contracts/exception_catching_throwing/must_throw/fail.manifest.yaml": {
-      "bytes": 764,
-      "sha256": "2bd9952950c2559a0224b3d8c73077703d65422db89791a5c96f844991e47892"
+      "bytes": 680,
+      "sha256": "3ab0ba13bff82a8e80682dd24581a8fc32379fd27d6c552abf3cabe62e0c54e9"
     },
     "framework/refactoring/contracts/exception_catching_throwing/must_throw/fail/contract.yaml": {
-      "bytes": 7320,
-      "sha256": "a6a959ecb2d5e4fd1741e4ab9c39b1342b680dc20f8518f4dedbba62435458a0"
+      "bytes": 5605,
+      "sha256": "6f0ab629cd92ad3dbc9dd900e1f884bf2f2a31fefb3c022c0512e6479fddb627"
     },
     "framework/refactoring/contracts/exception_catching_throwing/must_throw/fail/prompt.md": {
-      "bytes": 6063,
-      "sha256": "08ef0fa0ddc297728bb85c69d1084da5d85fba72dd41e19c0387d0a3a6faa5de"
+      "bytes": 5959,
+      "sha256": "b1f9cbad9c4e1fceb27505876bb309816cbb2644c560e53091139302a85c2346"
     },
     "framework/refactoring/contracts/exception_catching_throwing/must_throw/flag.manifest.yaml": {
-      "bytes": 824,
-      "sha256": "e0a384dda59f7a478f5365d9c97ed826d6e162ca077ff60c327f37d8cb35d389"
+      "bytes": 684,
+      "sha256": "a9bfc062aea8bc96af04b83d14b0ea38dc1c5ac122213812c6d342df1144b7d5"
     },
     "framework/refactoring/contracts/exception_catching_throwing/must_throw/flag/contract.yaml": {
-      "bytes": 7365,
-      "sha256": "926e8dba4448732d50835b820ce37d58d2248544ee5b0c997233012954f0fb59"
+      "bytes": 5597,
+      "sha256": "00ad72f3e40ac05732e2db68982c94e665c57e27b7322bc2ef730f7b4796a115"
     },
     "framework/refactoring/contracts/exception_catching_throwing/must_throw/flag/prompt.md": {
-      "bytes": 6339,
-      "sha256": "0198d12c65ff5bb5ccf066cc198f4ef17af663d8aa24a207713c4e834a914da6"
+      "bytes": 6235,
+      "sha256": "5e2b31e349faaead4447559fae5c667937a4e0f40182603c133bc4c176e72bfb"
     },
     "framework/refactoring/contracts/exception_catching_throwing/no_throw/README.md": {
       "bytes": 940,
       "sha256": "07d80e4c1a92db6020ee2b77e2163a2e89132ff035a7677b6b3e67fcb7e985ea"
     },
     "framework/refactoring/contracts/exception_catching_throwing/no_throw/contract.yaml": {
-      "bytes": 7482,
-      "sha256": "63876452e5e2ebe33f816c78688464c987eed43d924bebaf4039bdc5bff5854d"
+      "bytes": 5801,
+      "sha256": "eeb99a6babc044e06de20b1cdf5d9a06594b161ce04c4cb46a249803003e2b79"
     },
     "framework/refactoring/contracts/exception_catching_throwing/no_throw/manifest.yaml": {
-      "bytes": 810,
-      "sha256": "64589e0c4dc1eb0a2663d8bf6ac6b6a56138cfdb417f5fc7eb059a0d043f3aec"
+      "bytes": 650,
+      "sha256": "2592fb928f5c5d062d88c30d8bb3e7affdf37ef8bf8149546cecc1f506d61494"
     },
     "framework/refactoring/contracts/exception_catching_throwing/no_throw/prompt.md": {
-      "bytes": 5917,
-      "sha256": "2babbe70311e2c1c82e35db89655f813c421c05f625bef647b73e6d9965a7c8b"
+      "bytes": 5813,
+      "sha256": "9908865edcc4f037b58294933e20b773f59e674767624414a5dd383b110f36bf"
     },
     "framework/refactoring/contracts/redundant_assertion/README.md": {
       "bytes": 1610,
       "sha256": "c8fc7bbf53451c1823adb3102780ca7e6f6480f2a5d42efb262bb9abe7ffc06c"
     },
     "framework/refactoring/contracts/redundant_assertion/jfreechart.manifest.yaml": {
-      "bytes": 812,
-      "sha256": "d0212060edd98a073c997c17ecb157bc204265abd70f04be4c60ded6c18febb7"
+      "bytes": 744,
+      "sha256": "79842f969ddd48cfaf588b7e40f70613ed38e000fa8a4a0c4b8d52e3ef21ccb6"
     },
     "framework/refactoring/contracts/redundant_assertion/jfreechart/contract.yaml": {
-      "bytes": 5629,
-      "sha256": "854bd0ab5a855d96f436594f63bdf055c4146cfda4306133c4cf7d4449285b35"
+      "bytes": 4046,
+      "sha256": "537f52299e495876b68c6c781ba8761bd07480dcc196158cf34ac3c343a06d14"
     },
     "framework/refactoring/contracts/redundant_assertion/jfreechart/prompt.md": {
-      "bytes": 4222,
-      "sha256": "5bf3b0d660c3b892551d7cb0eab54ee1c1c8a42b53493c863e2f45c89e25836c"
+      "bytes": 4118,
+      "sha256": "0b623007d50277b1dd60d1641bd08abcb81f06c636a44231ed2adf23807bc499"
     },
     "framework/refactoring/contracts/redundant_assertion/ordinary.manifest.yaml": {
-      "bytes": 735,
-      "sha256": "b1215066506e34e3e34d60d2e696236235f0d097cffdd43eb5e8a86b9b19a74a"
+      "bytes": 651,
+      "sha256": "568d107041e5319d653bc1142275c426a2bfc37d07094e9868ea441f168d5897"
     },
     "framework/refactoring/contracts/redundant_assertion/ordinary/contract.yaml": {
-      "bytes": 5622,
-      "sha256": "10627ed0d4f0171648502c095db1353bed5cc71245c878d00e078d4eec8507c2"
+      "bytes": 3907,
+      "sha256": "b190dd9c15ab20725cbb712874784350d6458df9449fc6908d2118732b48a4b0"
     },
     "framework/refactoring/contracts/redundant_assertion/ordinary/prompt.md": {
-      "bytes": 5356,
-      "sha256": "62697a792f90bdd9f5037ade5c9d2cbc0bd4e78cfd92c92bf485f5ca69bac3e8"
+      "bytes": 5252,
+      "sha256": "fa9887a39e9f48f3b8df6d112ff0b2083173e509d8e40281bb24240c6913ad48"
     },
     "framework/refactoring/contracts/registry.yaml": {
-      "bytes": 5224,
-      "sha256": "dd7cb4d32fa146976b8a4d4c383d09d29561697934d68381816f14f4e105fda0"
+      "bytes": 4576,
+      "sha256": "78853f08087050da4c56a9385dc5693d6c2056a5110b91991f81ea8efa5d5bde"
     },
     "framework/refactoring/rag_integration/__init__.py": {
       "bytes": 69,
@@ -1226,8 +1226,8 @@
       "sha256": "a45bdca2fdd53e8c5b29b00d50319224c9791989fa107da4154b624da179a02c"
     },
     "scripts/check_package.py": {
-      "bytes": 3144,
-      "sha256": "6236d4d5552a568135a454a406342b0f63c89af88b11c35e848d0fff86a55f12"
+      "bytes": 2412,
+      "sha256": "c3fb48277b3b781217ac9295211be67a75320ac6bbb2ec894ad5f6f369440047"
     },
     "scripts/common.py": {
       "bytes": 4369,
@@ -1264,6 +1264,10 @@
     "tests/check_engineering.py": {
       "bytes": 4226,
       "sha256": "6cbe75c0165eafd0cea6240e17c0ffcbfa3f344e261060e138ac28aee79e2404"
+    },
+    "tests/test_contract_resources.py": {
+      "bytes": 2940,
+      "sha256": "0d332a396d5eed42fd1e0187f7bdf1fe538de7b9eb4fdbfba9ea2279e36541d7"
     },
     "tests/test_instance_pipeline.py": {
       "bytes": 8289,

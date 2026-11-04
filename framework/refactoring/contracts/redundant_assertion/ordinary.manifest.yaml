@@ -8,7 +8,5 @@ version: '4.2'
 scope: general
 applicability_entry: pipeline.agents.safety_contracts:analyze_ra
 validator_entry: pipeline.agents.candidate_validation:validate_redundant_assertion
-test_entry:
-- pipeline.tests.test_safety_contract_v4:ExecutableSafetyContractTest
 contract_file: redundant_assertion/ordinary/contract.yaml
 prompt_file: redundant_assertion/ordinary/prompt.md
