@@ -69,7 +69,7 @@ def run(data="data/normalized"):
  write_json(inside("results/validation/table_reproduction.json"),report)
  lines=["# Table reproduction report","",f"Status: **{report['status']}**. Numeric cells matched: **{matches}/{len(checks)}**.","","Computed from normalized instance/cohort/decision records. Frozen paper cells are comparison targets only.","","| Table | Matched | Cells |","|---|---:|---:|"]
  for n,v in report["tables"].items():lines.append(f"| {n} | {v['matched']} | {v['cells']} |")
- lines+=["","RQ2-A strict and common endpoints remain separate. RQ3 79/79 describes historical replay comparisons, not a replay performed by this build.","","Supplementary counts:","",json.dumps(extras,indent=2),"","Detailed mismatches, if any, are in results/validation/table_reproduction.json."]
+ lines+=["","Table V preserves the paper's Full-strict versus Rule-Guided-common policy comparison; the common-criteria comparison is reported separately. RQ3 79/79 summarizes recorded comparisons from the reported historical replay; this command recomputes the records without executing a new replay.","","Supplementary counts:","",json.dumps(extras,indent=2),"","Detailed mismatches, if any, are in results/validation/table_reproduction.json."]
  inside("TABLE_REPRODUCTION_REPORT.md").write_text("\n".join(lines)+"\n",encoding="utf-8")
  print(json.dumps({k:v for k,v in report.items() if k not in ["checks"]},indent=2))
  return 0 if report["status"]=="PASS" else 1

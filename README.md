@@ -1,6 +1,8 @@
 # ILERef
 
-ILERef 提供基于实例、可执行契约和验证证据的测试代码重构实现，以及 RQ1–RQ3 实验记录和论文表 I–VI 的重算脚本。
+ILERef（Instance-Level Evidence for Reliable LLM-Based Code Refactoring）是面向 LLM 代码重构的通用框架设计，以源码绑定实例、适用性判断、可执行契约和证据驱动验收组织重构过程。论文在四个 Java 开源项目的三类测试异味（AR、RA、ECT）上进行实证验证。
+
+本仓库提供该框架在测试异味领域的实现、RQ1–RQ3 实验记录、论文表 I–VI 的重算脚本，以及一个可生成新候选的 AR 单实例入口。其他语言和重构问题需要相应的检测、契约和验证适配；当前包不提供这些领域的运行配置或验证结果。
 
 随包提供 Apache Commons CLI 原始源码、已有检测记录、Java 前端和检测 JAR。单实例入口以 `UtilTest.testFindNonWhitespacePos(Character, boolean)` 的 Assertion Roulette（AR）为例，执行：
 
@@ -10,7 +12,7 @@ ILERef 提供基于实例、可执行契约和验证证据的测试代码重构�
 → 源码回填 → 编译与目标测试 → 重检测与归属 → 最终决策及证据保存
 ```
 
-流程从已有检测记录开始，省略初始检测；每次重新构建实例、判断适用性并生成候选。原始材料位于 `examples/ar_cli/`，本次目标和资源路径由 `config/run_ar.json` 指定。
+此单实例入口从已有检测记录开始，省略初始检测；每次重新构建实例并判断适用性，准入后请求模型生成候选。原始材料位于 `examples/ar_cli/`，本次目标和资源路径由 `config/run_ar.json` 指定。
 
 ## 环境与配置
 
@@ -57,6 +59,8 @@ python -B scripts/validate_dataset.py
 
 ## 输出与范围
 
+论文的实例、契约和分阶段验证在本包中采用测试异味领域的字段与工具。论文概念名称与实现字段、判定标签的对应关系见 [数据说明](docs/DATA_NOTES.md)。
+
 每次运行保存到 `results/runs/<name>/`，包括输入、实例与源码绑定、适用性结果、契约、提示词、模型响应、候选、验证日志、测试 XML、重检测 CSV，以及最终 `result.json` 和证据哈希清单。中断或拒绝时保留已生成的证据，后续阶段标记为 `NOT_RUN`。
 
 | 最终结果 | 含义 | 退出码 |
@@ -65,6 +69,6 @@ python -B scripts/validate_dataset.py
 | `REJECTED` | 明确不满足准入或验证要求 | 1 |
 | `INCONCLUSIVE` | 尚无足够证据支持结论，或仅执行了准备/环境检查 | 2 |
 
-单实例运行需要配置模型服务；表格重算使用历史记录，不重跑全部论文实验。包内保留历史证据索引，但未包含完整的历史候选、契约及原始日志，因此完整历史证据检查可能为 `BLOCKED`。历史数据与新运行输出分开保存。
+单实例运行需要配置模型服务。表格重算对应论文已报告的冻结实验记录；其中 RQ3 重算历史重放的配对结果，不重新执行 79 例重放。包内保留历史证据索引，但未包含完整的历史候选、契约及原始日志，因此完整历史证据检查可能为 `BLOCKED`。历史数据与新运行输出分开保存。
 
 许可证与来源见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。

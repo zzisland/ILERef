@@ -13,7 +13,7 @@ Computed from normalized instance/cohort/decision records. Frozen paper cells ar
 | V | 12 | 12 |
 | VI | 7 | 7 |
 
-RQ2-A strict and common endpoints remain separate. RQ3 79/79 describes historical replay comparisons, not a replay performed by this build.
+Table V preserves the paper's Full-strict versus Rule-Guided-common policy comparison; the common-criteria comparison is reported separately. RQ3 79/79 summarizes recorded comparisons from the reported historical replay; this command recomputes the records without executing a new replay.
 
 Supplementary counts:
 

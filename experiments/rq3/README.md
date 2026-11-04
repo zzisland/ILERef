@@ -1,4 +1,4 @@
-# RQ3: provenance and historical replay
+# RQ3: Instance-Level Traceability and Outcome Attribution
 
 | Material | Location |
 |---|---|
@@ -8,7 +8,9 @@
 | Auxiliary evidence references | [auxiliary_evidence_index.json](auxiliary_evidence_index.json) |
 | Interpretation and missing materials | [data notes](../../docs/DATA_NOTES.md), [workflow and scope](../../README.md) |
 
-RQ3 contains 120 source-tracing instances and 79 historical replay pairs. The stored source/candidate hashes and key result comparisons agree for 79/79. These are historical comparisons, not current cross-environment compilation, testing or re-detection.
+RQ3 covers source traceability for 120 frozen instances and the paper's reported instance-guided verification replay of 79 historical cases. The package preserves original/replay associations and comparisons for source hashes, candidate hashes, target-test identities, post-refactoring outcomes and final decisions; all five recorded comparisons agree for 79/79 pairs.
+
+The commands below recompute these recorded replay comparisons. They do not perform a new replay or test cross-environment reproducibility. The historical experiment and this package's record-recomputation command are distinct operations.
 
 From the repository root:
 

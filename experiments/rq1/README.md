@@ -1,4 +1,4 @@
-# RQ1: effectiveness and external comparison
+# RQ1: Overall Effectiveness
 
 | Material | Location |
 |---|---|
@@ -15,7 +15,7 @@ From the repository root:
 python -B scripts/reproduce_tables.py --all
 ```
 
-This computes all six paper tables locally. RQ1 includes 5,589 detected, 2,175 admitted and 1,993 selected historical acceptances. The selected union is 1,812 earlier positives plus 181 supplementary positives, not a uniform latest-code rerun.
+This recomputes Tables I–VI from the frozen evaluation records. For Table IV, the consolidated records contain 5,589 detected instances, 2,175 admitted instances and 1,993 distinct accepted instances: a recorded conditional acceptance rate of 91.6% and an end-to-end acceptance rate of 35.7%. For cohort composition and counting conventions, see the [data notes](../../docs/DATA_NOTES.md).
 
 The external comparison freezes 216 methods and 323 Method-Issue targets. Candidate coverage counts targets with a recorded saved candidate; no-candidate, confirmed failure and inconclusive outcomes remain separate.
 
