@@ -1,0 +1,416 @@
+{
+  "all_match": true,
+  "checks": [
+    {
+      "paper_numeric_cells": [
+        "174",
+        "2",
+        "141",
+        "317"
+      ],
+      "record_derived_cells": [
+        174,
+        2,
+        141,
+        317
+      ],
+      "row": 1,
+      "status": "MATCH",
+      "table": "1"
+    },
+    {
+      "paper_numeric_cells": [
+        "964",
+        "4",
+        "205",
+        "1173"
+      ],
+      "record_derived_cells": [
+        964,
+        4,
+        205,
+        1173
+      ],
+      "row": 2,
+      "status": "MATCH",
+      "table": "1"
+    },
+    {
+      "paper_numeric_cells": [
+        "1466",
+        "39",
+        "523",
+        "2028"
+      ],
+      "record_derived_cells": [
+        1466,
+        39,
+        523,
+        2028
+      ],
+      "row": 3,
+      "status": "MATCH",
+      "table": "1"
+    },
+    {
+      "paper_numeric_cells": [
+        "737",
+        "21",
+        "1313",
+        "2071"
+      ],
+      "record_derived_cells": [
+        737,
+        21,
+        1313,
+        2071
+      ],
+      "row": 4,
+      "status": "MATCH",
+      "table": "1"
+    },
+    {
+      "paper_numeric_cells": [
+        "3341",
+        "66",
+        "2182",
+        "5589"
+      ],
+      "record_derived_cells": [
+        3341,
+        66,
+        2182,
+        5589
+      ],
+      "row": 5,
+      "status": "MATCH",
+      "table": "1"
+    },
+    {
+      "paper_numeric_cells": [
+        "51",
+        "70",
+        "38",
+        "2",
+        "30"
+      ],
+      "record_derived_cells": [
+        51,
+        70,
+        38,
+        2,
+        30
+      ],
+      "row": 1,
+      "status": "MATCH",
+      "table": "2"
+    },
+    {
+      "paper_numeric_cells": [
+        "50",
+        "61",
+        "48",
+        "4",
+        "9"
+      ],
+      "record_derived_cells": [
+        50,
+        61,
+        48,
+        4,
+        9
+      ],
+      "row": 2,
+      "status": "MATCH",
+      "table": "2"
+    },
+    {
+      "paper_numeric_cells": [
+        "62",
+        "105",
+        "49",
+        "39",
+        "17"
+      ],
+      "record_derived_cells": [
+        62,
+        105,
+        49,
+        39,
+        17
+      ],
+      "row": 3,
+      "status": "MATCH",
+      "table": "2"
+    },
+    {
+      "paper_numeric_cells": [
+        "53",
+        "87",
+        "33",
+        "21",
+        "33"
+      ],
+      "record_derived_cells": [
+        53,
+        87,
+        33,
+        21,
+        33
+      ],
+      "row": 4,
+      "status": "MATCH",
+      "table": "2"
+    },
+    {
+      "paper_numeric_cells": [
+        "216",
+        "323",
+        "168",
+        "66",
+        "89"
+      ],
+      "record_derived_cells": [
+        216,
+        323,
+        168,
+        66,
+        89
+      ],
+      "row": 5,
+      "status": "MATCH",
+      "table": "2"
+    },
+    {
+      "paper_numeric_cells": [
+        "323",
+        "323"
+      ],
+      "record_derived_cells": [
+        323,
+        323
+      ],
+      "row": 1,
+      "status": "MATCH",
+      "table": "3"
+    },
+    {
+      "paper_numeric_cells": [
+        "118",
+        "134"
+      ],
+      "record_derived_cells": [
+        118,
+        134
+      ],
+      "row": 2,
+      "status": "MATCH",
+      "table": "3"
+    },
+    {
+      "paper_numeric_cells": [
+        "109",
+        "40"
+      ],
+      "record_derived_cells": [
+        109,
+        40
+      ],
+      "row": 3,
+      "status": "MATCH",
+      "table": "3"
+    },
+    {
+      "paper_numeric_cells": [
+        "1",
+        "44"
+      ],
+      "record_derived_cells": [
+        1,
+        44
+      ],
+      "row": 4,
+      "status": "MATCH",
+      "table": "3"
+    },
+    {
+      "paper_numeric_cells": [
+        "3341",
+        "2109",
+        "1928",
+        "63.1\\%",
+        "91.4\\%",
+        "57.7\\%"
+      ],
+      "record_derived_cells": [
+        3341,
+        2109,
+        1928,
+        "63.1%",
+        "91.4%",
+        "57.7%"
+      ],
+      "row": 1,
+      "status": "MATCH",
+      "table": "4"
+    },
+    {
+      "paper_numeric_cells": [
+        "66",
+        "9",
+        "9",
+        "13.6\\%",
+        "100\\%",
+        "13.6\\%"
+      ],
+      "record_derived_cells": [
+        66,
+        9,
+        9,
+        "13.6%",
+        "100.0%",
+        "13.6%"
+      ],
+      "row": 2,
+      "status": "MATCH",
+      "table": "4"
+    },
+    {
+      "paper_numeric_cells": [
+        "2182",
+        "57",
+        "56",
+        "2.6\\%",
+        "98.2\\%",
+        "2.6\\%"
+      ],
+      "record_derived_cells": [
+        2182,
+        57,
+        56,
+        "2.6%",
+        "98.2%",
+        "2.6%"
+      ],
+      "row": 3,
+      "status": "MATCH",
+      "table": "4"
+    },
+    {
+      "paper_numeric_cells": [
+        "5589",
+        "2175",
+        "1993",
+        "38.9\\%",
+        "91.6\\%",
+        "35.7\\%"
+      ],
+      "record_derived_cells": [
+        5589,
+        2175,
+        1993,
+        "38.9%",
+        "91.6%",
+        "35.7%"
+      ],
+      "row": 4,
+      "status": "MATCH",
+      "table": "4"
+    },
+    {
+      "paper_numeric_cells": [
+        "120",
+        "92",
+        "28",
+        "84"
+      ],
+      "record_derived_cells": [
+        120,
+        92,
+        28,
+        84
+      ],
+      "row": 1,
+      "status": "MATCH",
+      "table": "5"
+    },
+    {
+      "paper_numeric_cells": [
+        "120",
+        "120",
+        "0",
+        "73"
+      ],
+      "record_derived_cells": [
+        120,
+        120,
+        0,
+        73
+      ],
+      "row": 2,
+      "status": "MATCH",
+      "table": "5"
+    },
+    {
+      "paper_numeric_cells": [
+        "84/92",
+        "91.30\\%"
+      ],
+      "record_derived_cells": [
+        "84/92",
+        "91.30%"
+      ],
+      "row": 3,
+      "status": "MATCH",
+      "table": "5"
+    },
+    {
+      "paper_numeric_cells": [
+        "73/92",
+        "79.35\\%"
+      ],
+      "record_derived_cells": [
+        "73/92",
+        "79.35%"
+      ],
+      "row": 4,
+      "status": "MATCH",
+      "table": "5"
+    },
+    {
+      "paper_numeric_cells": [
+        "137/143",
+        "95.8\\%",
+        "0"
+      ],
+      "record_derived_cells": [
+        "137/143",
+        "95.8%",
+        0
+      ],
+      "row": 1,
+      "status": "MATCH",
+      "table": "6"
+    },
+    {
+      "paper_numeric_cells": [
+        "143/143",
+        "100\\%",
+        "6",
+        "4.2\\%"
+      ],
+      "record_derived_cells": [
+        "143/143",
+        "100.0%",
+        6,
+        "4.2%"
+      ],
+      "row": 2,
+      "status": "MATCH",
+      "table": "6"
+    }
+  ],
+  "notes": "Includes percentage rounding; paired 65/19/8/0 and 54 shared targets are also in AUDIT_OBSERVATIONS.json, outside table numeric cells",
+  "numeric_cells": 96,
+  "observation_source": "AUDIT_OBSERVATIONS.json; computed from selected frozen row ledgers"
+}

@@ -1,0 +1,7 @@
+decision:
+  mode: rule_only
+  # Separate decision transport budget, including retries, across a run/resume.
+  max_requests_per_run: 100
+  supported_modes:
+    - rule_only
+    - rule_llm

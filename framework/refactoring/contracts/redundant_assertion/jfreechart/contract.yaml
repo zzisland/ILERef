@@ -1,0 +1,75 @@
+document_schema_version: '1.0'
+execution_authority: python
+status: active
+contract_builder_entry: pipeline.contract_builders:ExecutableContractBuilder.build
+transformation_entry: pipeline.agents.ra_contract:expected_candidate
+prompt_entry: pipeline.agents.ra_contract:build_prompt
+contract_id: ra.jfreechart.catch_constant_deletion
+issue_type: Redundant_Assertion
+version: '2.0'
+scope: project_specific
+applicability_entry: pipeline.agents.ra_contract:analyze_catch
+validator_entry: pipeline.agents.ra_contract:validate_candidate
+test_entry:
+- pipeline.tests.test_ra_v2_contract:RaV2ContractTest
+project: JFreeChart
+scope_note: Audited setter(null)/Marker event-oracle pattern. Existing Python guards unchanged; no new
+  project-name gate.
+contract_file: redundant_assertion/jfreechart/contract.yaml
+prompt_file: redundant_assertion/jfreechart/prompt.md
+rules:
+  applicability_prerequisites: project_specific：当前审计过的 JFreeChart Marker setter(null)/event oracle 模式。一个末尾顶层
+    try、一个 catch，无 finally/resource/复杂控制；catch 仅 assertTrue(true);。try 为 setter(null) + 已绑定 fail(普通字符串)，异常不能捕获
+    fail。前面七条 audited setup/oracle 语句及总计八条顶层语句、三个先行 assertEquals、旧/新值与事件 getter 关系必须匹配。
+  transformation_target: 仅删除批准 catch 中常量 assertion，保留空 catch。不是把 catch 改成 assertThrows。
+  edit_and_preservation_constraints: 保护 try/catch、异常类型和变量、setter trigger、fail 消息、属性/事件 oracle、其他文本与注释、signature。禁止删除其他
+    RA，尤其 self-comparison/equals/hashCode/reflexivity/clone/copy 或错误操作数。registry 的 project_specific 标签不是新增
+    project-name gate；执行仍以原有 Python audited shape 和依赖绑定为准，不能宣称可推广。
+  candidate_validation_predicates: verify_proof 后 delegate ra_contract.validate_candidate：删除目标后的 format-insensitive
+    tree 必须相同，保留 literal、comment 文本及归属，忽略 token 间布局。六个 RA_V2 标签共享这一完整 predicate；file materialize 保留 owner
+    首行缩进/尾换行。Prompt 的 NO_UNRELATED_FORMATTING 比实际布局容忍更严格。
+  allowed_edits:
+    source_field: transformation_target
+  forbidden_edits:
+    source_field: edit_and_preservation_constraints
+  protected_elements:
+    source_field: edit_and_preservation_constraints
+  required_preservation:
+    source_field: edit_and_preservation_constraints
+common_pipeline_requirements: 'ApplicabilityEvidenceExtractor → 默认 instance-level ApplicabilityPolicy
+  / RuleBasedRiskAssessor + RiskPolicyGuard → REFACTOR_LOW_RISK → RISK_APPROVED → ExecutableContractBuilder
+  → RefactoringPromptService → CandidateValidator → file composition → compile/test → revalidation → EvidenceLinkedAcceptancePolicy。
+
+
+  ContractBuilder 还检查 risk envelope、instance ID、单目标 smell、有效来源证据、source/method/hash/line range 和当前文件绑定；低风险不是最终接纳。验证、拼接、编译测试、复检和
+  final acceptance 未被 Prompt 或 registry 替代。
+
+
+  instance_schema_version=2.0 与 source_schema_version 独立；refactoring_contract.contract_id/version 是六条规则的登记身份。ECT
+  dispatcher proof 版本 3.0 与 fail/flag/no_throw 路径版本 1.0/2.0/1.0 不应混为一个 schema 版本。Prompt service 版本 5.2-contract-v4.1-ect-v3，CandidateValidator
+  4.2；RA catch 内部另有 ra-v2-local-deletion-1。版本号差异本身不表示未同步。
+
+
+  共同 CandidateValidator 检查单个完整方法、非空、无 class/import 等外层内容、签名/annotation、原文件 hash、方法未删、无新增 placeholder、存在变化；调用
+  smell predicate 后只替换目标方法并核对方法外内容。单个 Java Markdown fence 会先清理，INFO 不阻止通过。候选通过仅表示静态阶段通过。'
+ect_common_restrictions: null
+audit_provenance:
+  directory: analysis/framework_refactor_stage3_20260920
+  files_sha256:
+    contract_rules.md: 066aa05cad91ae4d57414714f1a6da6f1899e7314d07721c0a688d06ddcc260d
+    prompt_templates.md: bcb528e416d40f48298429db374fe754cc98c77b98628ed9039dc48e5f5ae8ef
+    prompt_validator_alignment.md: 214a1f30bce90fef709931850001825fbf2c19f3e1ba7bdc37c5541e09096522
+  implementation_sha256:
+    pipeline/agents/candidate_validation.py: 5bf2bdcb4d65a2d840608378e4d20665bfbfaf389e426d7a3c2a072fe27a18d7
+    pipeline/agents/prompt_service.py: 1a723627f341bcb3d191ee8c62264be63378a2384c42e24130a925a3daad7217
+    pipeline/agents/ra_contract.py: e66f1c4e615f4695ddcc67d8e7979f0f38ab97ed9f84f5b05d09112b1f77a148
+    pipeline/agents/refactoring_contract.py: 0dd04a46578e84a48f4c4845de7c619a8d650e8e4f3418cce6185c2363a9f367
+    pipeline/agents/safety_contracts.py: 05690921c118dc8976c378448f01c560302178f6a15f2676d2aa090af775697b
+    pipeline/contract_builders.py: a61a86c78a04a3ebd7d00f8470d4a00561fd1aeed8bced67426f0eb07371909d
+    pipeline/tests/test_ra_v2_contract.py: 3db65884eb02c0d278e63cf369493a3ef850a10b16dd6ce2931e1f9eba48af50
+  prompt_template_sha256: 272a58eb83205531844aa69f7f75becb26dce77daa03762cae98294f75f6affb
+  prompt_amendment:
+    revision: ect-fail-prompt-fix-1
+    contract_id: ect.must_throw.fail
+    implementation_sha256: 1a723627f341bcb3d191ee8c62264be63378a2384c42e24130a925a3daad7217
+    template_sha256: ece33fa100f9100392020aa31f289f095061f75887ed80949a0abc6cc38857dd

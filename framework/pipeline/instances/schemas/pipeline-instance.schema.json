@@ -1,0 +1,235 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "pipeline-instance.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "instance_schema_version",
+    "source_schema_version",
+    "instance_id",
+    "project_version",
+    "module_path",
+    "test_relative_path",
+    "test_file_path",
+    "test_filename",
+    "test_package_name",
+    "split_filename",
+    "method_signature",
+    "method_source_hash",
+    "smell_type",
+    "detected_smells",
+    "selected_smells",
+    "ignored_smells",
+    "line_range",
+    "test_code",
+    "production_context",
+    "source_record"
+  ],
+  "properties": {
+    "instance_schema_version": {
+      "const": "2.0"
+    },
+    "source_schema_version": {
+      "const": "4.1"
+    },
+    "instance_id": {
+      "type": "string",
+      "pattern": "^utrefactor:v1:[a-f0-9]{64}$"
+    },
+    "project_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "module_path": {
+      "type": "string"
+    },
+    "test_relative_path": {
+      "type": "string",
+      "minLength": 1
+    },
+    "test_file_path": {
+      "type": "string"
+    },
+    "test_filename": {
+      "type": "string"
+    },
+    "test_package_name": {
+      "type": "string"
+    },
+    "split_filename": {
+      "type": "string"
+    },
+    "method_signature": {
+      "type": "string",
+      "minLength": 3
+    },
+    "method_source_hash": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "smell_type": {
+      "type": "string",
+      "minLength": 1
+    },
+    "detected_smells": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "selected_smells": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "ignored_smells": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "line_range": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "start",
+        "end"
+      ],
+      "properties": {
+        "start": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "end": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "test_code": {
+      "type": "string",
+      "minLength": 1
+    },
+    "production_context": {
+      "type": "object"
+    },
+    "source_record": {
+      "type": "object",
+      "description": "Read-only original provenance; never used as the normalized runtime view."
+    },
+    "source_owner_binding": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "schema_version",
+        "status",
+        "reason_code"
+      ],
+      "properties": {
+        "schema_version": {
+          "const": "1.0"
+        },
+        "status": {
+          "enum": [
+            "BOUND",
+            "MISSING",
+            "AMBIGUOUS",
+            "STALE",
+            "IDENTITY_MISMATCH",
+            "INSUFFICIENT_EVIDENCE",
+            "UNKNOWN_LEGACY"
+          ]
+        },
+        "reason_code": {
+          "type": "string",
+          "minLength": 1
+        },
+        "frozen_source_root": {
+          "type": "string"
+        },
+        "test_relative_path": {
+          "type": "string"
+        },
+        "resolved_source_path": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "source_file_sha256": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "package_name": {
+          "type": "string"
+        },
+        "owner_class": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "test_method": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "method_signature": {
+          "type": "string"
+        },
+        "method_source_hash": {
+          "type": "string"
+        }
+      }
+    },
+    "execution_owner_mapping": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "schema_version",
+        "status",
+        "reason_code"
+      ],
+      "properties": {
+        "schema_version": {
+          "const": "1.0"
+        },
+        "status": {
+          "enum": [
+            "NOT_RUN",
+            "MAPPED",
+            "BLOCKED",
+            "UNKNOWN_LEGACY",
+            "MAPPED_LEGACY"
+          ]
+        },
+        "reason_code": {
+          "type": "string",
+          "minLength": 1
+        },
+        "test_class": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "test_method": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "source_file_sha256": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    }
+  }
+}

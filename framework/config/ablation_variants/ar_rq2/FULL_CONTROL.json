@@ -1,0 +1,46 @@
+{
+  "variant_id": "FULL_CONTROL",
+  "sample_manifest_ref": "analysis\\ar_rq2_frozen\\ar_240_manifest.json",
+  "schema_version": "ar-rq2-config-1",
+  "identity": {
+    "runtime": "ablation-instance-runtime-2-ar",
+    "model": {
+      "role": "refactoring",
+      "enabled": true,
+      "provider": "openai_compatible",
+      "endpoint_sha256": "1d0c8dae4013f0dd0883ac7692d61535aa7cdbad5eab0302c57fa1d0f07fe77a",
+      "model": "deepseek-v4-pro",
+      "timeout": 300,
+      "transport_max_retries": 0,
+      "temperature": 0.0,
+      "top_p": 1.0,
+      "max_tokens": 32768,
+      "dimensions": null,
+      "source": "local",
+      "credential_configured": true
+    },
+    "rag": false,
+    "retry": false,
+    "repair": false,
+    "generation_unit": "CURRENT_TARGET_INSTANCE",
+    "revisions": {
+      "cli": "8d56926d951f1193d438c328bcdb01ddb48aac01",
+      "compress": "1ace49a4a302ac86d52c40dab04e7709d1c598bf",
+      "jfreechart": "98d9c90b6e0a1e553a506497daaf64a5704a4413",
+      "jsoup": "d8c49e5ec72a08ca1ac4e08740e70dc0f47ad911"
+    },
+    "project_inputs": {
+      "cli": "e88968ea33e14925313b5229a69465bd869e71cc40394b047e9866c0772d2991",
+      "compress": "59c78851c8344e8bb68bd85af445541e87d8ef8e00a0b7b3d3a9476d0c2a3a95",
+      "jfreechart": "1565439b2ab455eb3c5ab22c6e5773a8db338f35671d2913a032a124734cc01c",
+      "jsoup": "f9c1e802f30eb8e1232dc339dfac69253517235f8a5595a9ec5d269b928c5115"
+    },
+    "framework_sha256": "0bba2758623a758e0398b89751523051510595c27fec2d22a2c74356f4ef5a1f",
+    "frozen_inputs": {
+      "ar_240_manifest.json": "ab9b52cc73c98a0822811abe7d3440e41297ef61cd1eb25f53bece839fbb97f3"
+    }
+  },
+  "bindings_sha256": "abb2888bb1fac88fe132ad144e62c4ce33cb89a23b38364162709d44ef9c3f7c",
+  "sample_size": 240,
+  "planned_model_calls": 160
+}

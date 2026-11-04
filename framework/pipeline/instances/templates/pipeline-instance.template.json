@@ -1,0 +1,50 @@
+{
+  "instance_schema_version": "2.0",
+  "source_schema_version": "4.1",
+  "instance_id": "${GENERATED_INSTANCE_ID}",
+  "project_version": "${PROJECT_VERSION}",
+  "module_path": "${MODULE_PATH_OR_EMPTY}",
+  "test_relative_path": "${PROJECT_RELATIVE_TEST_PATH}",
+  "test_file_path": "${ABSOLUTE_TEST_FILE_PATH}",
+  "test_filename": "${TEST_FILENAME}",
+  "test_package_name": "${TEST_PACKAGE_NAME}",
+  "split_filename": "${DETECTOR_SPLIT_FILENAME}",
+  "method_signature": "${METHOD_NAME_AND_PARAMETERS}",
+  "method_source_hash": "${GENERATED_METHOD_SOURCE_SHA256}",
+  "smell_type": "${TARGET_SMELL}",
+  "detected_smells": [
+    "${TARGET_SMELL}"
+  ],
+  "selected_smells": [
+    "${TARGET_SMELL}"
+  ],
+  "ignored_smells": [],
+  "line_range": {
+    "start": 0,
+    "end": 0
+  },
+  "test_code": "${ORIGINAL_TEST_METHOD_SOURCE}",
+  "production_context": {},
+  "source_record": {
+    "schemaVersion": "4.1",
+    "testContext": {
+      "testModulePath": "${MODULE_PATH_OR_EMPTY}",
+      "testRelativePath": "${PROJECT_RELATIVE_TEST_PATH}",
+      "testFilePath": "${ABSOLUTE_TEST_FILE_PATH}",
+      "testFilename": "${TEST_FILENAME}",
+      "testPackageName": "${TEST_PACKAGE_NAME}",
+      "splitFilename": "${DETECTOR_SPLIT_FILENAME}",
+      "testCodeStartLine": 0,
+      "testCodeEndLine": 0,
+      "testCode": "${ORIGINAL_TEST_METHOD_SOURCE}",
+      "smellList": [
+        "${TARGET_SMELL}"
+      ],
+      "selectedSmells": [
+        "${TARGET_SMELL}"
+      ],
+      "ignoredSmells": []
+    },
+    "productionContext": {}
+  }
+}

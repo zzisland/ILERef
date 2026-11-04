@@ -1,0 +1,50 @@
+{
+  "instance_schema_version": "2.0",
+  "source_schema_version": "4.1",
+  "instance_id": "utrefactor:v1:20e7d140d2b8cf1114263f09ea75b472a1c23535262f635c4bc480d800967c8c",
+  "project_version": "example-only-v1",
+  "module_path": "",
+  "test_relative_path": "src/test/java/example/ExampleTest.java",
+  "test_file_path": "hostpath://e/example-project/src/test/java/example/ExampleTest.java",
+  "test_filename": "ExampleTest.java",
+  "test_package_name": "example",
+  "split_filename": "ExampleTest__1.java",
+  "method_signature": "rejectsInvalidNumber()",
+  "method_source_hash": "4a7fff33834f8d2226e9bf85bd492c29751ccc25baedc65e1bfb66796a7ab2cb",
+  "smell_type": "Exception_Catching_Throwing",
+  "detected_smells": [
+    "Exception_Catching_Throwing"
+  ],
+  "selected_smells": [
+    "Exception_Catching_Throwing"
+  ],
+  "ignored_smells": [],
+  "line_range": {
+    "start": 10,
+    "end": 17
+  },
+  "test_code": "@Test\nvoid rejectsInvalidNumber() {\n    try {\n        Integer.parseInt(\"invalid\");\n        fail(\"Expected NumberFormatException\");\n    } catch (NumberFormatException expected) {\n    }\n}",
+  "production_context": {},
+  "source_record": {
+    "schemaVersion": "4.1",
+    "testContext": {
+      "testModulePath": "",
+      "testRelativePath": "src/test/java/example/ExampleTest.java",
+      "testFilePath": "hostpath://e/example-project/src/test/java/example/ExampleTest.java",
+      "testFilename": "ExampleTest.java",
+      "testPackageName": "example",
+      "splitFilename": "ExampleTest__1.java",
+      "testCodeStartLine": 10,
+      "testCodeEndLine": 17,
+      "testCode": "@Test\nvoid rejectsInvalidNumber() {\n    try {\n        Integer.parseInt(\"invalid\");\n        fail(\"Expected NumberFormatException\");\n    } catch (NumberFormatException expected) {\n    }\n}",
+      "smellList": [
+        "Exception_Catching_Throwing"
+      ],
+      "selectedSmells": [
+        "Exception_Catching_Throwing"
+      ],
+      "ignoredSmells": []
+    },
+    "productionContext": {}
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "instance_schema_version": "2.0",
+  "source_schema_version": "4.1",
+  "instance_id": "utrefactor:v1:4e37f43594deb6cc7cbedf080a1f89aedc6d36c30b4e2b77eb056bd058bd0001",
+  "project_version": "example-only-v1",
+  "module_path": "",
+  "test_relative_path": "src/test/java/example/ExampleTest.java",
+  "test_file_path": "hostpath://e/example-project/src/test/java/example/ExampleTest.java",
+  "test_filename": "ExampleTest.java",
+  "test_package_name": "example",
+  "split_filename": "ExampleTest__1.java",
+  "method_signature": "checksParsedValue()",
+  "method_source_hash": "22adbb4fa203e97728208defa9b519024b5f846feb8372cf76fcd3e16c3176da",
+  "smell_type": "Assertion_Roulette",
+  "detected_smells": [
+    "Assertion_Roulette"
+  ],
+  "selected_smells": [
+    "Assertion_Roulette"
+  ],
+  "ignored_smells": [],
+  "line_range": {
+    "start": 10,
+    "end": 15
+  },
+  "test_code": "@Test\nvoid checksParsedValue() {\n    int value = Integer.parseInt(\"7\");\n    assertEquals(7, value);\n    assertTrue(value > 0);\n}",
+  "production_context": {},
+  "source_record": {
+    "schemaVersion": "4.1",
+    "testContext": {
+      "testModulePath": "",
+      "testRelativePath": "src/test/java/example/ExampleTest.java",
+      "testFilePath": "hostpath://e/example-project/src/test/java/example/ExampleTest.java",
+      "testFilename": "ExampleTest.java",
+      "testPackageName": "example",
+      "splitFilename": "ExampleTest__1.java",
+      "testCodeStartLine": 10,
+      "testCodeEndLine": 15,
+      "testCode": "@Test\nvoid checksParsedValue() {\n    int value = Integer.parseInt(\"7\");\n    assertEquals(7, value);\n    assertTrue(value > 0);\n}",
+      "smellList": [
+        "Assertion_Roulette"
+      ],
+      "selectedSmells": [
+        "Assertion_Roulette"
+      ],
+      "ignoredSmells": []
+    },
+    "productionContext": {}
+  }
+}

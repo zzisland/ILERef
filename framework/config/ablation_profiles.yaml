@@ -1,0 +1,19 @@
+schema_version: '1.0'
+active_profile: FULL
+profiles:
+  FULL:
+    applicability: instance_level
+    contract: executable
+    acceptance: evidence_linked
+  A1:
+    applicability: category_level
+    contract: executable
+    acceptance: evidence_linked
+  A2:
+    applicability: instance_level
+    contract: category_rule
+    acceptance: evidence_linked
+  A3:
+    applicability: instance_level
+    contract: executable
+    acceptance: compile_test_only

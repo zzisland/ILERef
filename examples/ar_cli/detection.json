@@ -1,0 +1,74 @@
+[
+  {
+    "productionContext": {
+      "astControlFlow": [],
+      "astMethodCalls": [],
+      "astNodeTypeSummaries": [],
+      "astObjectCreations": [],
+      "available": true,
+      "compactAstTrees": [],
+      "dependencyMethodInputs": [],
+      "dependencyMethodOutputs": [],
+      "dependencyMethodSignatures": [],
+      "dependencyMethodSummaries": [],
+      "directCallNames": [],
+      "focalMethodCodeSnippets": [],
+      "focalMethodInputs": [
+        "CharSequence text",
+        "int startPos"
+      ],
+      "focalMethodNames": [
+        "indexOfNonWhitespace"
+      ],
+      "focalMethodOutputs": [
+        "int"
+      ],
+      "focalMethodRefs": [
+        "legacy://datasets\\cli\\src\\main\\java\\org\\apache\\commons\\cli\\help\\Util.java#org.apache.commons.cli.help#Util:: static int indexOfNonWhitespace(final CharSequence text, final int startPos)"
+      ],
+      "focalMethodSignatures": [
+        " static int indexOfNonWhitespace(final CharSequence text, final int startPos)"
+      ],
+      "focalMethodSummaries": [
+        "indexOfNonWhitespace(CharSequence text, int startPos) -> int; calls isEmpty, length, isWhitespace, charAt"
+      ],
+      "focalMethodThrownExceptions": [],
+      "methodLibraryPath": "_production_method_library.json",
+      "productionClassName": "Util",
+      "productionClassPath": "legacy://datasets\\cli\\src\\main\\java\\org\\apache\\commons\\cli\\help\\Util.java",
+      "productionFields": [
+        "/**\r\n * A special value for index not found.\r\n */\r\nprivate static final int NOT_FOUND = -1;"
+      ],
+      "productionImports": [
+        "java.util.Arrays"
+      ],
+      "productionPackageName": "org.apache.commons.cli.help",
+      "reason": ""
+    },
+    "schemaVersion": "4.1",
+    "testContext": {
+      "codeComment": "",
+      "ignoredSmells": [
+        "Assertion_Roulette",
+        "Conditional_Test_Logic",
+        "Magic_Number_Test"
+      ],
+      "refactorRule": "UNASSIGNED",
+      "selectedSmells": [],
+      "smellList": [
+        "Assertion Roulette",
+        "Conditional Test Logic",
+        "Magic Number Test"
+      ],
+      "splitFilename": "UtilTest__2",
+      "testCode": "@ParameterizedTest\r\n    @MethodSource(\"charArgs\")\r\n    void testFindNonWhitespacePos(final Character c, final boolean isWhitespace) {\r\n        String text = String.format(\"%cWorld\", c);\r\n        assertEquals(isWhitespace ? 1 : 0, Util.indexOfNonWhitespace(text, 0));\r\n        text = String.format(\"%c%c%c\", c, c, c);\r\n        assertEquals(isWhitespace ? -1 : 0, Util.indexOfNonWhitespace(text, 0));\r\n    }",
+      "testCodeEndLine": 73,
+      "testCodeStartLine": 66,
+      "testFilePath": "legacy://datasets\\cli\\src\\test\\java\\org\\apache\\commons\\cli\\help\\UtilTest.java",
+      "testFilename": "UtilTest.java",
+      "testModulePath": "",
+      "testPackageName": "org.apache.commons.cli.help",
+      "testRelativePath": "src/test/java/org/apache/commons/cli/help/UtilTest.java"
+    }
+  }
+]

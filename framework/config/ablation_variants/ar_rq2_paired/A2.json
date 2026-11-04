@@ -1,0 +1,49 @@
+{
+  "variant_id": "A2",
+  "generation_profile": "ar-formal-contract-pair-2",
+  "sample_manifest_ref": "analysis\\ar_a2_pairing_preflight\\ar_admitted_160_manifest.json",
+  "schema_version": "ar-rq2-strict-paired-config-2",
+  "identity": {
+    "runtime": "ablation-instance-runtime-5-api-failure-finalization",
+    "model": {
+      "role": "refactoring",
+      "enabled": true,
+      "provider": "openai_compatible",
+      "endpoint_sha256": "1d0c8dae4013f0dd0883ac7692d61535aa7cdbad5eab0302c57fa1d0f07fe77a",
+      "model": "deepseek-v4-pro",
+      "timeout": 300,
+      "transport_max_retries": 0,
+      "temperature": 0.0,
+      "top_p": 1.0,
+      "max_tokens": 32768,
+      "dimensions": null,
+      "source": "local",
+      "credential_configured": true
+    },
+    "rag": false,
+    "retry": false,
+    "repair": false,
+    "cache": false,
+    "cross_variant_reuse": false,
+    "generation_unit": "CURRENT_TARGET_INSTANCE",
+    "revisions": {
+      "cli": "8d56926d951f1193d438c328bcdb01ddb48aac01",
+      "compress": "1ace49a4a302ac86d52c40dab04e7709d1c598bf",
+      "jfreechart": "98d9c90b6e0a1e553a506497daaf64a5704a4413",
+      "jsoup": "d8c49e5ec72a08ca1ac4e08740e70dc0f47ad911"
+    },
+    "project_inputs": {
+      "cli": "e88968ea33e14925313b5229a69465bd869e71cc40394b047e9866c0772d2991",
+      "compress": "59c78851c8344e8bb68bd85af445541e87d8ef8e00a0b7b3d3a9476d0c2a3a95",
+      "jfreechart": "1565439b2ab455eb3c5ab22c6e5773a8db338f35671d2913a032a124734cc01c",
+      "jsoup": "f9c1e802f30eb8e1232dc339dfac69253517235f8a5595a9ec5d269b928c5115"
+    },
+    "framework_sha256": "222e7de3b7d1959de0fcc4e0479bcda82b92dd21b1474c3deaf4510043733f43",
+    "frozen_inputs": {
+      "ar_admitted_160_manifest.json": "26c8d4ce0bd0f95520b54710ab2f8d1c380f2ba5927811acfb70467ee5f35c8f"
+    }
+  },
+  "bindings_sha256": "abe3f8858e4b30ba0d87b12de39b8c8d29407099b05397ee4295da38d356adb7",
+  "sample_size": 160,
+  "planned_model_calls": 160
+}

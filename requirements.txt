@@ -1,0 +1,6 @@
+PyYAML==6.0.3
+jsonschema==4.25.0
+tree-sitter==0.25.2
+tree-sitter-java==0.23.5
+# Model transport; not installed during this packaging session.
+langchain-openai==0.3.35

@@ -1,0 +1,316 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "agent-result.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "contract_version", "run_id", "instance_id", "agent", "agent_version",
+    "status", "result", "errors", "artifacts"
+  ],
+  "properties": {
+    "contract_version": {"const": "1.0"},
+    "run_id": {"type": "string", "minLength": 1},
+    "instance_id": {"type": "string", "pattern": "^utrefactor:v1:[a-f0-9]{64}$"},
+    "agent": {
+      "enum": [
+        "risk_assessment", "refactoring", "build_test_validation",
+        "smell_revalidation", "iterative_repair"
+      ]
+    },
+    "agent_version": {"type": "string", "minLength": 1},
+    "status": {
+      "enum": ["SUCCESS", "FAILED", "NOT_IMPLEMENTED", "NOT_EXECUTED"]
+    },
+    "result": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "ctl_rule_version": {"type": ["string", "null"]},
+        "mnt_rule_version": {"type": ["string", "null"]},
+        "hash_chain": {"type": ["object", "null"]},
+        "decision": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["action", "risk", "scope", "reason"],
+              "properties": {
+                "action": {"enum": ["REFACTOR", "REVIEW", "SKIP", "REMOVE"]},
+                "risk": {"enum": ["LOW", "MEDIUM", "HIGH", "CRITICAL"]},
+                "scope": {"enum": ["METHOD", "CLASS", "FILE", "UNKNOWN"]},
+                "reason": {"type": "string", "minLength": 1}
+              }
+            },
+            {
+              "enum": [
+                "REFACTOR_LOW_RISK", "SKIP_FALSE_POSITIVE", "SKIP_NOT_APPLICABLE",
+                "REVIEW_HIGH_RISK", "REVIEW_INSUFFICIENT_CONTEXT"
+              ]
+            },
+            {
+              "enum": ["CANDIDATE_GENERATED", "REFACTORING_REJECTED", "REFACTORING_FAILED"]
+            },
+            {
+              "enum": ["VALIDATION_PASSED", "VALIDATION_FAILED", "VALIDATION_BLOCKED"]
+            },
+            {
+              "enum": ["REVALIDATION_PASSED", "REVALIDATION_FAILED", "REVALIDATION_BLOCKED"]
+            }
+          ]
+        },
+        "risk_level": {"enum": ["LOW", "MEDIUM", "HIGH", "CRITICAL"]},
+        "reason_code": {"type": "string"},
+        "confidence_semantics": {"type": "string"},
+        "confidence": {"type": "number", "minimum": 0, "maximum": 1},
+        "assessment_mode": {
+          "enum": ["rule_only", "rule_llm", "rule_first_llm_fallback", "llm_assisted"]
+        },
+        "rule_original": {"type": "object", "required": ["decision", "evidence", "policy_checks", "allowed_changes", "reason_code"]},
+        "model_opinion": {"type": "object", "required": ["status", "requests", "advice"], "properties": {
+          "status": {"enum": ["SUCCESS", "TECHNICAL_FAILURE"]},
+          "requests": {"type": "integer", "minimum": 0, "maximum": 6},
+          "advice": {"type": ["object", "null"]}
+        }},
+        "final_decision": {"enum": ["REFACTOR_LOW_RISK", "SKIP_FALSE_POSITIVE", "SKIP_NOT_APPLICABLE", "REVIEW_HIGH_RISK", "REVIEW_INSUFFICIENT_CONTEXT"]},
+        "arbitration_version": {"type": "string"},
+        "override_applied": {"type": "boolean"},
+        "override_reason": {"type": "string"},
+        "evidence_checks": {"type": "array", "items": {"type": "object", "required": ["source_id", "passed"]}},
+        "coverage": {"type": "object"},
+        "rule_limitation_category": {"type": "string"},
+        "admission_guidance": {"type": ["object", "null"]},
+        "assessor_name": {"type": "string", "minLength": 1},
+        "assessor_version": {"type": "string", "minLength": 1},
+        "rule_version": {"type": "string", "minLength": 1},
+        "evidence": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/riskEvidence"}
+        },
+        "allowed_changes": {"type": "array", "items": {"type": "string"}},
+        "forbidden_changes": {"type": "array", "items": {"type": "string"}},
+        "required_context": {"type": "array", "items": {"type": "string"}},
+        "missing_context": {"type": "array", "items": {"type": "string"}},
+        "next_action": {"enum": ["REFACTOR", "STOP", "MANUAL_REVIEW", "SAVE_CANDIDATE", "ACCEPT", "ACCEPT_PARTIAL"]},
+        "mnt_completion_status": {"enum": ["PARTIAL", "COMPLETE", "NOT_ACCEPTED"]},
+        "effect_status": {"enum": ["REVALIDATION_PASSED", "REVALIDATION_FAILED", "REVALIDATION_BLOCKED"]},
+        "report_only": {"type": "boolean"},
+        "policy_checks": {
+          "type": "array",
+          "items": {"oneOf": [{
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["check_id", "passed", "reason"],
+            "properties": {
+              "check_id": {"type": "string", "minLength": 1},
+              "passed": {"type": "boolean"},
+              "reason": {"type": "string", "minLength": 1}
+            }
+          }, {"type":"object","additionalProperties":false,"required":["check_id","status","expected","observed","evidence_refs","reason"],"properties":{"check_id":{"type":"string","minLength":1},"status":{"enum":["PASS","FAIL","BLOCKED"]},"expected":{},"observed":{},"evidence_refs":{"type":"array","items":{"type":"string"}},"reason":{"type":"string","minLength":1}}}]}
+        },
+        "patch": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["generated_code", "changed_file"],
+          "properties": {
+            "generated_code": {"type": "string"},
+            "changed_file": {"type": "string"}
+          }
+        },
+        "compile_status": {"enum": ["PASS", "FAIL", "ENVIRONMENT_BLOCKED"]},
+        "test_status": {"enum": ["PASS", "FAIL", "ENVIRONMENT_BLOCKED"]},
+        "before": {"type": "object"},
+        "after": {"type": "object"},
+        "new_smell": {"type": "boolean"},
+        "reason": {"type": "string"},
+        "execution_status": {"enum": ["COMPLETED", "FAILED"]},
+        "smell": {"enum": ["Assertion_Roulette", "Redundant_Assertion", "Exception_Catching_Throwing", "Magic_Number_Test", "Conditional_Test_Logic"]},
+        "provider_name": {"type": "string", "minLength": 1},
+        "provider_version": {"type": "string", "minLength": 1},
+        "provider_type": {"enum": ["production_llm", "test_double"]},
+        "generation_mode": {"enum": ["llm"]},
+        "candidate_generation_mode": {"enum": ["RAG_AUGMENTED_LLM", "LLM_ONLY_CONFIGURED", "LLM_ONLY_FALLBACK", "REPLAY", "MOCK"]},
+        "prompt_version": {"type": "string", "minLength": 1},
+        "prompt_hash": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+        "generation_attempts": {"type": "integer", "minimum": 0, "maximum": 1},
+        "risk_contract": {"type": "object"},
+        "risk_evidence_ids": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}},
+        "changes": {"type": "array", "items": {"type": "object"}},
+        "validation_checks": {"type": "array", "items": {"$ref": "#/$defs/validationCheck"}},
+        "source": {"type": "object"},
+        "candidate": {"type": "object"},
+        "rag": {"type": "object"},
+        "raw_response": {"type": "string"},
+        "prompt": {"type": "string"},
+        "agent_errors": {"type": "array", "items": {"type": "object"}}
+        ,"status": {"type": "string", "minLength": 1}
+        ,"run_id": {"type": "string", "minLength": 1}
+        ,"instance_id": {"type": "string", "minLength": 1}
+        ,"project_id": {"type": "string", "minLength": 1}
+        ,"agent_name": {"type": "string", "minLength": 1}
+        ,"agent_version": {"type": "string", "minLength": 1}
+        ,"validation_mode": {"type": "string", "minLength": 1}
+        ,"isolation": {"type": "object"}
+        ,"requested_levels": {"type": "array", "items": {"type": "string"}}
+        ,"completed_levels": {"type": "array", "items": {"type": "string"}}
+        ,"stage_results": {"type": "array", "items": {"type": "object"}}
+        ,"structure_checks": {"type": "array", "items": {"$ref": "#/$defs/validationCheck"}}
+        ,"compile_result": {"type": "object"}
+        ,"target_test_result": {"type": "object"}
+        ,"module_test_result": {"type": "object"}
+        ,"test_summary": {"type": "object"}
+        ,"target_test_observed": {"type": "boolean"}
+        ,"baseline_comparison": {"type": "object"}
+        ,"failure_category": {"type": ["string", "null"]}
+        ,"failure_stage": {"type": ["string", "null"]}
+        ,"validation_errors": {"type": "array", "items": {"type": "object"}}
+        ,"started_at": {"type": "string", "minLength": 1}
+        ,"completed_at": {"type": "string", "minLength": 1}
+        ,"duration_ms": {"type": "integer", "minimum": 0}
+        ,"environment_summary": {"type": "object"}
+        ,"config_refs": {"type": "array", "items": {"type": "string"}}
+        ,"transient_artifacts": {"type": "object", "additionalProperties": {"type": "string"}}
+        ,"detector_execution": {"type": "object"}
+        ,"comparison": {"type": "object"}
+        ,"source_integrity": {"type": "object"}
+        ,"workspace": {"type": "object"}
+        ,"controlled_smells": {"type": "array", "items": {"type": "string"}}
+        ,"attempt_id": {"type": "string"}
+        ,"attempt_number": {"type": "integer"}
+        ,"eligibility": {"type": "object"}
+        ,"input_failure": {"type": "object"}
+        ,"repair": {"type": "object"}
+        ,"static_validation": {"type": "object"}
+        ,"full_validation": {"type": "object"}
+        ,"final_status": {"type": "string"}
+        ,"evidence_paths": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "errors": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["code", "message"],
+        "properties": {
+          "code": {"type": "string", "minLength": 1},
+          "message": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    "artifacts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["kind", "path"],
+        "properties": {
+          "kind": {"type": "string", "minLength": 1},
+          "path": {"type": "string", "minLength": 1},
+          "sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"}
+        }
+      }
+    }
+  },
+  "$defs": {
+    "riskEvidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "evidence_id", "evidence_type", "source_file", "method_signature",
+        "start_line", "end_line", "matched_code", "rule_id", "rule_version",
+        "conclusion", "confidence", "source_available"
+      ],
+      "properties": {
+        "evidence_id": {"type": "string", "minLength": 1},
+        "contract": {"type": "object"},
+        "evidence_type": {"type": "string", "minLength": 1},
+        "source_file": {"type": ["string", "null"]},
+        "method_signature": {"type": ["string", "null"]},
+        "start_line": {"type": ["integer", "null"], "minimum": 1},
+        "end_line": {"type": ["integer", "null"], "minimum": 1},
+        "matched_code": {"type": ["string", "null"]},
+        "rule_id": {"type": "string", "minLength": 1},
+        "rule_version": {"type": "string", "minLength": 1},
+        "conclusion": {"type": "string", "minLength": 1},
+        "confidence": {"type": "number", "minimum": 0, "maximum": 1},
+        "source_available": {"type": "boolean"},
+        "assertion_identity": {"type": ["string", "null"]},
+        "parent_assertion_id": {"type": ["string", "null"]},
+        "nesting_depth": {"type": ["integer", "null"], "minimum": 0},
+        "ast_path": {"type": ["string", "null"]},
+        "control_flow_path": {"type": "array", "items": {"type": "string"}},
+        "assertion_api": {"type": ["string", "null"]}
+      }
+    },
+    "validationCheck": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["check_id", "status", "severity", "message", "evidence", "expected", "actual"],
+      "properties": {
+        "check_id": {"type": "string", "minLength": 1},
+        "status": {"enum": ["PASS", "FAIL"]},
+        "severity": {"enum": ["INFO", "WARNING", "ERROR"]},
+        "message": {"type": "string", "minLength": 1},
+        "evidence": {}, "expected": {}, "actual": {}
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"result": {"properties": {"generation_attempts": {"const": 0}}, "required": ["generation_attempts"]}}, "required": ["result"]},
+      "then": {"properties": {"agent": {"const": "refactoring"}, "result": {
+        "required": ["smell", "candidate_generation_mode", "risk_contract"],
+        "properties": {"candidate_generation_mode": {"const": "REPLAY"}},
+        "anyOf": [
+          {"properties": {"smell": {"const": "Magic_Number_Test"}, "risk_contract": {"required": ["mnt_replay_provenance"]}}},
+          {"properties": {"risk_contract": {"required": ["saved_response_provenance"], "properties": {
+            "saved_response_provenance": {"type": "object", "required": ["source_result", "source_result_sha256", "source_run_id", "source_decision", "raw_response_sha256", "model_calls", "rag_calls"],
+              "properties": {"source_result": {"type": "string", "minLength": 1}, "source_result_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+                "source_run_id": {"type": "string", "minLength": 1}, "source_decision": {"enum": ["CANDIDATE_GENERATED", "REFACTORING_REJECTED"]},
+                "raw_response_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"}, "model_calls": {"const": 0}, "rag_calls": {"const": 0}}}
+          }}}}
+        ]
+      }}}
+    },
+    {
+      "if": {
+        "properties": {
+          "agent": {"const": "risk_assessment"},
+          "status": {"const": "SUCCESS"}
+        },
+        "required": ["agent", "status"]
+      },
+      "then": {
+        "properties": {
+          "result": {
+            "required": [
+              "decision", "risk_level", "confidence", "assessment_mode",
+              "assessor_name", "assessor_version", "rule_version", "evidence",
+              "allowed_changes", "forbidden_changes", "required_context",
+              "missing_context", "reason", "next_action", "policy_checks"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {"agent": {"const": "risk_assessment"}, "status": {"const": "SUCCESS"}, "result": {"properties": {"decision": {"const": "REFACTOR_LOW_RISK"}}, "required": ["decision"]}},
+        "required": ["agent", "status", "result"]
+      },
+      "then": {"properties": {"result": {"properties": {"evidence": {"minItems": 1}}}}}
+    },
+    {
+      "if": {"properties": {"agent": {"const": "refactoring"}, "status": {"enum": ["SUCCESS", "FAILED"]}}, "required": ["agent", "status"]},
+      "then": {"properties": {"result": {"required": ["decision", "execution_status", "smell", "provider_name", "provider_version", "provider_type", "generation_mode", "prompt_version", "prompt_hash", "generation_attempts", "risk_contract", "risk_evidence_ids", "changes", "validation_checks", "policy_checks", "source", "candidate", "rag", "raw_response", "prompt", "reason", "next_action", "agent_errors"]}}}
+    },
+    {
+      "if": {"properties": {"agent": {"const": "build_test_validation"}, "result": {"properties": {"decision": {"enum": ["VALIDATION_PASSED", "VALIDATION_FAILED", "VALIDATION_BLOCKED"]}}, "required": ["decision"]}}, "required": ["agent", "result"]},
+      "then": {"properties": {"result": {"required": ["decision", "status", "run_id", "instance_id", "project_id", "agent_name", "agent_version", "validation_mode", "source", "candidate", "isolation", "requested_levels", "completed_levels", "stage_results", "structure_checks", "compile_result", "target_test_result", "module_test_result", "test_summary", "target_test_observed", "baseline_comparison", "failure_category", "failure_stage", "reason", "next_action", "validation_errors", "started_at", "completed_at", "duration_ms", "environment_summary", "config_refs", "transient_artifacts"]}}}
+    },
+    {
+      "if": {"properties": {"agent": {"const": "smell_revalidation"}, "result": {"properties": {"decision": {"enum": ["REVALIDATION_PASSED", "REVALIDATION_FAILED", "REVALIDATION_BLOCKED"]}}, "required": ["decision"]}}, "required": ["agent", "result"]},
+      "then": {"properties": {"result": {"required": ["decision", "status", "failure_stage", "failure_category", "reason", "detector_execution", "before", "after", "comparison", "policy_checks", "source_integrity", "workspace", "structure_checks", "controlled_smells", "config_refs", "started_at", "completed_at", "duration_ms", "environment_summary", "transient_artifacts", "next_action"]}}}
+    }
+  ]
+}

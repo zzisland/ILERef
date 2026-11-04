@@ -1,0 +1,93 @@
+document_schema_version: '1.0'
+execution_authority: python
+status: active
+contract_builder_entry: pipeline.contract_builders:ExecutableContractBuilder.build
+transformation_entry: pipeline.agents.safety_contracts:materialize_ect_nothrow
+prompt_entry: pipeline.agents.prompt_service:RefactoringPromptService.build
+contract_id: ect.no_throw
+issue_type: Exception_Catching_Throwing
+version: '1.0'
+scope: general
+applicability_entry: pipeline.agents.safety_contracts:_analyze_ect_nothrow_v1
+validator_entry: pipeline.agents.candidate_validation:validate_exception_refactoring
+test_entry:
+- pipeline.tests.test_ect_nothrow_contract:EctNoThrowRiskContractTest
+- pipeline.tests.test_ect_nothrow_contract:EctNoThrowCandidateContractTest
+contract_file: exception_catching_throwing/no_throw/contract.yaml
+prompt_file: exception_catching_throwing/no_throw/prompt.md
+rules:
+  applicability_prerequisites: 没有 try，恰好一个 throws 且一个可解析 checked exception；已绑定 Jupiter 普通 void 零参数测试，不含
+    static/abstract/native 或不支持注解。非空顺序体，仅 local declaration/expression statement；控制流/throw/catch/finally/resource/capture
+    等受限。至少有调用/构造带来 oracle benefit。已有 assert*/assume*/fail/exception assertion 被拒绝。外部 exception observer/extension
+    未知 REVIEW。可解析的 this/super/无接收者 helper closure 递归查 oracle（深度上限 8）；不宣称能分析所有外部 receiver 实现。
+  transformation_target: 只移除批准 throws 范围，用完全限定 org.junit.jupiter.api.Assertions.assertDoesNotThrow(()
+    -> { complete original body }); 包住整个 body 一次。
+  edit_and_preservation_constraints: 保留每个原始 statement/token/comment、helper、method reference、参数、literal、执行顺序；不能挑子表达式、改调用或新增
+    import/helper。throws exception 只用于原边界准入证明，不成为 assertDoesNotThrow 参数。无 flag/fail 分支转换。diagnostic_policy
+    为 ASSERTION_FAILED_ERROR_WITH_ORIGINAL_CAUSE：这就是现行契约，不应称与原异常传播诊断完全相同。
+  candidate_validation_predicates: verify_proof；dispatcher/path version 检查；expected materialization hash
+    必须吻合；comment_inventory 与 AST tokens 相同；候选恰好一个方法、一个 FQN assertDoesNotThrow，且无 throws。13 个 ECT_NOTHROW
+    标签共享完整结果，不是独立弱 predicate。
+  allowed_edits:
+    source_field: transformation_target
+  forbidden_edits:
+    source_field: edit_and_preservation_constraints
+  protected_elements:
+    source_field: edit_and_preservation_constraints
+  required_preservation:
+    source_field: edit_and_preservation_constraints
+common_pipeline_requirements: 'ApplicabilityEvidenceExtractor → 默认 instance-level ApplicabilityPolicy
+  / RuleBasedRiskAssessor + RiskPolicyGuard → REFACTOR_LOW_RISK → RISK_APPROVED → ExecutableContractBuilder
+  → RefactoringPromptService → CandidateValidator → file composition → compile/test → revalidation → EvidenceLinkedAcceptancePolicy。
+
+
+  ContractBuilder 还检查 risk envelope、instance ID、单目标 smell、有效来源证据、source/method/hash/line range 和当前文件绑定；低风险不是最终接纳。验证、拼接、编译测试、复检和
+  final acceptance 未被 Prompt 或 registry 替代。
+
+
+  instance_schema_version=2.0 与 source_schema_version 独立；refactoring_contract.contract_id/version 是六条规则的登记身份。ECT
+  dispatcher proof 版本 3.0 与 fail/flag/no_throw 路径版本 1.0/2.0/1.0 不应混为一个 schema 版本。Prompt service 版本 5.2-contract-v4.1-ect-v3，CandidateValidator
+  4.2；RA catch 内部另有 ra-v2-local-deletion-1。版本号差异本身不表示未同步。
+
+
+  共同 CandidateValidator 检查单个完整方法、非空、无 class/import 等外层内容、签名/annotation、原文件 hash、方法未删、无新增 placeholder、存在变化；调用
+  smell predicate 后只替换目标方法并核对方法外内容。单个 Java Markdown fence 会先清理，INFO 不阻止通过。候选通过仅表示静态阶段通过。'
+ect_common_restrictions: 'multiple try → ECT_MULTIPLE_TARGETS_UNSUPPORTED；多 catch / finally / try-with-resources
+  → ECT_CATCH_OR_RESOURCE_BOUNDARY_UNSUPPORTED；嵌套控制 → ECT_NESTED_CONTROL_FLOW_UNSUPPORTED；union catch
+  → ECT_MULTICATCH_UNSUPPORTED；可能捕获 fail 的 Error 类 → ECT_CATCH_CAN_CAPTURE_FAIL。无 try 时有 throws 才进入 no_throw；显式
+  throw 或无目标分别 SKIP_NOT_APPLICABLE / SKIP_FALSE_POSITIVE。review/skip 不等价于扩大支持。
+
+
+  flag marker 当前只接受 assertTrue(flag)、assertEquals(true, flag)、assertEquals(flag, true)，且都需要 API 绑定，不含额外
+  message 参数。catch 的 cause local 只允许 Throwable/java.lang.Throwable 的单变量 ex.getCause() 初始化；observation
+  assertion 需引用 ex 或该 cause local，嵌套调用仅允许以下白名单、且 receiver 关联该异常根；禁止赋值/更新/构造/lambda/匿名类。
+
+
+  ECT_V2_ASSERTIONS：assertEquals、assertNotEquals、assertTrue、assertFalse、assertNull、assertNotNull、assertSame、assertNotSame、assertArrayEquals、assertInstanceOf。
+
+
+  ECT_V2_OBSERVATION_METHODS：getMessage、getLocalizedMessage、getCause、getSuppressed、getClass、contains、startsWith、endsWith、equals、isEmpty、length、toString。
+
+
+  fail1 safe_types：Exception、RuntimeException、IllegalArgumentException、IllegalStateException、NullPointerException、IndexOutOfBoundsException、UnsupportedOperationException、NumberFormatException（需前述
+  java.lang 绑定证明）。flag2 使用独立异常类型证据解析，不能将 fail1 的有限类型表套用为 flag2 完整支持范围。'
+audit_provenance:
+  directory: analysis/framework_refactor_stage3_20260920
+  files_sha256:
+    contract_rules.md: 066aa05cad91ae4d57414714f1a6da6f1899e7314d07721c0a688d06ddcc260d
+    prompt_templates.md: bcb528e416d40f48298429db374fe754cc98c77b98628ed9039dc48e5f5ae8ef
+    prompt_validator_alignment.md: 214a1f30bce90fef709931850001825fbf2c19f3e1ba7bdc37c5541e09096522
+  implementation_sha256:
+    pipeline/agents/candidate_validation.py: 5bf2bdcb4d65a2d840608378e4d20665bfbfaf389e426d7a3c2a072fe27a18d7
+    pipeline/agents/prompt_service.py: 1a723627f341bcb3d191ee8c62264be63378a2384c42e24130a925a3daad7217
+    pipeline/agents/ra_contract.py: e66f1c4e615f4695ddcc67d8e7979f0f38ab97ed9f84f5b05d09112b1f77a148
+    pipeline/agents/refactoring_contract.py: 0dd04a46578e84a48f4c4845de7c619a8d650e8e4f3418cce6185c2363a9f367
+    pipeline/agents/safety_contracts.py: 05690921c118dc8976c378448f01c560302178f6a15f2676d2aa090af775697b
+    pipeline/contract_builders.py: a61a86c78a04a3ebd7d00f8470d4a00561fd1aeed8bced67426f0eb07371909d
+    pipeline/tests/test_ect_nothrow_contract.py: 3340839360dba1b93655f8021bd1d64fd2d075f5686886effa981992271b7f5b
+  prompt_template_sha256: cf14ecf38b5dd7659cf489a044d5d2642715a0a8bf9cb3f0b5d677ae3b0e0efe
+  prompt_amendment:
+    revision: ect-fail-prompt-fix-1
+    contract_id: ect.must_throw.fail
+    implementation_sha256: 1a723627f341bcb3d191ee8c62264be63378a2384c42e24130a925a3daad7217
+    template_sha256: ece33fa100f9100392020aa31f289f095061f75887ed80949a0abc6cc38857dd

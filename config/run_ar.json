@@ -1,0 +1,12 @@
+{
+  "project": "cli",
+  "project_version": "8d56926d951f1193d438c328bcdb01ddb48aac01",
+  "detection": "examples/ar_cli/detection.json",
+  "provenance": "examples/ar_cli/provenance.json",
+  "target_path": "src/test/java/org/apache/commons/cli/help/UtilTest.java",
+  "method_signature": "testFindNonWhitespacePos(final Character c, final boolean isWhitespace)",
+  "smell": "Assertion_Roulette",
+  "model_config": "config/model.example.yaml",
+  "detector_jar": "tools/detector/TestSmellDetector.jar",
+  "agent_config": "framework/config/agent_config.yaml"
+}

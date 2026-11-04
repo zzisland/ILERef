@@ -1,0 +1,46 @@
+{
+  "accepted": {
+    "artifact_id": "artifact:465b34cf5ef8cc6a9cb8754f6731e9af",
+    "exported_bytes": "3586948",
+    "exported_relative_path": "data/source_records/objects/11/11bbc98723eaccb0376d490862439429d8a4beba681d2885b5a024c104e38f4f.csv",
+    "exported_sha256": "11bbc98723eaccb0376d490862439429d8a4beba681d2885b5a024c104e38f4f",
+    "original_bytes": "4037359",
+    "original_sha256": "bf871c41a199959e6a223bd4054ad70efc0c6565aba934acdad8e2dd205d326e",
+    "source_reference": "legacy://analysis/admission_repair_plan_20261014/accepted_reuse_1812.csv",
+    "status": "EXPORTED",
+    "transformation": "SOURCE_ROOT_ALIAS:12817"
+  },
+  "baseline": {
+    "artifact_id": "artifact:4ac25582c2526a44abf0938d4f8e485b",
+    "exported_bytes": "1177170",
+    "exported_relative_path": "data/source_records/objects/67/67bcd8f8bfd7bc7a6814b9b5f8cc95c11a7241428489d78cbeee5f1881f5ec78.csv",
+    "exported_sha256": "67bcd8f8bfd7bc7a6814b9b5f8cc95c11a7241428489d78cbeee5f1881f5ec78",
+    "original_bytes": "1343249",
+    "original_sha256": "76f20fda4f8de756825a3d4a9977207f0ee9cf81063179bdc694ed622296a54d",
+    "source_reference": "legacy://analysis/rq1_baseline_final_consolidation_20261018/final_323_target_results.csv",
+    "status": "EXPORTED",
+    "transformation": "SOURCE_ROOT_ALIAS:4439"
+  },
+  "methods": {
+    "artifact_id": "artifact:e325f9085447021ec58548661eb99f5c",
+    "exported_bytes": "494912",
+    "exported_relative_path": "data/source_records/objects/0e/0edb4256cb4eed5cdaf2c1d054b9f47a93e45ecad5e553262cc416e3646a80d7.json",
+    "exported_sha256": "0edb4256cb4eed5cdaf2c1d054b9f47a93e45ecad5e553262cc416e3646a80d7",
+    "original_bytes": "599882",
+    "original_sha256": "ce05ee75db699f3abd5be5add8bb260ff905d5a9c41714a8a03e44bd529553a9",
+    "source_reference": "legacy://analysis/controlled_baseline_frozen_input_20260920/baseline_sample_manifest.json",
+    "status": "EXPORTED",
+    "transformation": "DETERMINISTIC_SERIALIZATION"
+  },
+  "overall": {
+    "artifact_id": "artifact:ab0342cc69ac18b54c359d75cbd0b647",
+    "exported_bytes": "5942910",
+    "exported_relative_path": "data/source_records/objects/58/58b3836d0611d88f27ad522e8b707c914634427b529c35e61378a2b77740095c.csv",
+    "exported_sha256": "58b3836d0611d88f27ad522e8b707c914634427b529c35e61378a2b77740095c",
+    "original_bytes": "6553898",
+    "original_sha256": "875ec776d4f77059f8b4a4867a7a1d3ce467d20152d3f67e88c85fded16c8882",
+    "source_reference": "legacy://analysis/final_experiment_consolidation_20261016/instance_reconciliation.csv",
+    "status": "EXPORTED",
+    "transformation": "SOURCE_ROOT_ALIAS:17297"
+  }
+}

@@ -1,0 +1,14 @@
+status: active
+contract_builder_entry: pipeline.contract_builders:ExecutableContractBuilder.build
+transformation_entry: pipeline.agents.refactoring_providers:ExistingLLMRefactoringProvider.generate
+prompt_entry: pipeline.agents.prompt_service:RefactoringPromptService.build
+contract_id: ar.grounded_message
+issue_type: Assertion_Roulette
+version: '4.1'
+scope: general
+applicability_entry: pipeline.agents.safety_contracts:analyze
+validator_entry: pipeline.agents.candidate_validation:validate_assertion_roulette
+test_entry:
+- pipeline.tests.test_safety_contract_v4:ExecutableSafetyContractTest
+contract_file: assertion_roulette/contract.yaml
+prompt_file: assertion_roulette/prompt.md

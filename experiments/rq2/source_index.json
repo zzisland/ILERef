@@ -1,0 +1,46 @@
+{
+  "a3": {
+    "artifact_id": "artifact:812479634875509dd83058ab1070884b",
+    "exported_bytes": "664012",
+    "exported_relative_path": "data/source_records/objects/a4/a4b14cbad4806e81b59fc9bd16bf07d3c5b2a562d560597228eaadac29944437.jsonl",
+    "exported_sha256": "a4b14cbad4806e81b59fc9bd16bf07d3c5b2a562d560597228eaadac29944437",
+    "original_bytes": "693908",
+    "original_sha256": "bf584daaafd1912030c990ddcc79eb4dab5c365608ef34b6a9f1cdc3461515a3",
+    "source_reference": "legacy://analysis/ar_ablation_a3_structured/instances.jsonl",
+    "status": "EXPORTED",
+    "transformation": "DETERMINISTIC_SERIALIZATION"
+  },
+  "paired": {
+    "artifact_id": "artifact:53e8af76d1916d248610321a78039066",
+    "exported_bytes": "261309",
+    "exported_relative_path": "data/source_records/objects/c8/c8f514a6e947fd5f2d81a5265a2895209e4c22bd2cb4f77e84f79c07b7d9deb0.csv",
+    "exported_sha256": "c8f514a6e947fd5f2d81a5265a2895209e4c22bd2cb4f77e84f79c07b7d9deb0",
+    "original_bytes": "312393",
+    "original_sha256": "72f2bf5fe5753f246e57d6aa86d6783e7dbada9b7927828b88733b6a421da52b",
+    "source_reference": "legacy://analysis/rq2_paired_validation_completion_20261016/paired_instance_results.csv",
+    "status": "EXPORTED",
+    "transformation": "SOURCE_ROOT_ALIAS:1456"
+  },
+  "rq2_checks": {
+    "artifact_id": "artifact:e39aa466d621b34c2d61e5ebf333c627",
+    "exported_bytes": "137671",
+    "exported_relative_path": "data/source_records/objects/6a/6a1f81a77b841cec404d1677dd0cecf72d01bc4f8deb24f9455d4a246668e5cb.csv",
+    "exported_sha256": "6a1f81a77b841cec404d1677dd0cecf72d01bc4f8deb24f9455d4a246668e5cb",
+    "original_bytes": "167077",
+    "original_sha256": "41e265badaf2eb6cf143fd5d93f1e382ba91dab674aeae0d019899c3ba315741",
+    "source_reference": "legacy://analysis/rq2/_acceptance/_definition/_audit/_20261022/raw_check_ledger_212.csv",
+    "status": "EXPORTED",
+    "transformation": "SOURCE_ROOT_ALIAS:834"
+  },
+  "source120": {
+    "artifact_id": "artifact:aa5d71cfbcbea2b847ceffcd23306e0b",
+    "exported_bytes": "199020",
+    "exported_relative_path": "data/source_records/objects/c9/c9f4d2adfe85779edd37762bfa1e50c7444c48c6901c932bb47f95f8118d253c.json",
+    "exported_sha256": "c9f4d2adfe85779edd37762bfa1e50c7444c48c6901c932bb47f95f8118d253c",
+    "original_bytes": "218351",
+    "original_sha256": "1a16d123f19220ce4563e21f1f0247c47711ee2482f2d6467ffeb5a73147e895",
+    "source_reference": "legacy://analysis/module2_original_rule_ablation/manifest_120.json",
+    "status": "EXPORTED",
+    "transformation": "DETERMINISTIC_SERIALIZATION"
+  }
+}

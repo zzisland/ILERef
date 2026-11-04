@@ -1,0 +1,7 @@
+/.venv/
+/results/
+/framework/target/
+__pycache__/
+*.pyc
+/config/model.local.yaml
+.env

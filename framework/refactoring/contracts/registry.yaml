@@ -1,0 +1,97 @@
+registry_version: '1.0'
+contracts:
+- status: active
+  contract_builder_entry: pipeline.contract_builders:ExecutableContractBuilder.build
+  transformation_entry: pipeline.agents.refactoring_providers:ExistingLLMRefactoringProvider.generate
+  prompt_entry: pipeline.agents.prompt_service:RefactoringPromptService.build
+  contract_id: ar.grounded_message
+  issue_type: Assertion_Roulette
+  version: '4.1'
+  scope: general
+  applicability_entry: pipeline.agents.safety_contracts:analyze
+  validator_entry: pipeline.agents.candidate_validation:validate_assertion_roulette
+  test_entry:
+  - pipeline.tests.test_safety_contract_v4:ExecutableSafetyContractTest
+  manifest: assertion_roulette/manifest.yaml
+  contract_file: assertion_roulette/contract.yaml
+  prompt_file: assertion_roulette/prompt.md
+- status: active
+  contract_builder_entry: pipeline.contract_builders:ExecutableContractBuilder.build
+  transformation_entry: pipeline.agents.refactoring_providers:ExistingLLMRefactoringProvider.generate
+  prompt_entry: pipeline.agents.prompt_service:RefactoringPromptService.build
+  contract_id: ra.ordinary_redundant_assertion
+  issue_type: Redundant_Assertion
+  version: '4.2'
+  scope: general
+  applicability_entry: pipeline.agents.safety_contracts:analyze_ra
+  validator_entry: pipeline.agents.candidate_validation:validate_redundant_assertion
+  test_entry:
+  - pipeline.tests.test_safety_contract_v4:ExecutableSafetyContractTest
+  manifest: redundant_assertion/ordinary.manifest.yaml
+  contract_file: redundant_assertion/ordinary/contract.yaml
+  prompt_file: redundant_assertion/ordinary/prompt.md
+- status: active
+  contract_builder_entry: pipeline.contract_builders:ExecutableContractBuilder.build
+  transformation_entry: pipeline.agents.ra_contract:expected_candidate
+  prompt_entry: pipeline.agents.ra_contract:build_prompt
+  contract_id: ra.jfreechart.catch_constant_deletion
+  issue_type: Redundant_Assertion
+  version: '2.0'
+  scope: project_specific
+  applicability_entry: pipeline.agents.ra_contract:analyze_catch
+  validator_entry: pipeline.agents.ra_contract:validate_candidate
+  test_entry:
+  - pipeline.tests.test_ra_v2_contract:RaV2ContractTest
+  project: JFreeChart
+  scope_note: Audited setter(null)/Marker event-oracle pattern. Existing Python guards
+    unchanged; no new project-name gate.
+  manifest: redundant_assertion/jfreechart.manifest.yaml
+  contract_file: redundant_assertion/jfreechart/contract.yaml
+  prompt_file: redundant_assertion/jfreechart/prompt.md
+- status: active
+  contract_builder_entry: pipeline.contract_builders:ExecutableContractBuilder.build
+  transformation_entry: pipeline.agents.refactoring_providers:ExistingLLMRefactoringProvider.generate
+  prompt_entry: pipeline.agents.prompt_service:RefactoringPromptService.build
+  contract_id: ect.must_throw.fail
+  issue_type: Exception_Catching_Throwing
+  version: '1.0'
+  scope: general
+  applicability_entry: pipeline.agents.safety_contracts:analyze_ect
+  validator_entry: pipeline.agents.candidate_validation:validate_exception_refactoring
+  test_entry:
+  - pipeline.tests.test_safety_contract_v4:ExecutableSafetyContractTest
+  manifest: exception_catching_throwing/must_throw/fail.manifest.yaml
+  contract_file: exception_catching_throwing/must_throw/fail/contract.yaml
+  prompt_file: exception_catching_throwing/must_throw/fail/prompt.md
+- status: active
+  contract_builder_entry: pipeline.contract_builders:ExecutableContractBuilder.build
+  transformation_entry: pipeline.agents.refactoring_providers:ExistingLLMRefactoringProvider.generate
+  prompt_entry: pipeline.agents.prompt_service:RefactoringPromptService.build
+  contract_id: ect.must_throw.flag
+  issue_type: Exception_Catching_Throwing
+  version: '2.0'
+  scope: general
+  applicability_entry: pipeline.agents.safety_contracts:_analyze_ect_v2
+  validator_entry: pipeline.agents.candidate_validation:validate_exception_refactoring
+  test_entry:
+  - pipeline.tests.test_ect_v2_contract:EctV2RiskContractTest
+  - pipeline.tests.test_ect_v2_contract:EctV2CandidateContractTest
+  manifest: exception_catching_throwing/must_throw/flag.manifest.yaml
+  contract_file: exception_catching_throwing/must_throw/flag/contract.yaml
+  prompt_file: exception_catching_throwing/must_throw/flag/prompt.md
+- status: active
+  contract_builder_entry: pipeline.contract_builders:ExecutableContractBuilder.build
+  transformation_entry: pipeline.agents.safety_contracts:materialize_ect_nothrow
+  prompt_entry: pipeline.agents.prompt_service:RefactoringPromptService.build
+  contract_id: ect.no_throw
+  issue_type: Exception_Catching_Throwing
+  version: '1.0'
+  scope: general
+  applicability_entry: pipeline.agents.safety_contracts:_analyze_ect_nothrow_v1
+  validator_entry: pipeline.agents.candidate_validation:validate_exception_refactoring
+  test_entry:
+  - pipeline.tests.test_ect_nothrow_contract:EctNoThrowRiskContractTest
+  - pipeline.tests.test_ect_nothrow_contract:EctNoThrowCandidateContractTest
+  manifest: exception_catching_throwing/no_throw/manifest.yaml
+  contract_file: exception_catching_throwing/no_throw/contract.yaml
+  prompt_file: exception_catching_throwing/no_throw/prompt.md

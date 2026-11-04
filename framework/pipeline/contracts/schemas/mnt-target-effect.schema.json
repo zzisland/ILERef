@@ -1,0 +1,17 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"mnt-target-effect.schema.json",
+  "type":"object",
+  "required":["schema_version","mnt_rule_version","candidate_method_hash","observed_target_ids","selected_target_ids","approved_target_ids","processed_target_ids","retained_target_ids","static_contract_passed","selected_targets_processed","all_targets_processed","detector_method_positive"],
+  "properties":{
+    "schema_version":{"const":"2"},"mnt_rule_version":{"type":"string"},
+    "candidate_method_hash":{"type":"string","pattern":"^[a-f0-9]{64}$"},
+    "observed_target_ids":{"$ref":"#/$defs/ids"},"selected_target_ids":{"$ref":"#/$defs/ids"},
+    "approved_target_ids":{"$ref":"#/$defs/ids"},"processed_target_ids":{"$ref":"#/$defs/ids"},
+    "retained_target_ids":{"$ref":"#/$defs/ids"},"pending_target_ids":{"$ref":"#/$defs/ids"},
+    "unprocessed_target_ids":{"$ref":"#/$defs/ids"},
+    "static_contract_passed":{"type":"boolean"},"selected_targets_processed":{"type":"boolean"},
+    "all_targets_processed":{"type":"boolean"},"detector_method_positive":{"type":["boolean","null"]}
+  },
+  "$defs":{"ids":{"type":"array","uniqueItems":true,"items":{"type":"string","minLength":1}}}
+}

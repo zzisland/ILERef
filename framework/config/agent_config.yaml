@@ -1,0 +1,60 @@
+agents:
+  risk_assessment:
+    enabled: true
+    mode: rule_only
+    llm_fallback:
+      enabled: false
+  refactoring:
+    enabled: true
+    mode: llm
+    max_generation_attempts: 1
+    rag:
+      enabled: false
+      top_k: 3
+      required: false
+      failure_policy: llm_only_fallback
+  iterative_repair:
+    enabled: false
+    supported_smells:
+    - Assertion_Roulette
+    allowed_failure_codes:
+    - MESSAGES_MEANINGFUL
+    - ONLY_TARGET_MESSAGES_ADDED
+    max_attempts: 1
+    allowed_edit_scope: ASSERTION_MESSAGES_ONLY
+  candidate_recovery:
+    enabled: false
+    mode: BASELINE_ASSERTION_RECONSTRUCTION
+    supported_smells:
+    - Assertion_Roulette
+    max_attempts: 1
+  build_test_validation:
+    enabled: true
+    isolation_mode: copy
+    validation_levels:
+      structure: true
+      compile: true
+      target_test: true
+      module_test: false
+    timeouts:
+      workspace_seconds: 120
+      compile_seconds: 600
+      target_test_seconds: 600
+      module_test_seconds: 1200
+    preserve_failed_workspace: true
+    allow_class_level_test_fallback: true
+    allow_module_test_fallback: false
+    max_output_chars: 20000
+  smell_revalidation:
+    enabled: true
+    mode: per_instance_identity
+    isolation_mode: copy
+    require_validation_passed: true
+    use_same_detector_config: true
+    timeouts:
+      workspace_seconds: 120
+      detector_seconds: 600
+    preserve_failed_workspace: true
+    max_output_chars: 20000
+    report_only: false
+    accept_on_pass: true

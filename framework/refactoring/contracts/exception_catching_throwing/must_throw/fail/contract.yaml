@@ -1,0 +1,91 @@
+document_schema_version: '1.0'
+execution_authority: python
+status: active
+contract_builder_entry: pipeline.contract_builders:ExecutableContractBuilder.build
+transformation_entry: pipeline.agents.refactoring_providers:ExistingLLMRefactoringProvider.generate
+prompt_entry: pipeline.agents.prompt_service:RefactoringPromptService.build
+contract_id: ect.must_throw.fail
+issue_type: Exception_Catching_Throwing
+version: '1.0'
+scope: general
+applicability_entry: pipeline.agents.safety_contracts:analyze_ect
+validator_entry: pipeline.agents.candidate_validation:validate_exception_refactoring
+test_entry:
+- pipeline.tests.test_safety_contract_v4:ExecutableSafetyContractTest
+contract_file: exception_catching_throwing/must_throw/fail/contract.yaml
+prompt_file: exception_catching_throwing/must_throw/fail/prompt.md
+rules:
+  applicability_prerequisites: 顶层唯一普通 try、一个 catch、无 finally/resources/multi-catch；catch 为空。try 恰为完整调用/构造表达式后跟
+    fail，可带一个普通字符串消息。拒绝 Throwable/Error/AssertionError 等可吞 fail 类型。仅已知 java.lang Exception 子集，短名要求显式 java.lang
+    import 并排除遮蔽；未知层级 REVIEW。触发表达式无赋值、自增、lambda/匿名类；方法其他写入导致 capture 未知 REVIEW。
+  transformation_target: 替换整个批准 try/catch 范围为 assertThrows(ExceptionType.class, () -> completeTrigger[,
+    originalFailureMessage]);。
+  edit_and_preservation_constraints: 保留异常类型、完整调用链与参数、一次执行及时序、字面量 fail 消息、区域外 setup/verify/assertion。无
+    flag 可删除；不得猜测更窄 throw site，不增 imports/helper/catch/finally/resource。准入失败不是自动转成宽松规则。
+  candidate_validation_predicates: verify_proof；按 target.replacement 重放；expected AST 与候选相同，允许新单表达式 lambda
+    的 expression/block 等价规范化。TRIGGER_BOUNDARY_UNCHANGED 与 EXACT_EXCEPTION_REGION 使用同一个完整结果。v1 不做独立 comment_inventory
+    对比，新增注释探针通过。Prompt 的 flag 段错配已由 ect-fail-prompt-fix-1 修正；validator 不变。
+  allowed_edits:
+    source_field: transformation_target
+  forbidden_edits:
+    source_field: edit_and_preservation_constraints
+  protected_elements:
+    source_field: edit_and_preservation_constraints
+  required_preservation:
+    source_field: edit_and_preservation_constraints
+common_pipeline_requirements: 'ApplicabilityEvidenceExtractor → 默认 instance-level ApplicabilityPolicy
+  / RuleBasedRiskAssessor + RiskPolicyGuard → REFACTOR_LOW_RISK → RISK_APPROVED → ExecutableContractBuilder
+  → RefactoringPromptService → CandidateValidator → file composition → compile/test → revalidation → EvidenceLinkedAcceptancePolicy。
+
+
+  ContractBuilder 还检查 risk envelope、instance ID、单目标 smell、有效来源证据、source/method/hash/line range 和当前文件绑定；低风险不是最终接纳。验证、拼接、编译测试、复检和
+  final acceptance 未被 Prompt 或 registry 替代。
+
+
+  instance_schema_version=2.0 与 source_schema_version 独立；refactoring_contract.contract_id/version 是六条规则的登记身份。ECT
+  dispatcher proof 版本 3.0 与 fail/flag/no_throw 路径版本 1.0/2.0/1.0 不应混为一个 schema 版本。Prompt service 版本 5.2-contract-v4.1-ect-v3，CandidateValidator
+  4.2；RA catch 内部另有 ra-v2-local-deletion-1。版本号差异本身不表示未同步。
+
+
+  共同 CandidateValidator 检查单个完整方法、非空、无 class/import 等外层内容、签名/annotation、原文件 hash、方法未删、无新增 placeholder、存在变化；调用
+  smell predicate 后只替换目标方法并核对方法外内容。单个 Java Markdown fence 会先清理，INFO 不阻止通过。候选通过仅表示静态阶段通过。'
+ect_common_restrictions: 'multiple try → ECT_MULTIPLE_TARGETS_UNSUPPORTED；多 catch / finally / try-with-resources
+  → ECT_CATCH_OR_RESOURCE_BOUNDARY_UNSUPPORTED；嵌套控制 → ECT_NESTED_CONTROL_FLOW_UNSUPPORTED；union catch
+  → ECT_MULTICATCH_UNSUPPORTED；可能捕获 fail 的 Error 类 → ECT_CATCH_CAN_CAPTURE_FAIL。无 try 时有 throws 才进入 no_throw；显式
+  throw 或无目标分别 SKIP_NOT_APPLICABLE / SKIP_FALSE_POSITIVE。review/skip 不等价于扩大支持。
+
+
+  flag marker 当前只接受 assertTrue(flag)、assertEquals(true, flag)、assertEquals(flag, true)，且都需要 API 绑定，不含额外
+  message 参数。catch 的 cause local 只允许 Throwable/java.lang.Throwable 的单变量 ex.getCause() 初始化；observation
+  assertion 需引用 ex 或该 cause local，嵌套调用仅允许以下白名单、且 receiver 关联该异常根；禁止赋值/更新/构造/lambda/匿名类。
+
+
+  ECT_V2_ASSERTIONS：assertEquals、assertNotEquals、assertTrue、assertFalse、assertNull、assertNotNull、assertSame、assertNotSame、assertArrayEquals、assertInstanceOf。
+
+
+  ECT_V2_OBSERVATION_METHODS：getMessage、getLocalizedMessage、getCause、getSuppressed、getClass、contains、startsWith、endsWith、equals、isEmpty、length、toString。
+
+
+  fail1 safe_types：Exception、RuntimeException、IllegalArgumentException、IllegalStateException、NullPointerException、IndexOutOfBoundsException、UnsupportedOperationException、NumberFormatException（需前述
+  java.lang 绑定证明）。flag2 使用独立异常类型证据解析，不能将 fail1 的有限类型表套用为 flag2 完整支持范围。'
+audit_provenance:
+  directory: analysis/framework_refactor_stage3_20260920
+  files_sha256:
+    contract_rules.md: 066aa05cad91ae4d57414714f1a6da6f1899e7314d07721c0a688d06ddcc260d
+    prompt_templates.md: bcb528e416d40f48298429db374fe754cc98c77b98628ed9039dc48e5f5ae8ef
+    prompt_validator_alignment.md: 214a1f30bce90fef709931850001825fbf2c19f3e1ba7bdc37c5541e09096522
+  implementation_sha256:
+    pipeline/agents/candidate_validation.py: 5bf2bdcb4d65a2d840608378e4d20665bfbfaf389e426d7a3c2a072fe27a18d7
+    pipeline/agents/prompt_service.py: 1a723627f341bcb3d191ee8c62264be63378a2384c42e24130a925a3daad7217
+    pipeline/agents/ra_contract.py: e66f1c4e615f4695ddcc67d8e7979f0f38ab97ed9f84f5b05d09112b1f77a148
+    pipeline/agents/refactoring_contract.py: 0dd04a46578e84a48f4c4845de7c619a8d650e8e4f3418cce6185c2363a9f367
+    pipeline/agents/refactoring_providers.py: 0b603b9ed604d108ea553895aa24b9426ab5adceef2a73c95374b6f0c5472c04
+    pipeline/agents/safety_contracts.py: 05690921c118dc8976c378448f01c560302178f6a15f2676d2aa090af775697b
+    pipeline/contract_builders.py: a61a86c78a04a3ebd7d00f8470d4a00561fd1aeed8bced67426f0eb07371909d
+    pipeline/tests/test_safety_contract_v4.py: 26ce80d291587a96490fbfc9d96d1b3754557a86f94165338f4583a5bd2da2f8
+  prompt_template_sha256: 63d169b5a74ee50acf212b7d098bc18edfe138df106cc937d6cfd0cb6b52885d
+  prompt_amendment:
+    revision: ect-fail-prompt-fix-1
+    contract_id: ect.must_throw.fail
+    implementation_sha256: 1a723627f341bcb3d191ee8c62264be63378a2384c42e24130a925a3daad7217
+    template_sha256: ece33fa100f9100392020aa31f289f095061f75887ed80949a0abc6cc38857dd

@@ -1,0 +1,15 @@
+status: active
+contract_builder_entry: pipeline.contract_builders:ExecutableContractBuilder.build
+transformation_entry: pipeline.agents.safety_contracts:materialize_ect_nothrow
+prompt_entry: pipeline.agents.prompt_service:RefactoringPromptService.build
+contract_id: ect.no_throw
+issue_type: Exception_Catching_Throwing
+version: '1.0'
+scope: general
+applicability_entry: pipeline.agents.safety_contracts:_analyze_ect_nothrow_v1
+validator_entry: pipeline.agents.candidate_validation:validate_exception_refactoring
+test_entry:
+- pipeline.tests.test_ect_nothrow_contract:EctNoThrowRiskContractTest
+- pipeline.tests.test_ect_nothrow_contract:EctNoThrowCandidateContractTest
+contract_file: exception_catching_throwing/no_throw/contract.yaml
+prompt_file: exception_catching_throwing/no_throw/prompt.md

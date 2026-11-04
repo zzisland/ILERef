@@ -1,0 +1,14 @@
+status: active
+contract_builder_entry: pipeline.contract_builders:ExecutableContractBuilder.build
+transformation_entry: pipeline.agents.refactoring_providers:ExistingLLMRefactoringProvider.generate
+prompt_entry: pipeline.agents.prompt_service:RefactoringPromptService.build
+contract_id: ra.ordinary_redundant_assertion
+issue_type: Redundant_Assertion
+version: '4.2'
+scope: general
+applicability_entry: pipeline.agents.safety_contracts:analyze_ra
+validator_entry: pipeline.agents.candidate_validation:validate_redundant_assertion
+test_entry:
+- pipeline.tests.test_safety_contract_v4:ExecutableSafetyContractTest
+contract_file: redundant_assertion/ordinary/contract.yaml
+prompt_file: redundant_assertion/ordinary/prompt.md

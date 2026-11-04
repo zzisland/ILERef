@@ -1,0 +1,134 @@
+{
+  "5.1-contract-v4.1-ect-v2": {
+    "configuration_id": "5.1-contract-v4.1-ect-v2",
+    "meaning": "Historical label; effective parameters and version provenance are in linked source records"
+  },
+  "5.2-contract-v4.1-ect-v3": {
+    "configuration_id": "5.2-contract-v4.1-ect-v3",
+    "meaning": "Historical label; effective parameters and version provenance are in linked source records"
+  },
+  "RQ1-SYMMETRIC-COMMON-1.4-20261018": {
+    "configuration_id": "RQ1-SYMMETRIC-COMMON-1.4-20261018",
+    "experiment": "RQ1_BASELINE",
+    "historical_scope": "See source records and experiment protocol; alias is not a new execution.",
+    "variant": "Full"
+  },
+  "compile-exact-target-only-acceptance-1": {
+    "configuration_id": "compile-exact-target-only-acceptance-1",
+    "experiment": "RQ2_B",
+    "historical_scope": "See source records and experiment protocol; alias is not a new execution.",
+    "variant": "FIXED_CANDIDATE"
+  },
+  "historical-fixed": {
+    "configuration_id": "historical-fixed",
+    "meaning": "Historical label; effective parameters and version provenance are in linked source records"
+  },
+  "historical-full-candidate": {
+    "configuration_id": "historical-full-candidate",
+    "meaning": "Historical label; effective parameters and version provenance are in linked source records"
+  },
+  "ra-v2-local-deletion-1": {
+    "configuration_id": "ra-v2-local-deletion-1",
+    "meaning": "Historical label; effective parameters and version provenance are in linked source records"
+  },
+  "recorded-Full": {
+    "configuration_id": "recorded-Full",
+    "meaning": "Historical label; effective parameters and version provenance are in linked source records"
+  },
+  "recorded-UTRefactor": {
+    "configuration_id": "recorded-UTRefactor",
+    "meaning": "Historical label; effective parameters and version provenance are in linked source records"
+  },
+  "rq1.baseline-common": {
+    "configuration_id": "rq1.baseline-common",
+    "historical_scope": "Recorded decision endpoint, not re-executed"
+  },
+  "rq1.final-admission-20261016": {
+    "configuration_id": "rq1.final-admission-20261016",
+    "meaning": "Historical label; effective parameters and version provenance are in linked source records"
+  },
+  "rq1.native.HISTORICAL_FILE_NATIVE": {
+    "configuration_id": "rq1.native.HISTORICAL_FILE_NATIVE",
+    "experiment": "RQ1_MAIN",
+    "historical_scope": "See source records and experiment protocol; alias is not a new execution.",
+    "variant": "FULL"
+  },
+  "rq1.native.INSTANCE_NATIVE_PLUS_V12": {
+    "configuration_id": "rq1.native.INSTANCE_NATIVE_PLUS_V12",
+    "experiment": "RQ1_MAIN",
+    "historical_scope": "See source records and experiment protocol; alias is not a new execution.",
+    "variant": "FULL"
+  },
+  "rq1.native.NOT_ADMITTED": {
+    "configuration_id": "rq1.native.NOT_ADMITTED",
+    "experiment": "RQ1_MAIN",
+    "historical_scope": "See source records and experiment protocol; alias is not a new execution.",
+    "variant": "FULL"
+  },
+  "rq1.native.RQ1_FILE_NATIVE_FROZEN": {
+    "configuration_id": "rq1.native.RQ1_FILE_NATIVE_FROZEN",
+    "experiment": "RQ1_MAIN",
+    "historical_scope": "See source records and experiment protocol; alias is not a new execution.",
+    "variant": "FULL"
+  },
+  "rq1.native.RQ2_AR_INDEPENDENT": {
+    "configuration_id": "rq1.native.RQ2_AR_INDEPENDENT",
+    "experiment": "RQ1_MAIN",
+    "historical_scope": "See source records and experiment protocol; alias is not a new execution.",
+    "variant": "FULL"
+  },
+  "rq1.recorded-native": {
+    "configuration_id": "rq1.recorded-native",
+    "historical_scope": "Recorded decision endpoint, not re-executed"
+  },
+  "rq2.a.common": {
+    "configuration_id": "rq2.a.common",
+    "historical_scope": "Recorded decision endpoint, not re-executed"
+  },
+  "rq2.a.full": {
+    "configuration_id": "rq2.a.full",
+    "experiment": "RQ2_A",
+    "historical_scope": "See source records and experiment protocol; alias is not a new execution.",
+    "variant": "FULL"
+  },
+  "rq2.a.full-strict": {
+    "configuration_id": "rq2.a.full-strict",
+    "historical_scope": "Recorded decision endpoint, not re-executed"
+  },
+  "rq2.a.rule": {
+    "configuration_id": "rq2.a.rule",
+    "experiment": "RQ2_A",
+    "historical_scope": "See source records and experiment protocol; alias is not a new execution.",
+    "variant": "RULE"
+  },
+  "rq2.b.compile-target-only": {
+    "configuration_id": "rq2.b.compile-target-only",
+    "historical_scope": "Recorded decision endpoint, not re-executed"
+  },
+  "rq2.b.evidence-driven": {
+    "configuration_id": "rq2.b.evidence-driven",
+    "historical_scope": "Recorded decision endpoint, not re-executed"
+  },
+  "rq3.common": {
+    "configuration_id": "rq3.common",
+    "historical_scope": "Recorded decision endpoint, not re-executed"
+  },
+  "rq3.original.common": {
+    "configuration_id": "rq3.original.common",
+    "experiment": "RQ3_REPLAY",
+    "historical_scope": "See source records and experiment protocol; alias is not a new execution.",
+    "variant": "ORIGINAL"
+  },
+  "rq3.replay.common": {
+    "configuration_id": "rq3.replay.common",
+    "experiment": "RQ3_REPLAY",
+    "historical_scope": "See source records and experiment protocol; alias is not a new execution.",
+    "variant": "REPLAY"
+  },
+  "rq3.source": {
+    "configuration_id": "rq3.source",
+    "experiment": "RQ3_SOURCE",
+    "historical_scope": "See source records and experiment protocol; alias is not a new execution.",
+    "variant": "SOURCE_IDENTITY"
+  }
+}

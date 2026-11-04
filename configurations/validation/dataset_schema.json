@@ -1,0 +1,272 @@
+{
+  "applicability_enum": [
+    "ADMIT",
+    "REVIEW",
+    "PRESERVE",
+    "NOT_APPLICABLE"
+  ],
+  "check_enum": [
+    "PASS",
+    "FAIL",
+    "INCONCLUSIVE",
+    "NOT_RUN",
+    "NOT_APPLICABLE"
+  ],
+  "decision_enum": [
+    "ACCEPT",
+    "REVIEW",
+    "REJECT",
+    "ABSTAIN",
+    "NOT_RUN",
+    "NO_CANDIDATE",
+    "NOT_ACCEPT"
+  ],
+  "foreign_keys": {
+    "artifact_id": "source_records/index.csv.artifact_id",
+    "candidate_id": "candidates.candidate_id (nullable)",
+    "evidence_reference": "artifact_id optionally followed by a locator",
+    "execution_id": "executions.execution_id",
+    "instance_id": "instances.instance_id"
+  },
+  "schema_version": "1.0",
+  "storage": "UTF-8 CSV; contracts JSONL",
+  "tables": {
+    "applicability": {
+      "columns": [
+        "instance_id",
+        "execution_id",
+        "applicability_decision",
+        "original_decision",
+        "applicability_reason",
+        "evidence_reference",
+        "configuration_id",
+        "applicability_rule_id"
+      ],
+      "csv_type": "string",
+      "missing_value": "",
+      "primary_key": [
+        "instance_id",
+        "execution_id",
+        "configuration_id"
+      ]
+    },
+    "candidate_artifact_relations": {
+      "columns": [
+        "candidate_id",
+        "execution_id",
+        "artifact_role",
+        "artifact_id",
+        "original_sha256",
+        "exported_relative_path",
+        "evidence_reference"
+      ],
+      "csv_type": "string",
+      "missing_value": "",
+      "primary_key": [
+        "candidate_id",
+        "execution_id",
+        "artifact_role"
+      ]
+    },
+    "candidates": {
+      "columns": [
+        "candidate_id",
+        "instance_id",
+        "execution_id",
+        "candidate_artifact",
+        "candidate_hash",
+        "exported_hash",
+        "artifact_kind",
+        "generation_configuration",
+        "generation_status",
+        "evidence_reference"
+      ],
+      "csv_type": "string",
+      "missing_value": "",
+      "primary_key": [
+        "candidate_id"
+      ]
+    },
+    "cohort_membership": {
+      "columns": [
+        "cohort_id",
+        "instance_id",
+        "experiment_id",
+        "execution_id",
+        "membership_role"
+      ],
+      "csv_type": "string",
+      "missing_value": "",
+      "primary_key": [
+        "cohort_id",
+        "instance_id",
+        "execution_id"
+      ]
+    },
+    "coverage": {
+      "columns": [
+        "instance_id",
+        "execution_id",
+        "framework",
+        "candidate_available",
+        "original_final_status",
+        "evidence_reference"
+      ],
+      "csv_type": "string",
+      "missing_value": "",
+      "primary_key": [
+        "instance_id",
+        "execution_id"
+      ]
+    },
+    "decisions": {
+      "columns": [
+        "instance_id",
+        "candidate_id",
+        "execution_id",
+        "decision",
+        "original_decision",
+        "decision_configuration",
+        "evidence_reference",
+        "included_in_paper"
+      ],
+      "csv_type": "string",
+      "missing_value": "",
+      "primary_key": [
+        "instance_id",
+        "execution_id",
+        "decision_configuration"
+      ]
+    },
+    "evidence_manifest": {
+      "columns": [
+        "artifact_id",
+        "linked_instance_id",
+        "linked_candidate_id",
+        "evidence_type",
+        "source_reference",
+        "exported_relative_path",
+        "original_sha256",
+        "exported_sha256",
+        "status",
+        "transformation"
+      ],
+      "csv_type": "string",
+      "missing_value": "",
+      "primary_key": [
+        "artifact_id",
+        "linked_instance_id",
+        "linked_candidate_id",
+        "evidence_type"
+      ]
+    },
+    "exclusions": {
+      "columns": [
+        "instance_id",
+        "execution_id",
+        "original_decision",
+        "exclusion_reason",
+        "evidence_reference"
+      ],
+      "csv_type": "string",
+      "missing_value": "",
+      "primary_key": [
+        "instance_id",
+        "execution_id"
+      ]
+    },
+    "executions": {
+      "columns": [
+        "execution_id",
+        "instance_id",
+        "experiment_id",
+        "variant",
+        "configuration_id",
+        "source_record_id"
+      ],
+      "csv_type": "string",
+      "missing_value": "",
+      "primary_key": [
+        "execution_id"
+      ]
+    },
+    "instances": {
+      "columns": [
+        "instance_id",
+        "project",
+        "project_revision",
+        "source_file",
+        "method_signature",
+        "source_hash",
+        "source_hash_kind",
+        "method_source_hash",
+        "issue_type",
+        "source_record_id"
+      ],
+      "csv_type": "string",
+      "missing_value": "",
+      "primary_key": [
+        "instance_id"
+      ]
+    },
+    "methods": {
+      "columns": [
+        "mapping_id",
+        "project",
+        "project_revision",
+        "source_file",
+        "method_signature",
+        "source_hash",
+        "target_instance_ids",
+        "target_issue_types",
+        "source_record_id"
+      ],
+      "csv_type": "string",
+      "missing_value": "",
+      "primary_key": [
+        "mapping_id"
+      ]
+    },
+    "rq3_pairs": {
+      "columns": [
+        "instance_id",
+        "original_execution_id",
+        "replay_execution_id",
+        "original_candidate_id",
+        "replay_candidate_id",
+        "source_hash_equal",
+        "candidate_hash_equal",
+        "target_test_identity_equal",
+        "post_outcome_equal",
+        "final_decision_equal",
+        "historical_replay_status",
+        "evidence_reference"
+      ],
+      "csv_type": "string",
+      "missing_value": "",
+      "primary_key": [
+        "instance_id"
+      ]
+    },
+    "verification_checks": {
+      "columns": [
+        "check_record_id",
+        "candidate_id",
+        "instance_id",
+        "execution_id",
+        "check_id",
+        "check_type",
+        "result",
+        "original_result",
+        "evidence_reference",
+        "validation_configuration",
+        "evaluation_scope"
+      ],
+      "csv_type": "string",
+      "missing_value": "",
+      "primary_key": [
+        "check_record_id"
+      ]
+    }
+  }
+}

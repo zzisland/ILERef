@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "hash-exclusion.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "run_id", "project_id", "file_id", "source_relative_path", "stage", "reason", "expected_sha256", "actual_sha256", "manifest_ref", "validation_result_ref", "candidate_file_ref", "detector_result_ref", "included_in_statistics"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "run_id": {"type": "string", "minLength": 1},
+    "project_id": {"type": "string", "minLength": 1},
+    "file_id": {"type": "string", "minLength": 1},
+    "source_relative_path": {"type": ["string", "null"]},
+    "stage": {"enum": ["PRE_DETECTOR_MANIFEST", "PRE_DETECTOR_VALIDATION", "PRE_DETECTOR_CURRENT_FILE", "DETECTOR_INJECTION", "POST_DETECTOR_INPUT", "PRE_AGGREGATION"]},
+    "reason": {"enum": ["HASH_MISMATCH", "HASH_NOT_VERIFIED", "LEGACY_UNVERIFIED", "DETECTOR_FAILED", "DETECTOR_RESULT_INVALID", "ENVIRONMENT_BLOCKED", "VALIDATION_BLOCKED_BEFORE_DETECTOR"]},
+    "pre_validation_hash_status": {"enum": ["VERIFIED", "HASH_MISMATCH", "HASH_NOT_VERIFIED"]},
+    "post_detector_hash_status": {"enum": ["VERIFIED", "HASH_MISMATCH", "HASH_NOT_VERIFIED", "NOT_REACHED"]},
+    "engineering_validation_status": {"type": ["string", "null"]},
+    "detector_execution_status": {"type": ["string", "null"]},
+    "expected_sha256": {"$ref": "#/$defs/nullableSha256"},
+    "actual_sha256": {"$ref": "#/$defs/nullableSha256"},
+    "manifest_ref": {"$ref": "#/$defs/nullableRelativePath"},
+    "validation_result_ref": {"$ref": "#/$defs/nullableRelativePath"},
+    "candidate_file_ref": {"$ref": "#/$defs/nullableRelativePath"},
+    "detector_result_ref": {"$ref": "#/$defs/nullableRelativePath"},
+    "included_in_statistics": {"const": false}
+  },
+  "$defs": {
+    "nullableSha256": {"type": ["string", "null"], "pattern": "^[a-f0-9]{64}$"},
+    "nullableRelativePath": {"type": ["string", "null"], "minLength": 1, "pattern": "^(?![A-Za-z]:)(?!/)(?!.*(?:^|/)\\.\\.(?:/|$))[^\\\\]+$"}
+  }
+}

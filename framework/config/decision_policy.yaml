@@ -1,0 +1,69 @@
+version: 1.0
+
+risk_assessment:
+  rule_version: "4.1"
+  smell_rule_versions:
+    Redundant_Assertion: "4.2"
+    Exception_Catching_Throwing: "4.2"
+  supported_smells:
+    - Assertion_Roulette
+    - Redundant_Assertion
+    - Exception_Catching_Throwing
+    - Magic_Number_Test
+    - Conditional_Test_Logic
+  hard_constraints:
+    allow_test_method_deletion: false
+    allow_method_signature_change: false
+    allow_test_annotation_change: false
+    allow_class_structure_change: false
+    allow_helper_change: false
+    allow_non_target_method_change: false
+    allow_production_code_change: false
+    allow_multiple_target_smells: false
+  context_requirements:
+    require_source_location_when_available: true
+    require_junit_context_for_assertion_rewrite: true
+    require_remaining_oracle_for_assertion_removal: true
+    require_exception_type_and_trigger_boundary: true
+
+default:
+  action: REVIEW
+  risk: HIGH
+  scope: UNKNOWN
+
+smell_policy:
+  Assertion_Roulette:
+    enabled: true
+    risk: LOW
+    scope: METHOD
+    default_action: REVIEW
+
+  Exception_Catching_Throwing:
+    enabled: true
+    risk: MEDIUM
+    scope: METHOD
+    default_action: REVIEW
+
+  Sleepy_Test:
+    enabled: true
+    risk: MEDIUM
+    scope: METHOD
+    default_action: REVIEW
+
+  Redundant_Assertion:
+    enabled: true
+    risk: MEDIUM
+    scope: METHOD
+    default_action: REVIEW
+
+  Unknown_Test:
+    enabled: false
+    risk: HIGH
+    scope: METHOD
+    default_action: REVIEW
+
+  EmptyTest:
+    enabled: true
+    risk: CRITICAL
+    scope: METHOD
+    default_action: REVIEW

@@ -1,0 +1,23 @@
+{
+  "counts": {
+    "applicability": 5829,
+    "candidate_artifact_relations": 230,
+    "candidates": 2752,
+    "cohort_membership": 11488,
+    "contracts": 2247,
+    "coverage": 646,
+    "decisions": 7039,
+    "evidence_manifest": 76348,
+    "exclusions": 3596,
+    "executions": 6993,
+    "instances": 5589,
+    "methods": 216,
+    "rq3_pairs": 79,
+    "verification_checks": 83544
+  },
+  "issues": [],
+  "mode": "FULL",
+  "network": false,
+  "schema_version": "1.0",
+  "source_policy": "No inferred PASS; missing fields stay empty/null or INCONCLUSIVE"
+}

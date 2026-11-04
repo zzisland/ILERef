@@ -1,0 +1,50 @@
+{
+  "instance_schema_version": "2.0",
+  "source_schema_version": "4.1",
+  "instance_id": "utrefactor:v1:a65e8bf89a9ab97ca54fd131c3ef770e89dfb27c06cad9d323df2bc9b6a66746",
+  "project_version": "example-only-v1",
+  "module_path": "",
+  "test_relative_path": "src/test/java/example/ExampleTest.java",
+  "test_file_path": "hostpath://e/example-project/src/test/java/example/ExampleTest.java",
+  "test_filename": "ExampleTest.java",
+  "test_package_name": "example",
+  "split_filename": "ExampleTest__1.java",
+  "method_signature": "checksValueWithRedundantAssertion()",
+  "method_source_hash": "d0c05775caec25539d07e76bd377e35fea75e59f719e0e5be9443c56646a5081",
+  "smell_type": "Redundant_Assertion",
+  "detected_smells": [
+    "Redundant_Assertion"
+  ],
+  "selected_smells": [
+    "Redundant_Assertion"
+  ],
+  "ignored_smells": [],
+  "line_range": {
+    "start": 10,
+    "end": 15
+  },
+  "test_code": "@Test\nvoid checksValueWithRedundantAssertion() {\n    int value = Integer.parseInt(\"7\");\n    assertTrue(true);\n    assertEquals(7, value);\n}",
+  "production_context": {},
+  "source_record": {
+    "schemaVersion": "4.1",
+    "testContext": {
+      "testModulePath": "",
+      "testRelativePath": "src/test/java/example/ExampleTest.java",
+      "testFilePath": "hostpath://e/example-project/src/test/java/example/ExampleTest.java",
+      "testFilename": "ExampleTest.java",
+      "testPackageName": "example",
+      "splitFilename": "ExampleTest__1.java",
+      "testCodeStartLine": 10,
+      "testCodeEndLine": 15,
+      "testCode": "@Test\nvoid checksValueWithRedundantAssertion() {\n    int value = Integer.parseInt(\"7\");\n    assertTrue(true);\n    assertEquals(7, value);\n}",
+      "smellList": [
+        "Redundant_Assertion"
+      ],
+      "selectedSmells": [
+        "Redundant_Assertion"
+      ],
+      "ignoredSmells": []
+    },
+    "productionContext": {}
+  }
+}

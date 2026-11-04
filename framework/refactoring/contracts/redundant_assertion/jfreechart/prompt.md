@@ -1,0 +1,56 @@
+# ra.jfreechart.catch_constant_deletion / 2.0
+
+此文件为当前 Python Prompt 的规范快照；runtime 不读取本文件。`{{expression}}` 是原 Python 表达式占位符，不是新增模板引擎。
+
+## 最终基础模板
+
+```text
+RA v2 safety contract: SAFE_CONSTANT_ASSERTION_IN_CATCH.
+Return exactly one complete Java test method, without Markdown or explanations.
+DELETE_ONLY_APPROVED_CONSTANT_ASSERTION: delete only the exact target statement ranges.
+PRESERVE_TRY_CATCH_STRUCTURE: retain try/catch, exception type, variable and ordering; keep the empty catch.
+PRESERVE_OTHER_CATCH_STATEMENTS: do not change any non-target catch text or comment.
+PRESERVE_OTHER_ASSERTIONS: retain fail, property/event assertions and their operands/messages exactly.
+NO_UNRELATED_FORMATTING: preserve all non-target text, indentation, comments, variables, signatures and annotations.
+NO_OTHER_RA_REMOVAL: do not touch self-comparison, equals/hashCode/reflexivity, clone/copy or wrong operands.
+NO_CONTROL_FLOW_REWRITE: do not introduce assertThrows or alter the exception trigger or fail path.
+If these constraints cannot be met, return REFUSE_UNSAFE_REFACTORING.
+Source-bound proof: {{json.dumps(proof, ensure_ascii=False)}}
+Original method:
+{{instance['test_code']}}
+```
+
+## 槽位与序列化
+
+| 槽位 | 来源 / 序列化 |
+|---|---|
+| contract['smell'], ['risk_decision'] | ExecutableContractBuilder 的正式字段 |
+| json.dumps(contract['allowed_changes'/'forbidden_changes']) | 默认 JSON 序列化；保持现行 ensure_ascii 默认值 |
+| json.dumps(risk['evidence'], ensure_ascii=False) | 全部风险 evidence，包含 source-bound CONTRACT-V4 proof；不是只传目标摘要 |
+| len(assertion_targets) / json.dumps(assertion_targets, ensure_ascii=False) | conclusion=MISSING_MESSAGE 的 evidence 投影：evidence_id、assertion_identity、api、ast_path、parent_assertion_id、nesting_depth、matched_code |
+| json.dumps(imports, ensure_ascii=False) | context.test_class_source 的 import 正则提取，保留现行顺序 |
+| json.dumps(ect_contract, ensure_ascii=False) | proof.targets[0] 的路径字段投影；不存在的键为 null |
+| json.dumps(case_refs, ensure_ascii=False) | 入参 cases 的 case_id/summary；本次 []，无检索调用 |
+| instance['test_code'] | normalized 执行视图的方法源码，不从 provenance 随意拼接 |
+| json.dumps(production_summary, ensure_ascii=False) | production_context 的 available、productionClassName、focalMethodSignatures/Summaries、dependencyMethodSignatures/Summaries、astMethodCalls、astControlFlow；省略 None/[]/空串 |
+| json.dumps(proof, ensure_ascii=False) | RA catch 专用全部 proof |
+
+no_throw 的 ect_contract 投影：target_id、throws_text、throws_type、throws_remove_start、throws_end、body_start、body_end、body_hash、body_ast_fingerprint、statement_count、statements、wrapper_api。
+
+must_throw 的 ect_contract 投影：target_id、exception_type、catch_variable、flag、protected_statement、protected_statement_kind、exception_observations、replacement、safety_conditions。fail 路径已独立投影 target_id、exception_type、trigger、message、replacement；无 fail 消息时 message 为 null。
+
+## 可选后缀
+
+Full 策略组合与 risk assessment mode 是不同维度。若 risk.assessment_mode == rule_llm 且 admission_guidance 非空，build 在 validate_advice/check_evidence 通过后追加以下内容并重算 hash；本次 rule_only fixtures 未触发，也没有执行模型。
+
+```text
+
+Verified admission advice (guidance, NOT a safety proof). The source-bound candidate contract and all downstream checks remain mandatory.
+{{json.dumps(advice, ensure_ascii=False)}}
+```
+
+RA catch 的 early return 发生在 _build；仍可经过外层 build 的 guidance 后缀。它不包含通用模板的 case references/imports/production summary。
+
+## 已知对齐差异
+
+沿用 Stage 3 prompt_validator_alignment.md，未修正语义：单 Java fence 可清理；RA catch 允许布局差异；普通 RA/ECT fail 的 AST 检查忽略注释；ECT fail 的 flag 提示段错配已由 ect-fail-prompt-fix-1 修复，其他行为不变。具体适用范围以对应 Python validator 为准。

@@ -1,0 +1,16 @@
+path,status,reason,artifact_sha256
+data/normalized/contracts.jsonl,WITHHELD_LICENSE_REVIEW,"Historical payload embeds third-party methods and matched_code, including JFreeChart-derived source; no fields or rows were rewritten; one selected Apache Commons CLI sample is provided separately under examples/ar_cli without changing the full historical corpus",054263e6c7eb8b6e2fef905b051a944fea40d10cbd738a1e21e122ee57100b22
+data/artifacts/**,NOT_SELECTED,Saved third-party sources/candidate derivatives deferred for file-level rights and anonymity clearance; one selected Apache Commons CLI sample is provided separately under examples/ar_cli without changing the full historical corpus,
+data/source_records/objects/**,NOT_SELECTED,Raw nested records contain source fragments and 60 known anonymity holds; original evidence retained only in the read-only Artifact; one selected Apache Commons CLI sample is provided separately under examples/ar_cli without changing the full historical corpus,
+results/engineering_replay/**,INTERNAL_ONLY,"Private snapshots, binaries, detector, dependencies, logs and working environment excluded",
+framework/src/**,DEFERRED,Java frontend and detector-related code not needed for metadata/table verification; rights and independent runtime assembly not claimed,
+framework/analysis/**,DEFERRED,Historical analysis drivers outside initial core-code scope,
+framework/versions/**,DEFERRED,"Historical overlays not copied; original CODE_VERSION_MAP retained as provenance, not an availability assertion",
+framework/pipeline/multi_smell/**,NOT_REQUIRED,No imports from the requested core closure,
+framework/config/model_config*.yaml,EXCLUDED,No model runtime configuration or credentials shipped,
+UTRefactor source and cropped implementation,EXCLUDED,Historical comparison metadata only; source redistribution not authorized,
+docs/audit/** and internal reports/backups,INTERNAL_ONLY,Internal audit findings are not release payload; current-batch scope reports are generated separately,
+framework/pipeline/ar_module2/analysis.py,EXCLUDED_OBSOLETE_ANALYSIS,Unused historical 80-admitted-pair analysis helper; current Table V uses the preserved 92-pair normalized cohort. Original code hash remains in CODE_VERSION_MAP.csv.,2b16cc140791713891e9f0b18f490c04fac8cb94556e1a3f4ad562316d487ca5
+INITIAL_SYNC_REPORT.md; ADAPTATIONS.md; internal validation process reports,INTERNAL_ONLY,Preparation history retained outside the reviewer repository; necessary provenance and limitations remain documented.,
+.local-build/**; results/quality_review/**; results/local_checks/**; results/inspection/**,LOCAL_OUTPUT_ONLY,"Local backups, audit process and regenerable query/check output are outside the release payload.",
+results/validation/full_evidence_requirement.json,DUPLICATE_DERIVED_REPORT,Identical to results/validation/repository_validation.json; no runtime reader; full-evidence limitation remains explicit.,d1c0a6c63338cde137815a2fd4bb0e277c03a09724407d58a7610646148e8ce1

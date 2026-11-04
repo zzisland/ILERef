@@ -1,0 +1,17 @@
+status: active
+contract_builder_entry: pipeline.contract_builders:ExecutableContractBuilder.build
+transformation_entry: pipeline.agents.ra_contract:expected_candidate
+prompt_entry: pipeline.agents.ra_contract:build_prompt
+contract_id: ra.jfreechart.catch_constant_deletion
+issue_type: Redundant_Assertion
+version: '2.0'
+scope: project_specific
+applicability_entry: pipeline.agents.ra_contract:analyze_catch
+validator_entry: pipeline.agents.ra_contract:validate_candidate
+test_entry:
+- pipeline.tests.test_ra_v2_contract:RaV2ContractTest
+project: JFreeChart
+scope_note: Audited setter(null)/Marker event-oracle pattern. Existing Python guards
+  unchanged; no new project-name gate.
+contract_file: redundant_assertion/jfreechart/contract.yaml
+prompt_file: redundant_assertion/jfreechart/prompt.md

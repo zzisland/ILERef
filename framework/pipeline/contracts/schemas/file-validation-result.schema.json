@@ -1,0 +1,323 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "file-validation-result.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "pipeline_mode",
+    "hash_chain_version",
+    "contract_version",
+    "execution_scope",
+    "decision",
+    "status",
+    "validation_decision",
+    "engineering_validation_status",
+    "detector_execution_status",
+    "smell_count_status",
+    "revalidation_report_only",
+    "file_id",
+    "file_id_version",
+    "source_file",
+    "source_hash_before",
+    "source_hash_after",
+    "source_unchanged",
+    "candidate_file_ref",
+    "manifest_ref",
+    "candidate_hash",
+    "candidate_unchanged",
+    "instance_ids",
+    "method_count",
+    "structure_checks",
+    "stage_results",
+    "test_summary",
+    "detector_execution",
+    "smell_comparison",
+    "target_smell_comparison",
+    "instance_revalidation_results",
+    "workspace",
+    "hash_chain",
+    "included_in_statistics",
+    "started_at",
+    "completed_at",
+    "duration_ms",
+    "input_fingerprint"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "pipeline_mode": {
+      "const": "FILE_LEVEL_V1"
+    },
+    "hash_chain_version": {
+      "const": "1"
+    },
+    "contract_version": {
+      "const": "1.0"
+    },
+    "execution_scope": {
+      "const": "JAVA_TEST_FILE"
+    },
+    "decision": {
+      "enum": [
+        "VALIDATION_PASSED",
+        "VALIDATION_FAILED",
+        "VALIDATION_BLOCKED"
+      ]
+    },
+    "status": {
+      "type": "string",
+      "minLength": 1
+    },
+    "validation_decision": {
+      "enum": [
+        "VALIDATION_PASSED",
+        "VALIDATION_FAILED",
+        "VALIDATION_BLOCKED"
+      ]
+    },
+    "engineering_validation_status": {
+      "enum": [
+        "VALIDATION_PASSED",
+        "VALIDATION_FAILED",
+        "VALIDATION_BLOCKED"
+      ]
+    },
+    "detector_execution_status": {
+      "enum": [
+        "PASS",
+        "FAILED",
+        "NOT_RUN"
+      ]
+    },
+    "smell_count_status": {
+      "enum": [
+        "COMPLETED",
+        "DETECTOR_FAILED",
+        "DETECTOR_RESULT_INVALID",
+        "ENVIRONMENT_BLOCKED",
+        "HASH_MISMATCH",
+        "HASH_NOT_VERIFIED",
+        "NOT_EXECUTED"
+      ]
+    },
+    "revalidation_report_only": {
+      "const": false
+    },
+    "file_id": {
+      "type": "string",
+      "pattern": "^file:v1:[a-f0-9]{64}$"
+    },
+    "file_id_version": {
+      "const": "1"
+    },
+    "source_file": {
+      "type": "string"
+    },
+    "source_hash_before": {
+      "$ref": "#/$defs/sha256"
+    },
+    "source_hash_after": {
+      "$ref": "#/$defs/sha256"
+    },
+    "source_unchanged": {
+      "type": "boolean"
+    },
+    "candidate_file_ref": {
+      "$ref": "#/$defs/relativePath"
+    },
+    "manifest_ref": {
+      "$ref": "#/$defs/relativePath"
+    },
+    "candidate_hash": {
+      "$ref": "#/$defs/sha256"
+    },
+    "candidate_unchanged": {
+      "type": "boolean"
+    },
+    "instance_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "method_count": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "structure_checks": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "stage_results": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "test_summary": {
+      "type": "object"
+    },
+    "detector_execution": {
+      "type": "object"
+    },
+    "smell_comparison": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "target_smell_comparison": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "instance_revalidation_results": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "workspace": {
+      "type": "object"
+    },
+    "hash_chain": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "version",
+        "status",
+        "candidate_file_sha256",
+        "validation_input_sha256",
+        "injected_candidate_sha256",
+        "validated_candidate_sha256",
+        "detector_input_sha256",
+        "post_detector_candidate_sha256",
+        "mismatch_stage",
+        "expected_sha256",
+        "actual_sha256"
+      ],
+      "properties": {
+        "version": {
+          "const": "1"
+        },
+        "status": {
+          "enum": [
+            "VERIFIED",
+            "HASH_MISMATCH",
+            "HASH_NOT_VERIFIED",
+            "LEGACY_UNVERIFIED",
+            "NOT_CHECKED"
+          ]
+        },
+        "candidate_file_sha256": {
+          "$ref": "#/$defs/nullableSha256"
+        },
+        "validation_input_sha256": {
+          "$ref": "#/$defs/nullableSha256"
+        },
+        "injected_candidate_sha256": {
+          "$ref": "#/$defs/nullableSha256"
+        },
+        "validated_candidate_sha256": {
+          "$ref": "#/$defs/nullableSha256"
+        },
+        "detector_input_sha256": {
+          "$ref": "#/$defs/nullableSha256"
+        },
+        "post_detector_candidate_sha256": {
+          "$ref": "#/$defs/nullableSha256"
+        },
+        "mismatch_stage": {
+          "enum": [
+            null,
+            "VALIDATION_INPUT",
+            "WORKSPACE_INJECTION",
+            "POST_COMPILE",
+            "POST_TARGET_TEST",
+            "CANDIDATE_ARTIFACT_POST_VALIDATION",
+            "PRE_DETECTOR_MANIFEST",
+            "PRE_DETECTOR_VALIDATION",
+            "PRE_DETECTOR_CURRENT_FILE",
+            "DETECTOR_INJECTION",
+            "POST_DETECTOR_INPUT",
+            "PRE_AGGREGATION"
+          ]
+        },
+        "expected_sha256": {
+          "$ref": "#/$defs/nullableSha256"
+        },
+        "actual_sha256": {
+          "$ref": "#/$defs/nullableSha256"
+        },
+        "validation_evidence_version": {"type": "string"},
+        "project_inputs_sha256": {"$ref": "#/$defs/nullableSha256"},
+        "mnt_validation_version": {
+          "type": "string"
+        },
+        "source_file": {
+          "type": "string"
+        },
+        "source_file_sha256": {
+          "$ref": "#/$defs/nullableSha256"
+        },
+        "source_relative_path": {
+          "type": "string"
+        },
+        "instance_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "compiled_candidate_sha256": {
+          "$ref": "#/$defs/nullableSha256"
+        },
+        "candidate_file": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "included_in_statistics": {
+      "type": "boolean"
+    },
+    "started_at": {
+      "type": "string"
+    },
+    "completed_at": {
+      "type": "string"
+    },
+    "duration_ms": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "input_fingerprint": {
+      "$ref": "#/$defs/sha256"
+    }
+  },
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "nullableSha256": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "relativePath": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?![A-Za-z]:)(?!/)(?!.*(?:^|/)\\.\\.(?:/|$))[^\\\\]+$"
+    }
+  }
+}

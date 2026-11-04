@@ -1,0 +1,44 @@
+enabled_smells:
+  Conditional_Test_Logic: false  # Experimental bounded local preparation unrolling.
+  Assertion_Roulette: false
+  Exception_Catching_Throwing: false
+  Sleepy_Test: false
+  Redundant_Assertion: true
+  Magic_Number_Test: false  # Additional supported capability; not part of the default AR/RA/ECT experiment.
+  Inappropriate_Assertion: false
+  Naming_Convention: false
+  Mystery_Guest: false
+  Eager_Test: false
+  Unknown_Test: false
+
+# Multi-smell V1 is opt-in.  With this block disabled, the historical
+# single-smell orchestration and cache identity remain unchanged.
+multi_smell:
+  enabled: false
+  same_method_policy: sequential_whitelist
+  execution_order:
+    - Redundant_Assertion
+    - Exception_Catching_Throwing
+    - Assertion_Roulette
+  intermediate_validation:  
+    static_contract: true
+    hash: true
+    ast_reextract: true
+  final_validation:
+    engineering: true
+    detector: true
+    instance_revalidation: true
+  prefix_replay_on_failure: true
+  max_steps_per_method: 3
+  unsupported_overlap: manual_review
+  candidate_provider: external_llm
+  external_llm_enabled: true
+
+run:
+  base_dir: ".."
+  output_root: data
+  continue_on_project_failure: false     
+projects:
+  - cli
+  - jsoup
+  - jfreechart

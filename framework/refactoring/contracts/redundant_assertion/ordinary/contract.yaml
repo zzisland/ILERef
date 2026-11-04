@@ -1,0 +1,72 @@
+document_schema_version: '1.0'
+execution_authority: python
+status: active
+contract_builder_entry: pipeline.contract_builders:ExecutableContractBuilder.build
+transformation_entry: pipeline.agents.refactoring_providers:ExistingLLMRefactoringProvider.generate
+prompt_entry: pipeline.agents.prompt_service:RefactoringPromptService.build
+contract_id: ra.ordinary_redundant_assertion
+issue_type: Redundant_Assertion
+version: '4.2'
+scope: general
+applicability_entry: pipeline.agents.safety_contracts:analyze_ra
+validator_entry: pipeline.agents.candidate_validation:validate_redundant_assertion
+test_entry:
+- pipeline.tests.test_safety_contract_v4:ExecutableSafetyContractTest
+contract_file: redundant_assertion/ordinary/contract.yaml
+prompt_file: redundant_assertion/ordinary/prompt.md
+rules:
+  applicability_prerequisites: 只批准可证明无效且纯的直接 block expression statement。常量 assertTrue(true)、assertFalse(false)、assertNull(null)；同值
+    assertEquals 需同 block 唯一前置 final primitive local，排除 float/double；assertSame 同值、对象/字段/调用等不泛化。assertNotNull(new
+    ...) 不得删除构造器执行。control flow/try 等不在普通路径内。
+  transformation_target: 删除 targets 中 statement_start:statement_end 完整语句（包含分号），不是 assertion 表达式的 start:end。
+  edit_and_preservation_constraints: 保留已证明实际有意义且可达的 oracle；其 actual 来自直接方法调用的唯一 local，无中间写入，expected/type
+    等受限。未知 oracle 或必失败 oracle 构成可达性 barrier；没有剩余 oracle 必须 REVIEW。self-comparison 的对象 equals/hashCode/reflexivity/clone/copy
+    语义保护不能绕过。仅删除批准语句，禁止换操作数、添加断言或修改其他可执行 token。
+  candidate_validation_predicates: verify_proof；expected 为批准 statement 删除结果，ast_tokens(expected)==ast_tokens(candidate)；remaining
+    assertion 数量一致，remaining_oracle_ids 非空，逐一 confirmed_oracle 重证明。注意该 AST 比较忽略注释和布局，注释新增探针可通过，不得宣称字节级保护。
+  allowed_edits:
+    source_field: transformation_target
+  forbidden_edits:
+    source_field: edit_and_preservation_constraints
+  protected_elements:
+    source_field: edit_and_preservation_constraints
+  required_preservation:
+    source_field: edit_and_preservation_constraints
+common_pipeline_requirements: 'ApplicabilityEvidenceExtractor → 默认 instance-level ApplicabilityPolicy
+  / RuleBasedRiskAssessor + RiskPolicyGuard → REFACTOR_LOW_RISK → RISK_APPROVED → ExecutableContractBuilder
+  → RefactoringPromptService → CandidateValidator → file composition → compile/test → revalidation → EvidenceLinkedAcceptancePolicy。
+
+
+  ContractBuilder 还检查 risk envelope、instance ID、单目标 smell、有效来源证据、source/method/hash/line range 和当前文件绑定；低风险不是最终接纳。验证、拼接、编译测试、复检和
+  final acceptance 未被 Prompt 或 registry 替代。
+
+
+  instance_schema_version=2.0 与 source_schema_version 独立；refactoring_contract.contract_id/version 是六条规则的登记身份。ECT
+  dispatcher proof 版本 3.0 与 fail/flag/no_throw 路径版本 1.0/2.0/1.0 不应混为一个 schema 版本。Prompt service 版本 5.2-contract-v4.1-ect-v3，CandidateValidator
+  4.2；RA catch 内部另有 ra-v2-local-deletion-1。版本号差异本身不表示未同步。
+
+
+  共同 CandidateValidator 检查单个完整方法、非空、无 class/import 等外层内容、签名/annotation、原文件 hash、方法未删、无新增 placeholder、存在变化；调用
+  smell predicate 后只替换目标方法并核对方法外内容。单个 Java Markdown fence 会先清理，INFO 不阻止通过。候选通过仅表示静态阶段通过。'
+ect_common_restrictions: null
+audit_provenance:
+  directory: analysis/framework_refactor_stage3_20260920
+  files_sha256:
+    contract_rules.md: 066aa05cad91ae4d57414714f1a6da6f1899e7314d07721c0a688d06ddcc260d
+    prompt_templates.md: bcb528e416d40f48298429db374fe754cc98c77b98628ed9039dc48e5f5ae8ef
+    prompt_validator_alignment.md: 214a1f30bce90fef709931850001825fbf2c19f3e1ba7bdc37c5541e09096522
+  implementation_sha256:
+    pipeline/agents/candidate_validation.py: 5bf2bdcb4d65a2d840608378e4d20665bfbfaf389e426d7a3c2a072fe27a18d7
+    pipeline/agents/prompt_service.py: 1a723627f341bcb3d191ee8c62264be63378a2384c42e24130a925a3daad7217
+    pipeline/agents/ra_contract.py: e66f1c4e615f4695ddcc67d8e7979f0f38ab97ed9f84f5b05d09112b1f77a148
+    pipeline/agents/refactoring_contract.py: 0dd04a46578e84a48f4c4845de7c619a8d650e8e4f3418cce6185c2363a9f367
+    pipeline/agents/refactoring_providers.py: 0b603b9ed604d108ea553895aa24b9426ab5adceef2a73c95374b6f0c5472c04
+    pipeline/agents/safety_contracts.py: 05690921c118dc8976c378448f01c560302178f6a15f2676d2aa090af775697b
+    pipeline/contract_builders.py: a61a86c78a04a3ebd7d00f8470d4a00561fd1aeed8bced67426f0eb07371909d
+    pipeline/tests/test_safety_contract_v4.py: 26ce80d291587a96490fbfc9d96d1b3754557a86f94165338f4583a5bd2da2f8
+  prompt_template_sha256: d2c2b9d1ec6d11ba3e0988aeb72010a69d705ea3dccba7e248f394336565ff5b
+  prompt_amendment:
+    revision: ect-fail-prompt-fix-1
+    contract_id: ect.must_throw.fail
+    implementation_sha256: 1a723627f341bcb3d191ee8c62264be63378a2384c42e24130a925a3daad7217
+    template_sha256: ece33fa100f9100392020aa31f289f095061f75887ed80949a0abc6cc38857dd

@@ -1,0 +1,15 @@
+{
+  "project_revision": "8d56926d951f1193d438c328bcdb01ddb48aac01",
+  "delivery": {
+    "project_archive": "project.tar.gz",
+    "project_archive_sha256": "8ba1427e1f67b5f24c53699b80e0824bd913f3e44d29b4f569ce8e51fd125690",
+    "project_manifest": "project_manifest.csv",
+    "project_manifest_sha256": "0cd4b5e33fac1b3f9fc754dd0cafce5aa5a4b551f2e1a891d5eea59969c8bb0e",
+    "archive_files": 143,
+    "archive_metadata": "Deterministic tar/gzip: no host names/user IDs/timestamps; historical checkout bytes retained."
+  },
+  "target_path": "src/test/java/org/apache/commons/cli/help/UtilTest.java",
+  "source_sha256": "68dfa955c429db30e569db4377e54751af80d1d56a8fd48e312edb8492a33c03",
+  "origin": "Apache Commons CLI; historical schema 4.1 context snapshot extracted from instance.source_record; not raw unfiltered detector output.",
+  "historical_sample_sha256": "ee57c57bd7822ae406fba0ac1ec9841eeb87c8e50f6861fd6cb0c56574be12e5"
+}

@@ -1,0 +1,53 @@
+{
+  "variant_id": "A2",
+  "identity": {
+    "runtime": "ablation-instance-runtime-1",
+    "model": {
+      "role": "refactoring",
+      "enabled": true,
+      "provider": "openai_compatible",
+      "endpoint_sha256": "1d0c8dae4013f0dd0883ac7692d61535aa7cdbad5eab0302c57fa1d0f07fe77a",
+      "model": "deepseek-v4-pro",
+      "timeout": 300,
+      "transport_max_retries": 0,
+      "temperature": 0.0,
+      "top_p": 1.0,
+      "max_tokens": 32768,
+      "dimensions": null,
+      "source": "local",
+      "credential_configured": true
+    },
+    "rag": false,
+    "retry": false,
+    "generation_unit": "CURRENT_TARGET_INSTANCE",
+    "revisions": {
+      "cli": "8d56926d951f1193d438c328bcdb01ddb48aac01",
+      "compress": "1ace49a4a302ac86d52c40dab04e7709d1c598bf",
+      "jfreechart": "98d9c90b6e0a1e553a506497daaf64a5704a4413",
+      "jsoup": "d8c49e5ec72a08ca1ac4e08740e70dc0f47ad911"
+    },
+    "project_inputs": {
+      "cli": "e88968ea33e14925313b5229a69465bd869e71cc40394b047e9866c0772d2991",
+      "compress": "59c78851c8344e8bb68bd85af445541e87d8ef8e00a0b7b3d3a9476d0c2a3a95",
+      "jfreechart": "1565439b2ab455eb3c5ab22c6e5773a8db338f35671d2913a032a124734cc01c",
+      "jsoup": "f9c1e802f30eb8e1232dc339dfac69253517235f8a5595a9ec5d269b928c5115"
+    },
+    "framework_sha256": "8d1364594a97b96f168ee3edee1f84b383d9d04f5d8e527316fcad5e56da3675",
+    "frozen_inputs": {
+      "instance_crosswalk.json": "e8f8af8f3c3fc9ccb81b8f7d2554fc4317680feffbbabd792f9e3b851c68ba65",
+      "proposed_ect_supplement.json": "b640c08d1d8bc29f3c0f923647e74ef0ffbda039b192418373aaa500c0e2325c",
+      "baseline_sample_manifest.json": "ce05ee75db699f3abd5be5add8bb260ff905d5a9c41714a8a03e44bd529553a9"
+    }
+  },
+  "bindings_sha256": "fcd96ca653ac06e80a2813a0a0087012b9a845805359713765ea23c1b9891642",
+  "sample_size": 117,
+  "schema_version": "1",
+  "planned_model_calls": 117,
+  "generation_unit": "CURRENT_TARGET_INSTANCE",
+  "rag_enabled": false,
+  "retry_enabled": false,
+  "max_instances_per_batch": 225,
+  "max_model_calls_per_batch": 120,
+  "max_files_per_validation_batch": 30,
+  "sample_set_ref": "analysis/ablation_runtime_setup_20260927/sample_sets.json"
+}

@@ -1,0 +1,15 @@
+status: active
+contract_builder_entry: pipeline.contract_builders:ExecutableContractBuilder.build
+transformation_entry: pipeline.agents.refactoring_providers:ExistingLLMRefactoringProvider.generate
+prompt_entry: pipeline.agents.prompt_service:RefactoringPromptService.build
+contract_id: ect.must_throw.flag
+issue_type: Exception_Catching_Throwing
+version: '2.0'
+scope: general
+applicability_entry: pipeline.agents.safety_contracts:_analyze_ect_v2
+validator_entry: pipeline.agents.candidate_validation:validate_exception_refactoring
+test_entry:
+- pipeline.tests.test_ect_v2_contract:EctV2RiskContractTest
+- pipeline.tests.test_ect_v2_contract:EctV2CandidateContractTest
+contract_file: exception_catching_throwing/must_throw/flag/contract.yaml
+prompt_file: exception_catching_throwing/must_throw/flag/prompt.md

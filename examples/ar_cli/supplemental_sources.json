@@ -1,0 +1,44 @@
+[
+  {
+    "path": "framework/src/main/java/antlr/Java8BaseListener.java",
+    "source": "original research frontend/src/main/java/antlr/Java8BaseListener.java",
+    "original_sha256": "38ca80955e97ceb8eea708db23416f38985477c7f0fd182e234084a314823982",
+    "sha256": "7fa6f1efe7755b726df8e4a395fe5c13bc6fdd263b059558f295348d463b8379",
+    "change": "Generation path comment and LF only"
+  },
+  {
+    "path": "framework/src/main/java/antlr/Java8BaseVisitor.java",
+    "source": "original research frontend/src/main/java/antlr/Java8BaseVisitor.java",
+    "original_sha256": "90c6d4f57890cd68cad36b51d4970939b518881b59986a117dca91e3af825ce3",
+    "sha256": "6ebd1a86ade24e1628f6ef63386990d07d2c2c7c41730e2c863118adebc81b17",
+    "change": "Generation path comment and LF only"
+  },
+  {
+    "path": "framework/src/main/java/antlr/Java8Lexer.java",
+    "source": "original research frontend/src/main/java/antlr/Java8Lexer.java",
+    "original_sha256": "6ce52f9518d22e9f6ff64c9d0684882d8d820982a19501b12b05c93f69261242",
+    "sha256": "aea06a2d95b02b30a38a730020c1733ea1263c504a5f34e9ae1c27ecc6496f34",
+    "change": "Generation path comment and LF only"
+  },
+  {
+    "path": "framework/src/main/java/antlr/Java8Listener.java",
+    "source": "original research frontend/src/main/java/antlr/Java8Listener.java",
+    "original_sha256": "d9c13f6af4c2cc38eba1d84175a23b098ae6115ddd81f570a6a21a1b18b5d7e4",
+    "sha256": "7fd5983a12c787ea357b5a01a4f489dcb08cbbd34ee6b652d92232f357f26e7a",
+    "change": "Generation path comment and LF only"
+  },
+  {
+    "path": "framework/src/main/java/antlr/Java8Parser.java",
+    "source": "original research frontend/src/main/java/antlr/Java8Parser.java",
+    "original_sha256": "669e257d3349743b3deb6ac40b0aac5a4b051f6551e795ef9e6eb9be79bd45fc",
+    "sha256": "ff2ae26223d5a1b78d7163d721b8c0e58ba980ddd328e09247c47889596bcad8",
+    "change": "Generation path comment and LF only"
+  },
+  {
+    "path": "framework/src/main/java/antlr/Java8Visitor.java",
+    "source": "original research frontend/src/main/java/antlr/Java8Visitor.java",
+    "original_sha256": "7a6d0bd14e3182089908b63f9d33535565368b22732ca8364212706d06fe7e1d",
+    "sha256": "1231f9062aaf10e741b98acf05b8da469e4721680155ce7d673b3496db5fa4bb",
+    "change": "Generation path comment and LF only"
+  }
+]

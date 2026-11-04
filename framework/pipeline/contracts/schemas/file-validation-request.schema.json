@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "file-validation-request.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "pipeline_mode", "run_id", "project_name", "execution_scope", "file_id", "file_id_version", "hash_chain_version", "input_fingerprint", "source_file", "source_file_sha256", "source_relative_path", "manifest_ref", "original_file_ref", "candidate_file_ref", "candidate_file_sha256", "instances", "before_detection_ref"],
+  "properties": {
+    "schema_version": {"const": "1.0"}, "pipeline_mode": {"const": "FILE_LEVEL_V1"},
+    "run_id": {"type": "string", "minLength": 1}, "project_name": {"type": "string", "minLength": 1},
+    "execution_scope": {"const": "JAVA_TEST_FILE"}, "file_id": {"type": "string", "pattern": "^file:v1:[a-f0-9]{64}$"},
+    "file_id_version": {"const": "1"}, "hash_chain_version": {"const": "1"},
+    "input_fingerprint": {"$ref": "#/$defs/sha256"}, "source_file": {"type": "string", "minLength": 1},
+    "source_file_sha256": {"$ref": "#/$defs/sha256"}, "source_relative_path": {"$ref": "#/$defs/relativePath"},
+    "manifest_ref": {"$ref": "#/$defs/relativePath"}, "original_file_ref": {"$ref": "#/$defs/relativePath"},
+    "candidate_file_ref": {"$ref": "#/$defs/relativePath"}, "candidate_file_sha256": {"$ref": "#/$defs/sha256"},
+    "instances": {"type": "array", "minItems": 1, "items": {"type": "object", "additionalProperties": false, "required": ["instance_id", "method_signature", "smell_type", "module_path", "package_name", "source_relative_path", "fully_qualified_class_name", "split_file_name"], "properties": {"instance_id": {"type": "string"}, "method_signature": {"type": "string"}, "smell_type": {"type": "string"}, "module_path": {"type": "string"}, "package_name": {"type": "string"}, "source_relative_path": {"$ref": "#/$defs/relativePath"}, "fully_qualified_class_name": {"type": "string"}, "split_file_name": {"type": "string"}}}},
+    "before_detection_ref": {"type": "string", "minLength": 1}
+  },
+  "$defs": {"sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"}, "relativePath": {"type": "string", "minLength": 1, "pattern": "^(?![A-Za-z]:)(?!/)(?!.*(?:^|/)\\.\\.(?:/|$))[^\\\\]+$"}}
+}

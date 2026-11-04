@@ -1,0 +1,46 @@
+{
+  "replay": {
+    "artifact_id": "artifact:008ded0db9aa75bf73e22e07c3c463bc",
+    "exported_bytes": "1182546",
+    "exported_relative_path": "data/source_records/objects/44/447ef780623d2ddccd48899508e4df1661cecf2514a5eeb0691495ea8bc8d54c.json",
+    "exported_sha256": "447ef780623d2ddccd48899508e4df1661cecf2514a5eeb0691495ea8bc8d54c",
+    "original_bytes": "1657942",
+    "original_sha256": "197da6269aa92d722710153c3c30d1db2ae3e0ce6f4c9c277d0c25ffb1041426",
+    "source_reference": "legacy://analysis/ar_rq3_instance_replay_results.json",
+    "status": "EXPORTED",
+    "transformation": "HOST_PATH_ALIAS:6;LOCAL_USER_REDACTION:2;SOURCE_ROOT_ALIAS:948"
+  },
+  "replay_detail": {
+    "artifact_id": "artifact:4c71e140aba31c28f6ab06ab852d4980",
+    "exported_bytes": "5094412",
+    "exported_relative_path": "data/source_records/objects/09/0962a28096ffd5ceb0f096804686b25436524ce5b98dfd752017d9e707595dcc.json",
+    "exported_sha256": "0962a28096ffd5ceb0f096804686b25436524ce5b98dfd752017d9e707595dcc",
+    "original_bytes": "7853971",
+    "original_sha256": "29394e823f8fdc0deb1d231266977743c499fe8a750141740027e23edbe82c31",
+    "source_reference": "legacy://analysis/rq3_instance_case_audit/audit_data.json",
+    "status": "EXPORTED",
+    "transformation": "HOST_PATH_ALIAS:10;LOCAL_USER_REDACTION:4;SOURCE_ROOT_ALIAS:2610"
+  },
+  "source120": {
+    "artifact_id": "artifact:aa5d71cfbcbea2b847ceffcd23306e0b",
+    "exported_bytes": "199020",
+    "exported_relative_path": "data/source_records/objects/c9/c9f4d2adfe85779edd37762bfa1e50c7444c48c6901c932bb47f95f8118d253c.json",
+    "exported_sha256": "c9f4d2adfe85779edd37762bfa1e50c7444c48c6901c932bb47f95f8118d253c",
+    "original_bytes": "218351",
+    "original_sha256": "1a16d123f19220ce4563e21f1f0247c47711ee2482f2d6467ffeb5a73147e895",
+    "source_reference": "legacy://analysis/module2_original_rule_ablation/manifest_120.json",
+    "status": "EXPORTED",
+    "transformation": "DETERMINISTIC_SERIALIZATION"
+  },
+  "trace": {
+    "artifact_id": "artifact:13ff02313ae9112c71df30c736bff4ac",
+    "exported_bytes": "930907",
+    "exported_relative_path": "data/source_records/objects/b5/b510b83822d7a752f401e9ee7b8fde877273fd9306ed5ace6a530a03d4396dbf.json",
+    "exported_sha256": "b510b83822d7a752f401e9ee7b8fde877273fd9306ed5ace6a530a03d4396dbf",
+    "original_bytes": "1551060",
+    "original_sha256": "80c558fd2637978172e1b3d9274a8d3c4e73d6835f65e57739aff0f0303576bb",
+    "source_reference": "legacy://analysis/ar_a1_unified_instance_results.json",
+    "status": "EXPORTED",
+    "transformation": "DETERMINISTIC_SERIALIZATION"
+  }
+}

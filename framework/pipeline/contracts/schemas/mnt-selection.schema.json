@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "mnt-selection.schema.json",
+  "type": "object", "additionalProperties": false,
+  "required": ["selected_target_ids", "naming_proposals", "retained_targets"],
+  "properties": {
+    "selected_target_ids": {"type":"array", "minItems":1, "uniqueItems":true, "items":{"type":"string", "minLength":1}},
+    "naming_proposals": {"type":"array", "items":{"type":"object"}},
+    "retained_targets": {"type":"array", "items":{
+      "type":"object", "additionalProperties":false, "required":["target_id","reason_code","reason"],
+      "properties": {
+        "target_id":{"type":"string", "minLength":1},
+        "reason_code":{"enum":["KEEP_UNSELECTED","NO_ADDITIONAL_BENEFIT","OUTSIDE_SUPPORTED_SCOPE","INSUFFICIENT_NAMING_EVIDENCE"]},
+        "reason":{"type":"string", "minLength":1, "maxLength":1000}
+      }
+    }}
+  }
+}

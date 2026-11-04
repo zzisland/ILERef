@@ -1,0 +1,77 @@
+{
+  "historical_false_rejection_records": {
+    "historical_data_only": true,
+    "records": 28,
+    "source": {
+      "artifact_id": "artifact:5ea90ed714a6bbfc71480ab4220414db",
+      "exported_bytes": "81867",
+      "exported_relative_path": "data/source_records/objects/ef/ef0edf04b7c6af0a463da7880f335302480e736df13197238d3a9bc824b5d84e.json",
+      "exported_sha256": "ef0edf04b7c6af0a463da7880f335302480e736df13197238d3a9bc824b5d84e",
+      "original_bytes": "104946",
+      "original_sha256": "24f0414fc40fc20ad2568dd954fc91f89a375494f1c8d667cdfa38e14e5bb517",
+      "source_reference": "legacy://analysis/rq3_instance_attribution_guard_audit_20261021/historical_false_rejection_records.json",
+      "status": "EXPORTED",
+      "transformation": "DETERMINISTIC_SERIALIZATION"
+    }
+  },
+  "historical_negative_records": {
+    "historical_data_only": true,
+    "records": 36,
+    "source": {
+      "artifact_id": "artifact:33261e92aa8bbd9ccaf08242cf0ad66b",
+      "exported_bytes": "10736",
+      "exported_relative_path": "data/source_records/objects/48/48830cda4b7e7ccf58f439657a96387717219fe44bd1c7f3a4927b4a625f861c.json",
+      "exported_sha256": "48830cda4b7e7ccf58f439657a96387717219fe44bd1c7f3a4927b4a625f861c",
+      "original_bytes": "12791",
+      "original_sha256": "2a2d3a7caa27024e9c84200d8b89ba7d539c2356bc3bbf0146aeedeb94eb06d6",
+      "source_reference": "legacy://analysis/rq3_instance_attribution_guard_audit_20261021/historical_negative_records.json",
+      "status": "EXPORTED",
+      "transformation": "DETERMINISTIC_SERIALIZATION"
+    }
+  },
+  "historical_snapshot_search": {
+    "historical_data_only": true,
+    "records": null,
+    "source": {
+      "artifact_id": "artifact:5c8ad749630cbd679779f1b88510cbd2",
+      "exported_bytes": "4103",
+      "exported_relative_path": "data/source_records/objects/bd/bd2166bb96cc342a7182d4341e267d3c2e380b9c32d456267a13784957a4ca3d.json",
+      "exported_sha256": "bd2166bb96cc342a7182d4341e267d3c2e380b9c32d456267a13784957a4ca3d",
+      "original_bytes": "4464",
+      "original_sha256": "062d72d1a7ded97843c6f34361fe47c4c09c163c552fe179543efe0fb4d11537",
+      "source_reference": "legacy://analysis/rq3_instance_attribution_guard_audit_20261021/historical_snapshot_search.json",
+      "status": "EXPORTED",
+      "transformation": "DETERMINISTIC_SERIALIZATION"
+    }
+  },
+  "implementation_version_comparison": {
+    "historical_data_only": true,
+    "records": 8,
+    "source": {
+      "artifact_id": "artifact:938c8a6e1883c1dec48d6f7564eec481",
+      "exported_bytes": "1859",
+      "exported_relative_path": "data/source_records/objects/39/39f4292ce167c7826a6866b0579ad0599057154afcf8060b8282c576e7751b1e.json",
+      "exported_sha256": "39f4292ce167c7826a6866b0579ad0599057154afcf8060b8282c576e7751b1e",
+      "original_bytes": "2150",
+      "original_sha256": "9bece9b15db4e578ec7dc0db82d8d348a1e0f3ccf7862cc2ea3fd32db0be29fe",
+      "source_reference": "legacy://analysis/rq3_instance_attribution_guard_audit_20261021/implementation_version_comparison.json",
+      "status": "EXPORTED",
+      "transformation": "DETERMINISTIC_SERIALIZATION"
+    }
+  },
+  "regression_test_index": {
+    "historical_data_only": true,
+    "records": 124,
+    "source": {
+      "artifact_id": "artifact:5a03d88dcb01c012fdc498e60804b4ae",
+      "exported_bytes": "47544",
+      "exported_relative_path": "data/source_records/objects/9f/9fb678e0803008d7bf3c3a840559ec17e444d8b559b4812ef17ff8d0b662a1bf.json",
+      "exported_sha256": "9fb678e0803008d7bf3c3a840559ec17e444d8b559b4812ef17ff8d0b662a1bf",
+      "original_bytes": "55483",
+      "original_sha256": "cdd1bd112db4dc2ed1f2cf83ba18ba1bee8126636043b389affa4d2f01051665",
+      "source_reference": "legacy://analysis/rq3_instance_attribution_guard_audit_20261021/regression_test_index.json",
+      "status": "EXPORTED",
+      "transformation": "DETERMINISTIC_SERIALIZATION"
+    }
+  }
+}

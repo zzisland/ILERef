@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "file-candidate-manifest.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "pipeline_mode", "file_id", "file_id_version", "hash_chain_version", "project_id", "module_path", "source_file", "source_relative_path", "source_file_sha256", "original_file_ref", "candidate_file_ref", "candidate_file_sha256", "candidate_text_sha256_lf", "method_count", "instance_ids", "methods", "validation_result_ref"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "pipeline_mode": {"const": "FILE_LEVEL_V1"},
+    "file_id": {"type": "string", "pattern": "^file:v1:[a-f0-9]{64}$"},
+    "file_id_version": {"const": "1"},
+    "hash_chain_version": {"const": "1"},
+    "project_id": {"type": "string", "minLength": 1},
+    "module_path": {"type": "string"},
+    "source_file": {"type": "string", "minLength": 1},
+    "source_relative_path": {"$ref": "#/$defs/relativePath"},
+    "source_file_sha256": {"$ref": "#/$defs/sha256"},
+    "original_file_ref": {"$ref": "#/$defs/relativePath"},
+    "candidate_file_ref": {"$ref": "#/$defs/relativePath"},
+    "candidate_file_sha256": {"$ref": "#/$defs/sha256"},
+    "candidate_text_sha256_lf": {"$ref": "#/$defs/sha256"},
+    "method_count": {"type": "integer", "minimum": 1},
+    "instance_ids": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+    "methods": {"type": "array", "minItems": 1, "items": {"type": "object", "additionalProperties": false, "required": ["instance_id", "method_signature", "smell_type", "start_line", "end_line", "candidate_method_sha256_lf"], "properties": {"instance_id": {"type": "string"}, "method_signature": {"type": "string"}, "smell_type": {"type": "string"}, "start_line": {"type": "integer", "minimum": 1}, "end_line": {"type": "integer", "minimum": 1}, "candidate_method_sha256_lf": {"$ref": "#/$defs/sha256"}, "method_hash_version": {"type": "string"}, "source_baseline_hash": {"$ref": "#/$defs/sha256"}, "candidate_original_hash": {"anyOf": [{"$ref": "#/$defs/sha256"}, {"type": "null"}]}, "candidate_refactored_hash": {"$ref": "#/$defs/sha256"}, "hash_verification_mode": {"type": "string"}}}},
+    "validation_result_ref": {"$ref": "#/$defs/relativePath"}
+  },
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "relativePath": {"type": "string", "minLength": 1, "pattern": "^(?![A-Za-z]:)(?!/)(?!.*(?:^|/)\\.\\.(?:/|$))[^\\\\]+$"}
+  }
+}
