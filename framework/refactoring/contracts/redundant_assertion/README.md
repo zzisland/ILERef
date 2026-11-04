@@ -1,17 +1,17 @@
-# RA 普通路径与 project_specific 路径
+# RA ordinary and project-specific paths
 
 ## Ordinary redundant assertion
 
-`safety_contracts.analyze_ra` 只删除支持的纯恒真/恒空独立语句。`assertNotNull(new ...)` 不允许删除构造器执行。
+`safety_contracts.analyze_ra` deletes only supported, pure standalone assertions whose result is constant or vacuous. Deleting `assertNotNull(new ...)` must not remove constructor execution.
 
-Self-comparison 必须满足现有 final primitive 局部绑定和已证明重载条件；浮点、对象、字段、方法调用或绑定不明保持 review。equals/hashCode/clone/copy 等反身性或契约语境由原 semantic category guard 保护。
+Self-comparison requires the existing resolved final primitive local binding and a proven overload. Floating-point values, objects, fields, method calls, and unresolved bindings remain subject to review. The existing semantic-category guard protects reflexivity and contract contexts such as equals/hashCode/clone/copy.
 
-Oracle preservation 依赖 `confirmed_oracle` 与现有直线控制流、可达性证明。“assert 开头”的调用、未知 helper 或分支不自动算独立 oracle。只删除已批准目标，其他语句、消息、字面量与求值顺序保持。
+Oracle preservation relies on `confirmed_oracle` and the existing straight-line control-flow and reachability checks. Calls whose names begin with "assert", unknown helpers, or branches do not automatically count as independent oracles. Only approved targets are deleted; other statements, messages, literals, and evaluation order are preserved.
 
-## JFreeChart catch constant deletion：project_specific
+## JFreeChart catch constant deletion: project_specific
 
-`ra_contract.analyze_catch` 处理已审计的 setter(null)/Marker 事件 oracle 子集：唯一末尾 try、单 catch、trigger + 已绑定 fail、catch 中精确 `assertTrue(true);`，前置构造/监听/事件重置/getter/事件来源断言满足固定形状。
+`ra_contract.analyze_catch` handles the audited subset of setter(null)/Marker event oracles: a single trailing try, one catch, a trigger followed by a bound fail call, and exactly `assertTrue(true);` in the catch. Preceding construction, listener registration, event reset, getter, and event-source assertions must match the supported shapes.
 
-异常绑定、fail 不被 catch 捕获、其余 oracle 和全部其他语句保持，均为原有条件。multiple catch、finally、resource、额外 catch 行为、循环/分支、copy/equals/反身性语境仍 review。JFreeChart 依赖绑定特例仍在原 Python 中，不增加项目名 gate，也不得登记为一般 catch 删除规则。
+Existing conditions require resolved exception bindings, a fail call that is not caught by the catch, and preservation of other oracles and statements. Multiple catches, finally blocks, resources, additional catch behavior, loops/branches, and copy/equals/reflexivity contexts remain subject to review. JFreeChart dependency-binding special cases remain in the existing Python implementation; no project-name gate is added, and this must not be registered as a general catch-deletion rule.
 
-`expected_candidate` / `validate_candidate` 验证局部删除，`build_prompt` 为专用 prompt；普通路径使用原通用 prompt 与 `validate_redundant_assertion`。两个 manifest 独立登记。
+`expected_candidate` and `validate_candidate` enforce the local deletion; `build_prompt` supplies the dedicated prompt. The ordinary path uses the existing generic prompt and `validate_redundant_assertion`. The two manifests are registered separately.

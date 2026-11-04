@@ -2,16 +2,16 @@
 
 ## fail 1.0
 
-单 try/catch，protected region 为单调用/构造 trigger 后接已绑定 fail，catch 无行为。异常类型必须明确绑定且不能捕获 assertion failure。动态 fail 消息、未知 capture/assignment、非精确 trigger-fail 序列继续 review。
+A single try/catch contains a protected region consisting of one call or constructor trigger followed by a bound fail call, with no behavior in the catch body. The exception type must be resolved and must not catch assertion failures. Dynamic failure messages, unresolved captures/assignments, and sequences that do not match the exact trigger-then-fail pattern remain subject to review.
 
-只替换批准 region 为 `assertThrows`，保留完整 trigger、异常类型和受支持的 fail 字面量消息，不猜测调用链内更小的 throw site。
+Replace only the approved region with `assertThrows`, preserving the complete trigger, exception type, and supported literal failure message. Do not infer a narrower throw site within the call chain.
 
 ## flag 2.0
 
-`_analyze_ect_v2` 证明 false 初始化 flag、catch 唯一 true 标记和 post-try marker assertion。protected region 保留一个完整调用、构造或支持的局部声明。
+`_analyze_ect_v2` establishes a flag initialized to false, a single assignment of true in the catch, and a post-try marker assertion. The protected region retains one complete call, constructor invocation, or supported local declaration.
 
-`assertThrows` 返回原绑定异常；批准的 exception observations（message/cause/property 等）保持原 API、参数、字符串、顺序与时机。仅删除纯 flag 声明、catch 赋值和对应 marker，其余 setup/oracle/cleanup 保留。
+`assertThrows` returns the exception with its original bound type. Approved exception observations (message, cause, properties, etc.) preserve their APIs, arguments, strings, order, and timing. Only the standalone flag declaration, catch assignment, and corresponding marker are deleted; all other setup, oracles, and cleanup are preserved.
 
-类型使用原 `resolve_ect_exception_type`。flag 其他使用、外部写、条件赋值、多 protected statements、不支持的区域注释、multiple catch/finally/resource 保持 review。
+Types are resolved by the existing `resolve_ect_exception_type`. Other uses of the flag, writes to external state, conditional assignments, multiple protected statements, unsupported comments within the region, multiple catches, finally blocks, and resources remain subject to review.
 
-两个路径都用原 prompt 分支和 `validate_exception_refactoring`，随后经过整文件验证。分别见 fail / flag manifest。
+Both paths use the existing prompt branches and `validate_exception_refactoring`, followed by whole-file verification. See the respective fail and flag manifests.

@@ -1,9 +1,9 @@
 # ECT no_throw 1.0
 
-`_analyze_ect_nothrow_v1` 只支持已绑定 Jupiter 普通 void 零参数测试；一个 throws 类型须由 `resolve_ect_checked_exception_type` 证明，helper closure 可检查。
+`_analyze_ect_nothrow_v1` supports only resolved, ordinary Jupiter test methods with a void return type and no parameters. A single declared exception type must be established by `resolve_ect_checked_exception_type`, and the helper-call closure must be inspectable.
 
-protected region 是完整方法体。仅移除批准 throws clause，并用全限定 `org.junit.jupiter.api.Assertions.assertDoesNotThrow(() -> { ... })` 包装整个 body。原语句、token、注释、调用/方法引用、参数、字面量和顺序保持，不添加 import。
+The protected region is the entire method body. Remove only the approved throws clause and wrap the complete body with fully qualified `org.junit.jupiter.api.Assertions.assertDoesNotThrow(() -> { ... })`. Preserve all original statements, tokens, comments, calls/method references, arguments, literals, and their order. Do not add imports.
 
-不在此路径删除 fail branch 或 flag：直接/可达断言、assumption、已有异常断言、显式 throw、控制流和不支持的 capture 保持现有 review/skip。try/catch/finally/resource 不自动清理，外部异常观察扩展不明仍 review。
+This path does not delete fail branches or flags. Direct/reachable assertions, assumptions, existing exception assertions, explicit throws, control flow, and unsupported captures retain their existing review/skip outcomes. Try/catch/finally/resource structures are not automatically cleaned up; unresolved extensions of external exception observation remain subject to review.
 
-`materialize_ect_nothrow` 给出目标形状，原 prompt 与 `validate_exception_refactoring` 检查完整 body 契约；失败诊断沿用现有策略，不重新解释异常语义。
+`materialize_ect_nothrow` defines the target shape. The existing prompt and `validate_exception_refactoring` enforce the whole-body contract. Failure diagnostics follow the existing policy without reinterpreting exception semantics.

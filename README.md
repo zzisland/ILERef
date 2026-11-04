@@ -1,43 +1,44 @@
 # ILERef
 
-ILERef（Instance-Level Evidence for Reliable LLM-Based Code Refactoring）是面向 LLM 代码重构的通用框架设计，以源码绑定实例、适用性判断、可执行契约和证据驱动验收组织重构过程。论文在四个 Java 开源项目的三类测试异味（AR、RA、ECT）上进行实证验证。
+ILERef (Instance-Level Evidence for Reliable LLM-Based Code Refactoring) is a general framework for LLM-based code refactoring. It organizes refactoring around source-bound instances, applicability assessment, executable contracts, and evidence-driven acceptance. The paper evaluates the framework on three test-smell types (AR, RA, and ECT) across four Java open-source projects.
 
-本仓库提供该框架在测试异味领域的实现、RQ1–RQ3 实验记录、论文表 I–VI 的重算脚本，以及一个可生成新候选的 AR 单实例入口。其他语言和重构问题需要相应的检测、契约和验证适配；当前包不提供这些领域的运行配置或验证结果。
+This repository provides the framework implementation for test-smell refactoring, RQ1–RQ3 evaluation records, scripts to recompute Tables I–VI, and a single-instance AR workflow that generates a new candidate. Other languages and refactoring tasks require corresponding detection, contract, and verification adapters; their configurations and evaluation results are outside the scope of this package.
 
-随包提供 Apache Commons CLI 原始源码、已有检测记录、Java 前端和检测 JAR。单实例入口以 `UtilTest.testFindNonWhitespacePos(Character, boolean)` 的 Assertion Roulette（AR）为例，执行：
+The package includes original Apache Commons CLI source, a preserved detection record, a Java frontend, and the detector JAR. The single-instance workflow targets Assertion Roulette (AR) in `UtilTest.testFindNonWhitespacePos(Character, boolean)`:
 
 ```text
-已有检测记录与源码 → 实例构建与源码绑定 → 适用性判断
-→ 契约与提示词 → 模型生成新候选 → 契约与结构检查
-→ 源码回填 → 编译与目标测试 → 重检测与归属 → 最终决策及证据保存
+Preserved detection record and source → Instance reconstruction and source binding
+→ Applicability assessment → Contract and prompt construction → New model candidate
+→ Contract and structural checks → Source reintegration → Compilation and target testing
+→ Issue re-detection and attribution → Final decision and evidence preservation
 ```
 
-此单实例入口从已有检测记录开始，省略初始检测；每次重新构建实例并判断适用性，准入后请求模型生成候选。原始材料位于 `examples/ar_cli/`，本次目标和资源路径由 `config/run_ar.json` 指定。
+This entry point starts after initial detection. Each run reconstructs the instance, reassesses applicability, and requests a model candidate if admitted. Original inputs are in `examples/ar_cli/`; `config/run_ar.json` specifies the target and resource paths.
 
-## 环境与配置
+## Environment and configuration
 
-参考环境：Python 3.13.9、JDK 25.0.2、Maven 3.9.15。Python 依赖版本见 [requirements.txt](requirements.txt)，Java 依赖版本见各模块的 POM。Java 和 Maven 需在 PATH 中可用，也可通过 `JAVA_HOME`、`MAVEN_HOME` 指定安装位置。
+Reference environment: Python 3.13.9, JDK 25.0.2, and Maven 3.9.15. Python dependency versions are listed in [requirements.txt](requirements.txt); Java dependency versions are specified in the module POMs. Java and Maven must be available through PATH or configured with `JAVA_HOME` and `MAVEN_HOME`.
 
-以下命令均在项目根目录执行。已有环境满足依赖时可直接使用；新环境安装依赖：
+Run the commands below from the repository root. An existing environment with the required dependencies can be reused. For a new environment, install the Python dependencies:
 
 ```powershell
 python -m pip install -r requirements.txt
 ```
 
-编辑 [config/model.example.yaml](config/model.example.yaml) 中 `roles.refactoring` 下的 `model` 和 `base_url`，分别填写模型名称和 OpenAI-compatible 服务地址。API 密钥由环境变量 `ILEREF_API_KEY` 提供。默认使用规则式适用性判断和 FULL 可执行契约，关闭 RAG 与迭代修复。
+In [config/model.example.yaml](config/model.example.yaml), set `model` and `base_url` under `roles.refactoring` to the model identifier and OpenAI-compatible endpoint. Supply credentials through the `ILEREF_API_KEY` environment variable. The default configuration uses rule-based applicability assessment and FULL executable contracts, with RAG and iterative repair disabled.
 
-Maven 默认从 Maven Central 获取依赖，并缓存在 `results/maven_repository/`。复用已有公共依赖缓存时可设置 `ILEREF_MAVEN_REPOSITORY`；依赖齐全后可用 `ILEREF_MAVEN_OFFLINE=1` 离线运行。若缓存使用其他镜像标识，可通过 `ILEREF_MAVEN_MIRROR_ID` 指定。
+Maven resolves dependencies from Maven Central and caches them in `results/maven_repository/` by default. To reuse an existing public dependency cache, set `ILEREF_MAVEN_REPOSITORY`. Once all dependencies are available, set `ILEREF_MAVEN_OFFLINE=1` for offline execution. If the cache uses a different mirror identifier, specify it with `ILEREF_MAVEN_MIRROR_ID`.
 
-## 运行一个 AR 实例
+## Run one AR instance
 
 ```powershell
-$env:ILEREF_API_KEY = '填写实际凭据'
+$env:ILEREF_API_KEY = 'your-api-key'
 python -B scripts/run_instance.py --name ar_001
 ```
 
-入口默认读取 `config/run_ar.json`，也可用 `--config` 指定包内其他配置。每次使用不同的运行名称；源码回填和验证在隔离副本中执行。
+The entry point reads `config/run_ar.json` by default; use `--config` to select another configuration within the package. Use a new name for each run. Source reintegration and verification take place in an isolated copy.
 
-按需检查包资源、准备阶段或编译测试环境：
+To check package resources, preparation, or the compilation and testing environment:
 
 ```powershell
 python -B scripts/check_package.py
@@ -46,29 +47,29 @@ python -B scripts/run_instance.py --prepare-only --name prepare_001
 python -B scripts/run_instance.py --check-environment --name env_001
 ```
 
-`--prepare-only` 执行到契约与提示词构建；`--check-environment` 另外编译 Java 前端、原始项目并执行原始目标测试。两种检查模式均不生成候选，结束时为 `INCONCLUSIVE`（退出码 2）。
+`--prepare-only` stops after contract and prompt construction. `--check-environment` additionally builds the Java frontend, compiles the original project, and executes the original target test. Neither mode generates a candidate; both finish with `INCONCLUSIVE` (exit code 2).
 
-## 重算论文表格
+## Recompute the paper tables
 
 ```powershell
 python -B scripts/reproduce_tables.py --all
 python -B scripts/validate_dataset.py
 ```
 
-表格脚本从 `data/` 和 `experiments/` 中的冻结记录计算表 I–VI，并与论文的 96 个数值单元格比较。表格写入 `results/tables/`，验证报告写入 `results/validation/`。字段与统计口径见 [数据说明](docs/DATA_NOTES.md)。
+The table script computes Tables I–VI from frozen records in `data/` and `experiments/`, then compares the results with 96 numeric cells from the paper. Tables are written to `results/tables/`; validation reports are written to `results/validation/`. See [data notes](docs/DATA_NOTES.md) for field definitions and counting conventions.
 
-## 输出与范围
+## Outputs and scope
 
-论文的实例、契约和分阶段验证在本包中采用测试异味领域的字段与工具。论文概念名称与实现字段、判定标签的对应关系见 [数据说明](docs/DATA_NOTES.md)。
+The paper's instances, contracts, and staged verification are implemented here with test-smell-specific fields and tools. [Data notes](docs/DATA_NOTES.md) map the paper's conceptual names to implementation fields and decision labels.
 
-每次运行保存到 `results/runs/<name>/`，包括输入、实例与源码绑定、适用性结果、契约、提示词、模型响应、候选、验证日志、测试 XML、重检测 CSV，以及最终 `result.json` 和证据哈希清单。中断或拒绝时保留已生成的证据，后续阶段标记为 `NOT_RUN`。
+Each run writes to `results/runs/<name>/`, including inputs, the instance and source binding, applicability results, the contract, prompt, model response, candidate, verification logs, test XML, re-detection CSV, final `result.json`, and an evidence hash manifest. Rejected or interrupted runs retain the evidence already produced; subsequent stages remain `NOT_RUN`.
 
-| 最终结果 | 含义 | 退出码 |
+| Final result | Meaning | Exit code |
 |---|---|---|
-| `ACCEPTED` | 契约、结构、编译、目标测试、目标 AR 消除及证据一致性检查全部通过 | 0 |
-| `REJECTED` | 明确不满足准入或验证要求 | 1 |
-| `INCONCLUSIVE` | 尚无足够证据支持结论，或仅执行了准备/环境检查 | 2 |
+| `ACCEPTED` | Contract, structure, compilation, target testing, target AR removal, and evidence consistency checks all pass | 0 |
+| `REJECTED` | Admission or verification requirements are demonstrably unmet | 1 |
+| `INCONCLUSIVE` | Evidence is insufficient, or only preparation/environment checks were requested | 2 |
 
-单实例运行需要配置模型服务。表格重算对应论文已报告的冻结实验记录；其中 RQ3 重算历史重放的配对结果，不重新执行 79 例重放。包内保留历史证据索引，但未包含完整的历史候选、契约及原始日志，因此完整历史证据检查可能为 `BLOCKED`。历史数据与新运行输出分开保存。
+A single-instance run requires a configured model service. Table recomputation uses the frozen evaluation records reported in the paper; for RQ3, it recomputes historical replay comparisons without executing the 79 cases again. Historical evidence indexes are included, but the complete historical candidates, contracts, and raw logs are not bundled, so full historical evidence validation may report `BLOCKED`. Historical data and new run outputs are stored separately.
 
-许可证与来源见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。
+See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) for licenses and provenance.
