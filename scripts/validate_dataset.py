@@ -8,6 +8,7 @@ from dataset_schema import FIELDS
 from full_evidence_validation import duplicate_keys,acceptance_issues
 
 def run(report="results/validation/repository_validation.json",require_full=False):
+ output_path=result_path(report)
  schema=read_json(inside("configurations/validation/dataset_schema.json"))
  tables={name:read_csv(inside("data/normalized/"+name+".csv")) for name in FIELDS}
  errors=[];counts=collections.Counter()
@@ -112,7 +113,7 @@ def run(report="results/validation/repository_validation.json",require_full=Fals
  contracts=inside("data/normalized/contracts.jsonl").is_file()
  full_status="BLOCKED"
  output={"status":"FAIL" if errors else "PARTIAL","metadata_validation":"FAIL" if errors else "PASS","full_evidence_validation":full_status,"contract_payloads":"PRESENT_UNVALIDATED" if contracts else "WITHHELD_LICENSE_REVIEW","candidate_bytes_present":candidate_bytes,"candidate_records":len(candidates),"historical_acceptance_index_links":len(indexed),"counts":{k:len(v) for k,v in tables.items()},"cohort_counts":{k:len(v) for k,v in sorted(members.items())},"evidence_files_present":len(present),"evidence_files_explicitly_omitted":len(omitted),"check_counts":dict(counts),"errors":errors,"scope":"Schema, historical metadata, frozen memberships and recorded consistency only. Missing bytes never PASS.","network_disabled":True,"outside_package_reads_denied":True}
- write_json(inside(report),output)
+ write_json(output_path,output)
  print(json.dumps({k:v for k,v in output.items() if k not in {"check_counts","errors","cohort_counts","counts"}},indent=2))
  if errors:print(json.dumps(errors[:10],indent=2))
  if errors:return 1

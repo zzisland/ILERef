@@ -18,5 +18,3 @@ python -B scripts/reproduce_tables.py --all
 This recomputes Tables I–VI from the frozen evaluation records. For Table IV, the consolidated records contain 5,589 detected instances, 2,175 admitted instances and 1,993 distinct accepted instances: a recorded conditional acceptance rate of 91.6% and an end-to-end acceptance rate of 35.7%. For cohort composition and counting conventions, see the [data notes](../../docs/DATA_NOTES.md).
 
 The external comparison freezes 216 methods and 323 Method-Issue targets. Candidate coverage counts targets with a recorded saved candidate; no-candidate, confirmed failure and inconclusive outcomes remain separate.
-
-UTRefactor source and complete baseline rerun capability are absent. The full candidate/source/raw-evidence corpus is not bundled; historical references and hashes remain in the indexes. The [single-instance workflow](../../README.md) rebuilds an AR instance from the bundled detection record and original project snapshot, then requests a new model candidate and validates it. Consult [repository availability](../../REPOSITORY_AVAILABILITY.csv).

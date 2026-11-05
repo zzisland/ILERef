@@ -17,8 +17,9 @@ def collect(iid):
  return {"scope":"Historical metadata only; omitted evidence is not a completed check","instance_id":iid,"availability":{"contracts":"INCLUDED" if contract_path.is_file() else "WITHHELD_LICENSE_REVIEW","evidence":[availability[r["artifact_id"]] for r in tables["evidence"] if r["artifact_id"] in availability]},**tables}
 def main():
  p=argparse.ArgumentParser(description=__doc__);g=p.add_mutually_exclusive_group(required=True);g.add_argument("--example",action="store_true");g.add_argument("--instance-id");p.add_argument("--output");a=p.parse_args();offline_guard()
+ output_path=result_path(a.output) if a.output else None
  result=collect(EXAMPLE if a.example else a.instance_id)
- if a.output:write_json(inside(a.output),result)
+ if output_path:write_json(output_path,result)
  print(json.dumps({"instance_id":result["instance_id"],"instance":result["instances"][0],"counts":{k:len(v) for k,v in result.items() if isinstance(v,list)},"decisions":result["decisions"],"output":a.output,"availability":{"contracts":result["availability"]["contracts"],"evidence_status_counts":dict(__import__("collections").Counter(e["repository_status"] for e in result["availability"]["evidence"]))}},indent=2))
  return 0
 if __name__=="__main__":raise SystemExit(main())

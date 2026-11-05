@@ -9,6 +9,12 @@ def inside(rel):
  p=(ROOT/rel).resolve()
  if not p.is_relative_to(ROOT): raise ValueError("Path escapes package")
  return p
+def result_path(rel):
+ """User-selected reports must stay under results, never overwrite inputs."""
+ p=inside(rel)
+ base=inside("results")
+ if p==base or not p.is_relative_to(base):raise ValueError("Output must be a file under results/")
+ return p
 def read_json(p): return json.loads(Path(p).read_text(encoding="utf-8-sig"))
 def read_csv(p):
  with Path(p).open(encoding="utf-8-sig",newline="") as f:return list(csv.DictReader(f))

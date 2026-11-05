@@ -1,53 +1,78 @@
 # ILERef
 
-ILERef (Instance-Level Evidence for Reliable LLM-Based Code Refactoring) is a general framework for LLM-based code refactoring. It organizes refactoring around source-bound instances, applicability assessment, executable contracts, and evidence-driven acceptance. The paper evaluates the framework on three test-smell types (AR, RA, and ECT) across four Java open-source projects.
+ILERef (Instance-Level Evidence for Reliable LLM-Based Code Refactoring) is a general framework that organizes LLM-based refactoring around source-bound instances, applicability assessment, executable contracts, and evidence-driven acceptance. The paper evaluates it on Assertion Roulette (AR), Redundant Assertion (RA), and Exception Catching/Throwing (ECT) across four Java projects.
 
-This repository provides the framework implementation for test-smell refactoring, RQ1–RQ3 evaluation records, scripts to recompute Tables I–VI, and a single-instance AR workflow that generates a new candidate. Other languages and refactoring tasks require corresponding detection, contract, and verification adapters; their configurations and evaluation results are outside the scope of this package.
+This repository provides the core implementation, a minimal end-to-end AR example with real model generation, and RQ1–RQ3 records with scripts to recompute Tables I–VI. Historical data definitions and material availability are documented in [DATA_NOTES.md](docs/DATA_NOTES.md).
 
-The package includes original Apache Commons CLI source, a preserved detection record, a Java frontend, and the detector JAR. The single-instance workflow targets Assertion Roulette (AR) in `UtilTest.testFindNonWhitespacePos(Character, boolean)`:
+## Framework overview
 
 ```text
-Preserved detection record and source → Instance reconstruction and source binding
-→ Applicability assessment → Contract and prompt construction → New model candidate
-→ Contract and structural checks → Source reintegration → Compilation and target testing
-→ Issue re-detection and attribution → Final decision and evidence preservation
+Preserved detection record + original source
+  → Instance reconstruction and source binding
+  → Applicability assessment
+  → Executable contract and prompt construction
+  → Model generation of a new candidate
+  → Contract and structural checks
+  → Source reintegration
+  → Compilation and target testing
+  → Issue re-detection and attribution
+  → Final decision and evidence preservation
 ```
 
-This entry point starts after initial detection. Each run reconstructs the instance, reassesses applicability, and requests a model candidate if admitted. Original inputs are in `examples/ar_cli/`; `config/run_ar.json` specifies the target and resource paths.
+The example starts after initial detection. The Python pipeline constructs instances, assesses applicability, builds contracts and prompts, and coordinates validation. The Java frontend and detector JAR support source analysis and re-detection. Acceptance requires consistent evidence from the current candidate and verification run.
 
-## Environment and configuration
+| Location | Purpose |
+|---|---|
+| [framework/](framework/) | Core pipeline, instance schemas, contracts, prompts, verification, and Java frontend |
+| [config/](config/) | Example run settings and credential-free model configuration |
+| [examples/ar_cli/](examples/ar_cli/) | Original Apache Commons CLI source archive, detection record, hashes, and provenance |
+| [tools/](tools/) | Detector JAR and its source and licensing materials |
+| [scripts/](scripts/) | Single-instance entry point, checks, table recomputation, and record inspection |
+| [data/](data/) | Normalized experiment records, frozen memberships, and evidence indexes |
+| [experiments/](experiments/) | RQ1–RQ3 data navigation and interpretation |
+| [tests/](tests/) | Focused software regression checks |
+| [docs/DATA_NOTES.md](docs/DATA_NOTES.md) | Data definitions, sampling, evaluation conventions, and material availability |
 
-Reference environment: Python 3.13.9, JDK 25.0.2, and Maven 3.9.15. Python dependency versions are listed in [requirements.txt](requirements.txt); Java dependency versions are specified in the module POMs. Java and Maven must be available through PATH or configured with `JAVA_HOME` and `MAVEN_HOME`.
+## Environment and model configuration
 
-Run the commands below from the repository root. An existing environment with the required dependencies can be reused. For a new environment, install the Python dependencies:
+Reference versions: Python 3.11.9, JDK 25.0.2, and Maven 3.9.15. Python dependencies are pinned in [requirements.txt](requirements.txt); Java dependencies are specified in the POMs. Make Java and Maven available through PATH or `JAVA_HOME` and `MAVEN_HOME`.
+
+Run all commands from the repository root. Reuse an environment with the required dependencies, or install them in a new environment:
 
 ```powershell
 python -m pip install -r requirements.txt
 ```
 
-In [config/model.example.yaml](config/model.example.yaml), set `model` and `base_url` under `roles.refactoring` to the model identifier and OpenAI-compatible endpoint. Supply credentials through the `ILEREF_API_KEY` environment variable. The default configuration uses rule-based applicability assessment and FULL executable contracts, with RAG and iterative repair disabled.
+In [config/model.example.yaml](config/model.example.yaml), configure `roles.refactoring`:
 
-Maven resolves dependencies from Maven Central and caches them in `results/maven_repository/` by default. To reuse an existing public dependency cache, set `ILEREF_MAVEN_REPOSITORY`. Once all dependencies are available, set `ILEREF_MAVEN_OFFLINE=1` for offline execution. If the cache uses a different mirror identifier, specify it with `ILEREF_MAVEN_MIRROR_ID`.
+- Set `base_url` and `model` for an OpenAI-compatible model service.
+- Keep `api_key: ${ILEREF_API_KEY}` and provide the credential through the environment.
+- Adjust `timeout` and `max_tokens` to the service's supported settings.
 
-## Run one AR instance
+The AR example uses rule-based applicability assessment and FULL executable contracts; RAG and iterative repair are disabled. These are example settings, not a description of every historical experiment.
+
+Maven downloads public dependencies to `results/maven_repository/` by default. An existing cache can be selected with `ILEREF_MAVEN_REPOSITORY`; `ILEREF_MAVEN_OFFLINE=1` enables offline use when all dependencies are present. Set `ILEREF_MAVEN_MIRROR_ID` if that cache uses a different repository identifier.
+
+## Minimal end-to-end example
+
+The example targets `UtilTest.testFindNonWhitespacePos(Character, boolean)` in the bundled Apache Commons CLI revision. It reconstructs the AR instance from the preserved detection record, binds it to the source, and reassesses applicability before requesting a new model candidate.
+
+After configuring the model service:
 
 ```powershell
 $env:ILEREF_API_KEY = 'your-api-key'
 python -B scripts/run_instance.py --name ar_001
 ```
 
-The entry point reads `config/run_ar.json` by default; use `--config` to select another configuration within the package. Use a new name for each run. Source reintegration and verification take place in an isolated copy.
+This command runs the full workflow above, including real model generation and downstream verification. It does not replay a saved candidate. Source reintegration takes place in an isolated copy; use a new run name each time. [config/run_ar.json](config/run_ar.json) specifies the target and resources, with paths resolved relative to the repository root. Use `--config` to select another package-local configuration.
 
-To check package resources, preparation, or the compilation and testing environment:
+Optional preflight:
 
 ```powershell
 python -B scripts/check_package.py
-python -B tests/test_instance_pipeline.py
-python -B scripts/run_instance.py --prepare-only --name prepare_001
-python -B scripts/run_instance.py --check-environment --name env_001
 ```
 
-`--prepare-only` stops after contract and prompt construction. `--check-environment` additionally builds the Java frontend, compiles the original project, and executes the original target test. Neither mode generates a candidate; both finish with `INCONCLUSIVE` (exit code 2).
+The preflight checks resources, imports, dependencies, and tool availability without calling a model. The entry point also exposes `--prepare-only` and `--check-environment` for diagnostics; neither generates a candidate or establishes end-to-end acceptance. See `python -B scripts/run_instance.py --help`.
 
 ## Recompute the paper tables
 
@@ -56,20 +81,18 @@ python -B scripts/reproduce_tables.py --all
 python -B scripts/validate_dataset.py
 ```
 
-The table script computes Tables I–VI from frozen records in `data/` and `experiments/`, then compares the results with 96 numeric cells from the paper. Tables are written to `results/tables/`; validation reports are written to `results/validation/`. See [data notes](docs/DATA_NOTES.md) for field definitions and counting conventions.
+These commands recompute recorded statistics and check dataset consistency; they do not rerun the historical experiments. Table recomputation compares 96 numeric cells from Tables I–VI. Outputs are saved in `results/tables/` and `results/validation/`. See [DATA_NOTES.md](docs/DATA_NOTES.md) for evaluation conventions and evidence availability.
 
-## Outputs and scope
+## Outputs
 
-The paper's instances, contracts, and staged verification are implemented here with test-smell-specific fields and tools. [Data notes](docs/DATA_NOTES.md) map the paper's conceptual names to implementation fields and decision labels.
+Each run writes to `results/runs/<name>/`: inputs and source binding, applicability assessment, contract, prompt, model response, candidate, verification logs, test XML, re-detection CSV, final `result.json`, and an evidence hash manifest. Interrupted or rejected runs retain the evidence produced so far; later stages remain `NOT_RUN`.
 
-Each run writes to `results/runs/<name>/`, including inputs, the instance and source binding, applicability results, the contract, prompt, model response, candidate, verification logs, test XML, re-detection CSV, final `result.json`, and an evidence hash manifest. Rejected or interrupted runs retain the evidence already produced; subsequent stages remain `NOT_RUN`.
-
-| Final result | Meaning | Exit code |
+| Result | Meaning | Exit code |
 |---|---|---|
-| `ACCEPTED` | Contract, structure, compilation, target testing, target AR removal, and evidence consistency checks all pass | 0 |
+| `ACCEPTED` | Contract, structure, compilation, exact target testing, target AR removal, and final evidence checks pass | 0 |
 | `REJECTED` | Admission or verification requirements are demonstrably unmet | 1 |
-| `INCONCLUSIVE` | Evidence is insufficient, or only preparation/environment checks were requested | 2 |
+| `INCONCLUSIVE` | Evidence is insufficient, or a diagnostic-only mode was selected | 2 |
 
-A single-instance run requires a configured model service. Table recomputation uses the frozen evaluation records reported in the paper; for RQ3, it recomputes historical replay comparisons without executing the 79 cases again. Historical evidence indexes are included, but the complete historical candidates, contracts, and raw logs are not bundled, so full historical evidence validation may report `BLOCKED`. Historical data and new run outputs are stored separately.
+New outputs remain separate from historical inputs under `data/` and `experiments/`. Generated results and private model configuration are excluded from Git; credentials are supplied through the environment.
 
 See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) for licenses and provenance.

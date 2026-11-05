@@ -1,17 +1,16 @@
-# Verification layers
+# Verification
 
-Formal implementation lives here; legacy paths alias these module objects.
+This package validates generated candidates, integrates them into source, and collects the evidence used for acceptance.
 
-- candidate: method extraction and executable contract compliance.
-- reintegration: identity/range/hash, conflict handling, file composition, structure and inventory.
-- engineering: isolated workspace, trusted Maven commands, target execution/report evidence.
-- outcome: detector identity/hash, attribution and before/after issue observations.
-- acceptance: frozen ValidationEvidenceBundle consumers; no validation execution.
-- repair: eligibility, generation/recovery and re-entry through CandidateValidator.
+| Module | Responsibility |
+|---|---|
+| `candidate/` | Candidate extraction and executable contract checks |
+| `reintegration/` | Source identity, ranges, hashes, file composition, and structural checks |
+| `engineering/` | Isolated workspaces, Maven compilation, and target-test execution evidence |
+| `outcome/` | Detector identity, issue re-detection, and attribution to the target instance |
+| `acceptance/` | Acceptance decisions from collected validation evidence |
+| `repair/` | Repair eligibility and re-entry through candidate validation; disabled in the bundled AR example |
 
-file_gate.py coordinates engineering then outcome inside the original workspace lifetime.
-evidence.py preserves the bundle wire format; integrity.py owns complete-file re-audit.
-Compatibility CandidateValidator still returns a file preview, delegated to reintegration/preview.py.
-The exact runtime gates and source-bound AR/RA/ECT predicates are unchanged.
+`file_gate.py` coordinates engineering validation and outcome checks within the validation workspace. `evidence.py` defines the evidence bundle, and `integrity.py` checks the source/candidate hash chain. The single-instance entry point performs a final contract, structure, and evidence consistency review before accepting a candidate.
 
-See ../../analysis/framework_refactor_stage5_20260920 for mapping, regression and migration provenance.
+Run the [minimal end-to-end example](../../../README.md#minimal-end-to-end-example) to exercise these stages with a newly generated model candidate.
